@@ -1,0 +1,35 @@
+Project Specification for Group # ___ [put your assigned group number from Quercus here]
+
+[see additional instructions on Quercus for filling in all parts of the blueprint]
+
+Team Name: [this can be a name or your project title, you can pick it later too]
+
+Domain:
+
+[Establish what the domain is and what the broad purpose of your proposed software will be — this can be quite brief]
+
+Software Specification:
+
+[In plain English, what should the program be able to do (not how should it do it)]
+
+[think in terms of nouns and verbs, which will map onto variables and methods in the program]
+
+User Stories:
+
+[statements of interactions between the user and the system]
+
+[see additional instructions on Quercus]
+
+[aim for at least one user story per group member + 1 extra; in the table below, each group member must be assigned to one user story + mark one user story as being a team user story — this one should be the one that is most central to the basic functionality of your system. That is, the one you would probably want to implement first.]
+
+Proposed Entities for the Domain:
+
+[based on your specification, indicate a few potential entities for your domain — including their names and instance variables]
+
+Scheduled Meeting Times + Mode of Communication:
+
+[when will your team meet each week — you MUST meet during the weekly tutorial timeslot and we strongly recommend scheduling one more regular meeting time]
+
+Meeting time outside of lab: [indicate day and time here]
+
+Mode of Communication: [indicate mode of communication here]
