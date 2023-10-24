@@ -1,4 +1,4 @@
-package use_cases.get_api_questions;
+package use_cases.getApiQuestions;
 
 public class GetApiQuestionsInputData {
     private final int numberOfQuestions;
