@@ -1,4 +1,5 @@
-package use_cases.getApiQuestions;
+package use_cases.get_api_questions;
 
 public interface GetApiQuestionsOutputBoundary {
+
 }
