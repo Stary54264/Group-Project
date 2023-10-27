@@ -30,7 +30,7 @@ public class GetApiQuestionsInputData {
     }
 
     public enum QuestionDifficulty {
-        EASY, MEDIUM, HARD
+        ALL, EASY, MEDIUM, HARD
     }
     public enum QuestionType {
         ALL, BOOL, MULTI
