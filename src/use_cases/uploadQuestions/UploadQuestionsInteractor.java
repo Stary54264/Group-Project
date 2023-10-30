@@ -1,6 +1,6 @@
 package use_cases.uploadQuestions;
 
-public class UploadQuestionsInteractor implements UploadQuestionsInputBoundary{
+public class UploadQuestionsInteractor implements UploadQuestionsInputBoundary {
     final UploadQuestionsUserDataAccessInterface userDataAccessObject;
     final UploadQuestionsOutputBoundary uploadQuestionsPresenter;
 
@@ -12,8 +12,8 @@ public class UploadQuestionsInteractor implements UploadQuestionsInputBoundary{
 
     @Override
     public void execute() {
-        userDataAccessObject.clear();
-        UploadQuestionsOutputData clearOutputData = new UploadQuestionsOutputData(user, false);
+        userDataAccessObject.addQuestions();
+        UploadQuestionsOutputData clearOutputData = new UploadQuestionsOutputData();
         uploadQuestionsPresenter.prepareSuccessView(clearOutputData);
     }
 }
