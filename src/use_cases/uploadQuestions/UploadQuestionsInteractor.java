@@ -12,7 +12,7 @@ public class UploadQuestionsInteractor implements UploadQuestionsInputBoundary {
 
     @Override
     public void execute() {
-        userDataAccessObject.addQuestions()
+        userDataAccessObject.addQuestions();
         UploadQuestionsOutputData clearOutputData = new UploadQuestionsOutputData();
         uploadQuestionsPresenter.prepareSuccessView(clearOutputData);
     }
