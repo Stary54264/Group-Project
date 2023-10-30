@@ -1,4 +1,5 @@
-package src.use_cases.get_result;
+package use_cases.getResult;
 
 public class getResultInputData {
+
 }
