@@ -16,4 +16,7 @@ public class UploadQuestionsInteractor implements UploadQuestionsInputBoundary {
         UploadQuestionsOutputData clearOutputData = new UploadQuestionsOutputData();
         uploadQuestionsPresenter.prepareSuccessView(clearOutputData);
     }
+    public int a(){
+        return 1;
+    }
 }
