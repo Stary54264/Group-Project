@@ -1,4 +1,4 @@
 package use_cases.uploadQuestions;
 
-public interface UploadQuestionsOutputBoundary {1
+public interface UploadQuestionsOutputBoundary {
 }
