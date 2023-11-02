@@ -1,4 +1,4 @@
-package src.interface_adapter.take_quiz;
+package interface_adapter.takeQuiz;
 
 public class takeQuizController {
 }

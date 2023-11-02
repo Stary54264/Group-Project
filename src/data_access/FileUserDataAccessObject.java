@@ -1,4 +1,10 @@
 package data_access;
+import entity.Test;
+import use_cases.takeQuiz.takeQuizDataAccessInterface;
+public class FileUserDataAccessObject implements takeQuizDataAccessInterface{
 
-public class FileUserDataAccessObject {
+    @Override
+    public Test getTest(String name) {
+        return null;
+    }
 }

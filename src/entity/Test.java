@@ -8,9 +8,31 @@ public class Test {
     private String category, name, comment;
     private final ArrayList<Result> results;
 
+    public Test() {
+        this.questions = new ArrayList<>();
+        this.results = new ArrayList<>();
+    }
+
     public Test(ArrayList<Question> questions) {
         this.questions = questions;
         this.results = new ArrayList<>();
+    }
+
+    public void setQuestions(ArrayList<Question> questions) {
+        this.questions.clear();
+        this.questions.addAll(questions);
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public ArrayList<Question> getQuestions() {
@@ -24,6 +46,7 @@ public class Test {
     public ArrayList<Result> getResults() {
         return results;
     }
+    public void addResult(Result r) {results.add(r);}
 
     public String getCategory() {
         return category;

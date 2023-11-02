@@ -5,10 +5,10 @@ import java.util.Map;
 
 public class Result {
     private final Date timeTaken;
-    private final Map<Integer, Boolean> results;
+    private final Map<Integer, Question> results;
     private String comment;
 
-    public Result(Date timeTaken, Map<Integer, Boolean> results) {
+    public Result(Date timeTaken, Map<Integer, Question> results) {
         this.timeTaken = timeTaken;
         this.results = results;
     }
@@ -19,8 +19,8 @@ public class Result {
 
     public double getAverage() {
         double a = 0;
-        for (Boolean b: results.values()) {
-            if (b) a++;
+        for (Question b: results.values()) {
+            if (b != null) a++;
         }
         a /= results.values().size();
         return a;
