@@ -6,8 +6,11 @@ public class Question {
     private String correctAnswer;
     private String[] incorrectAnswers;
 
-    public Question(int id) {
+    public Question(int id, String question, String correctAnswer, String[] incorrectAnswers) {
         this.id = id;
+        this.question = question;
+        this.correctAnswer = correctAnswer;
+        this.incorrectAnswers = incorrectAnswers;
     }
 
     public int getId() {
