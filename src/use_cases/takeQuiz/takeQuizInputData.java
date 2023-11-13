@@ -1,7 +1,7 @@
 package use_cases.takeQuiz;
 
-import src.entity.Question;
-import src.entity.Test;
+import entity.Question;
+import entity.Test;
 
 import java.util.ArrayList;
 

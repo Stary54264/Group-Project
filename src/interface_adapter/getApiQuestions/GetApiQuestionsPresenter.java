@@ -1,7 +1,7 @@
-package src.interface_adapter.getApiQuestions;
+package interface_adapter.getApiQuestions;
 
-import src.use_cases.getApiQuestions.GetApiQuestionsOutputBoundary;
-import src.use_cases.getApiQuestions.GetApiQuestionsOutputData;
+import use_cases.getApiQuestions.GetApiQuestionsOutputBoundary;
+import use_cases.getApiQuestions.GetApiQuestionsOutputData;
 
 public class GetApiQuestionsPresenter implements GetApiQuestionsOutputBoundary {
 

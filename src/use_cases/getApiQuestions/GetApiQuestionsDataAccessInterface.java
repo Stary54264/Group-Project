@@ -1,6 +1,6 @@
-package src.use_cases.getApiQuestions;
+package use_cases.getApiQuestions;
 
-import src.entity.Test;
+import entity.Test;
 
 public interface GetApiQuestionsDataAccessInterface {
     //api access is static

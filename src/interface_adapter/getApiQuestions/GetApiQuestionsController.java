@@ -1,9 +1,9 @@
-package src.interface_adapter.getApiQuestions;
+package interface_adapter.getApiQuestions;
 
-import src.use_cases.getApiQuestions.GetApiQuestionsInputBoundary;
-import src.use_cases.getApiQuestions.GetApiQuestionsInputData;
-import src.use_cases.getApiQuestions.GetApiQuestionsInputData.QuestionType;
-import src.use_cases.getApiQuestions.GetApiQuestionsInputData.QuestionDifficulty;
+import use_cases.getApiQuestions.GetApiQuestionsInputBoundary;
+import use_cases.getApiQuestions.GetApiQuestionsInputData;
+import use_cases.getApiQuestions.GetApiQuestionsInputData.QuestionType;
+import use_cases.getApiQuestions.GetApiQuestionsInputData.QuestionDifficulty;
 
 public class GetApiQuestionsController {
     final GetApiQuestionsInputBoundary getApiQuestionsInteractor;

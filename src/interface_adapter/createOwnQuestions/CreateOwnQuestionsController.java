@@ -1,4 +1,4 @@
-package src.interface_adapter.createOwnQuestions;
+package interface_adapter.createOwnQuestions;
 
 import entity.Question;
 import use_cases.createOwnQuestions.CreateOwnQuestionsInputBoundary;

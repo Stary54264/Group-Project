@@ -1,4 +1,4 @@
-package src.interface_adapter.getApiQuestions;
+package interface_adapter.getApiQuestions;
 
 public class GetApiQuestionsViewModel {
 }

@@ -1,4 +1,4 @@
-package src.use_cases.uploadQuestions;
+package use_cases.uploadQuestions;
 
 public class UploadQuestionsInteractor implements UploadQuestionsInputBoundary {
     final UploadQuestionsUserDataAccessInterface userDataAccessObject;
