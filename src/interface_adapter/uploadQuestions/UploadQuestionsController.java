@@ -1,6 +1,6 @@
 package src.interface_adapter.upload_questions;
 
-import use_cases.uploadQuestions.UploadQuestionsInputBoundary;
+import src.use_cases.uploadQuestions.UploadQuestionsInputBoundary;
 
 public class UploadQuestionsController {
 
