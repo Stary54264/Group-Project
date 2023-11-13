@@ -1,4 +1,10 @@
-package use_cases.getApiQuestions;
+package src.use_cases.getApiQuestions;
+
+import src.entity.Question;
+import src.use_cases.getApiQuestions.GetApiQuestionsInputData.QuestionDifficulty;
+import src.use_cases.getApiQuestions.GetApiQuestionsInputData.QuestionType;
+
+import java.util.List;
 
 public class GetApiQuestionsInputData {
     private final int numberOfQuestions;

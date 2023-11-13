@@ -1,4 +1,4 @@
-package interface_adapter.upload_questions;
+package src.interface_adapter.upload_questions;
 
 import use_cases.uploadQuestions.UploadQuestionsInputBoundary;
 

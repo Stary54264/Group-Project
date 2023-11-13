@@ -1,6 +1,6 @@
-package app;
+package src.app;
 
-import entity.Question;
+import src.entity.Question;
 
 import java.util.ArrayList;
 import java.util.List;

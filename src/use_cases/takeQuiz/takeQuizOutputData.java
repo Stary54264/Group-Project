@@ -1,4 +1,4 @@
-package use_cases.takeQuiz;
+package src.use_cases.takeQuiz;
 
 import java.util.ArrayList;
 

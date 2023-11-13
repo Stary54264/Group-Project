@@ -1,7 +1,7 @@
-package app;
+package src.app;
 
-import entity.Question;
-import entity.Test;
+import src.entity.Question;
+import src.entity.Test;
 
 import java.util.ArrayList;
 

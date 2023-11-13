@@ -1,8 +1,8 @@
-package use_cases.takeQuiz;
+package src.use_cases.takeQuiz;
 
-import entity.Question;
-import entity.Result;
-import entity.Test;
+import src.entity.Question;
+import src.entity.Result;
+import src.entity.Test;
 
 import java.util.*;
 import java.util.stream.IntStream;

@@ -1,6 +1,6 @@
-package use_cases.takeQuiz;
+package src.use_cases.takeQuiz;
 
-import entity.Test;
+import src.entity.Test;
 
 public interface takeQuizDataAccessInterface {
     Test getTest(String name);

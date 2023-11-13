@@ -1,6 +1,6 @@
-package data_access;
+package src.data_access;
 
-import entity.Question;
+import src.entity.Question;
 
 import java.io.IOException;
 import java.net.URI;
@@ -9,7 +9,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
 
-import static app.QuizFactory.Parse;
+import static src.app.QuizFactory.Parse;
 
 public class APIDataAccessObject {
     public static List<Question> RetrieveQuestions(int numberOfQuestions, int category, int difficulty, int questionType) throws IOException, InterruptedException {

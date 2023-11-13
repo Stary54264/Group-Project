@@ -1,4 +1,4 @@
-package use_cases.manageQuiz;
+package src.use_cases.manageQuiz;
 
 public class manageQuizOutputData {
 }

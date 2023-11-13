@@ -1,4 +1,4 @@
-package interface_adapter.uploadQuestions;
+package src.interface_adapter.uploadQuestions;
 
 public class UploadQuestionsState {
 }
