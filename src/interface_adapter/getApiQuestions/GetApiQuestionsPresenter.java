@@ -14,7 +14,7 @@ public class GetApiQuestionsPresenter implements GetApiQuestionsOutputBoundary {
     }
 
     @Override
-    public void prepareFailView(GetApiQuestionsOutputData error) {
+    public void prepareFailView(String error) {
 
     }
 }
