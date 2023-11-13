@@ -1,9 +1,9 @@
-package src.interface_adapter.takeQuiz;
+package interface_adapter.takeQuiz;
 
-import src.entity.Result;
-import src.entity.Test;
-import src.use_cases.takeQuiz.takeQuizOutputBoundary;
-import src.use_cases.takeQuiz.takeQuizOutputData;
+import entity.Result;
+import entity.Test;
+import use_cases.takeQuiz.takeQuizOutputBoundary;
+import use_cases.takeQuiz.takeQuizOutputData;
 
 public class takeQuizPresenter implements takeQuizOutputBoundary {
     @Override

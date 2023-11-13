@@ -1,4 +1,4 @@
-package src.use_cases.takeQuiz;
+package use_cases.takeQuiz;
 
 public interface takeQuizInputBoundary {
     void startTest(String name);

@@ -1,4 +1,4 @@
-package src.interface_adapter.takeQuiz;
+package interface_adapter.takeQuiz;
 
 public class takeQuizState {
 }

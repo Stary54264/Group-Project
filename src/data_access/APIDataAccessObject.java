@@ -1,6 +1,6 @@
-package src.data_access;
+package data_access;
 
-import src.entity.Question;
+import entity.Question;
 
 import java.io.IOException;
 import java.net.URI;
@@ -9,7 +9,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
 
-import static src.app.QuizFactory.Parse;
+import app.QuizFactory;
 
 public class APIDataAccessObject {
     public static List<Question> RetrieveQuestions(int numberOfQuestions, int category, int difficulty, int questionType) throws IOException, InterruptedException {
@@ -45,7 +45,7 @@ public class APIDataAccessObject {
                 .method("GET", HttpRequest.BodyPublishers.noBody())
                 .build();
         HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        return Parse(response.body());
+        return QuizFactory.Parse(response.body());
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {

@@ -1,4 +1,5 @@
-package src.src.use_cases.manage_quiz;
+package use_cases.manageQuiz;
 
 public class manageQuizInputdata {
+    private String test;
 }

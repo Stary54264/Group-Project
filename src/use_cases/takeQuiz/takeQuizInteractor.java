@@ -1,6 +1,6 @@
-package src.use_cases.takeQuiz;
+package use_cases.takeQuiz;
 
-import src.entity.Question;
+import entity.Question;
 import src.entity.Result;
 import src.entity.Test;
 
@@ -11,13 +11,14 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
     private Test activeTest;
     private int[] testOrder;
     private int currentQuestionIndex;
-    private ArrayList<Question> wrongAnswers;
+    private final ArrayList<Question> wrongAnswers;
     private final takeQuizOutputBoundary outputBoundary;
     private final takeQuizDataAccessInterface dataAccessInterface;
 
     public takeQuizInteractor(takeQuizOutputBoundary outputBoundary, takeQuizDataAccessInterface dataAccessInterface) {
         this.outputBoundary = outputBoundary;
         this.dataAccessInterface = dataAccessInterface;
+        wrongAnswers = new ArrayList<>();
     }
 
     @Override
@@ -47,19 +48,30 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
         currentQuestionIndex ++;
 
         if (currentQuestionIndex-1 > testOrder.length) {
-            HashMap<Integer, Question> qs = new HashMap<>();
-            for (int i = 0; i < testOrder.length; i++) {
-                qs.put(i, wrongAnswers.get(testOrder[i])) ;
-            }
 
-            Result newResult = new Result(new Date(), qs);
+            Result newResult = prepareResult();
+
             activeTest.addResult(newResult);
             outputBoundary.prepareResultView(activeTest, newResult);
+            clearState();
         } else {
             currentIndex = testOrder[currentQuestionIndex];
             currentQuestion = questions.get(currentIndex);
             takeQuizOutputData out = new takeQuizOutputData(currentQuestion.getQuestion(), currentQuestion.getAnswers());
             outputBoundary.prepareNextQuestion(out);
         }
+    }
+
+    private Result prepareResult() {
+        HashMap<Integer, Question> qs = new HashMap<>();
+        for (int i = 0; i < testOrder.length; i++) {
+            qs.put(i, wrongAnswers.get(testOrder[i])) ;
+        }
+        return new Result(new Date(), qs);
+    }
+
+    private void clearState() {
+        wrongAnswers.clear();
+        activeTest = null;
     }
 }
