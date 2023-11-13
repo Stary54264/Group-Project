@@ -13,9 +13,6 @@ public class Question {
         this.incorrectAnswers = incorrectAnswers;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
-    }
 
     public void setCorrectAnswer(String correctAnswer) {
         this.correctAnswer = correctAnswer;
