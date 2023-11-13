@@ -1,5 +1,7 @@
 package data_access;
 
+import app.QuestionType;
+import app.QuestionDifficulty;
 import entity.Question;
 
 import java.io.IOException;
@@ -11,8 +13,12 @@ import java.util.List;
 
 import app.QuizFactory;
 
+import static app.QuestionDifficulty.ALL;
+import static app.QuestionType.BOOL;
+
 public class APIDataAccessObject {
-    public static List<Question> RetrieveQuestions(int numberOfQuestions, int category, int difficulty, int questionType) throws IOException, InterruptedException {
+    public static List<Question> RetrieveQuestions(int numberOfQuestions, int category, QuestionDifficulty difficulty,
+                                                   QuestionType questionType) throws IOException, InterruptedException {
         String query = String.format("https://opentdb.com/api.php?amount=%d", numberOfQuestions);
 
         if (category != 0) {
@@ -20,22 +26,28 @@ public class APIDataAccessObject {
         }
 
         switch (difficulty) {
-            case 1:
+            case ALL:
+                query += "&difficulty=all";
+                break;
+            case EASY:
                 query += "&difficulty=easy";
                 break;
-            case 2:
+            case MEDIUM:
                 query += "&difficulty=medium";
                 break;
-            case 3:
+            case HARD:
                 query += "&difficulty=hard";
                 break;
         }
 
         switch (questionType) {
-            case 1:
+            case ALL:
+                query += "&type=all";
+                break;
+            case BOOL:
                 query += "&type=boolean";
                 break;
-            case 2:
+            case MULTI:
                 query += "&type=multiple";
                 break;
         }
@@ -49,6 +61,6 @@ public class APIDataAccessObject {
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        RetrieveQuestions(10, 9, 2, 1);
+        RetrieveQuestions(10, 9, ALL, BOOL);
     }
 }

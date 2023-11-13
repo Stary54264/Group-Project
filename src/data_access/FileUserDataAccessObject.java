@@ -17,7 +17,7 @@ public class FileUserDataAccessObject implements takeQuizDataAccessInterface, Ge
     }
 
     @Override
-    public boolean existsByID(int testID) {
+    public boolean existsByName(String testName) {
         return false; // implement later
     }
 }

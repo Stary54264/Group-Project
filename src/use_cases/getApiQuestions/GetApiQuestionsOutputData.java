@@ -2,18 +2,18 @@ package use_cases.getApiQuestions;
 
 public class GetApiQuestionsOutputData {
     private final boolean success;
-    private final int testID;
+    private final String testName;
 
-    public GetApiQuestionsOutputData(boolean success, int testID) {
+    public GetApiQuestionsOutputData(boolean success, String testName) {
         this.success = success;
-        this.testID = testID;
+        this.testName = testName;
     }
 
     public boolean isSuccess() {
         return success;
     }
 
-    public int getTestID() {
-        return testID;
+    public String getTestName() {
+        return testName;
     }
 }
