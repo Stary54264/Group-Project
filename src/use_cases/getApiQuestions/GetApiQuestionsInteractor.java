@@ -1,12 +1,12 @@
-package src.use_cases.getApiQuestions;
-import src.entity.Question;
-import src.use_cases.getApiQuestions.GetApiQuestionsInputData.QuestionType;
-import src.use_cases.getApiQuestions.GetApiQuestionsInputData.QuestionDifficulty;
+package use_cases.getApiQuestions;
+import entity.Question;
+import use_cases.getApiQuestions.GetApiQuestionsInputData.QuestionType;
+import use_cases.getApiQuestions.GetApiQuestionsInputData.QuestionDifficulty;
 
 import java.io.IOException;
 import java.util.List;
 
-import static src.data_access.APIDataAccessObject.RetrieveQuestions;
+import static data_access.APIDataAccessObject.RetrieveQuestions;
 
 public class GetApiQuestionsInteractor implements GetApiQuestionsInputBoundary {
     final GetApiQuestionsDataAccessInterface apiDataAccessObject;

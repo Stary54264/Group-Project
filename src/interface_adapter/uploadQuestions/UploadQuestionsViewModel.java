@@ -1,4 +1,4 @@
-package src.interface_adapter.uploadQuestions;
+package interface_adapter.uploadQuestions;
 
 public class UploadQuestionsViewModel {
 }

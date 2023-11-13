@@ -1,8 +1,8 @@
-package src.use_cases.getApiQuestions;
+package use_cases.getApiQuestions;
 
-import src.entity.Question;
-import src.use_cases.getApiQuestions.GetApiQuestionsInputData.QuestionDifficulty;
-import src.use_cases.getApiQuestions.GetApiQuestionsInputData.QuestionType;
+import entity.Question;
+import use_cases.getApiQuestions.GetApiQuestionsInputData.QuestionDifficulty;
+import use_cases.getApiQuestions.GetApiQuestionsInputData.QuestionType;
 
 import java.util.List;
 

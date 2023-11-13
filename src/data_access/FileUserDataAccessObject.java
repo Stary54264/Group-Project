@@ -1,9 +1,9 @@
-package src.data_access;
+package data_access;
 
-import src.entity.Test;
+import entity.Test;
 
-import src.use_cases.getApiQuestions.GetApiQuestionsDataAccessInterface;
-import src.use_cases.takeQuiz.takeQuizDataAccessInterface;
+import use_cases.getApiQuestions.GetApiQuestionsDataAccessInterface;
+import use_cases.takeQuiz.takeQuizDataAccessInterface;
 public class FileUserDataAccessObject implements takeQuizDataAccessInterface, GetApiQuestionsDataAccessInterface {
 
     @Override

@@ -1,7 +1,7 @@
 package use_cases.takeQuiz;
 
-import src.entity.Result;
-import src.entity.Test;
+import entity.Result;
+import entity.Test;
 
 public interface takeQuizOutputBoundary {
 

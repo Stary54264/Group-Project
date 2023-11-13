@@ -1,4 +1,4 @@
-package src.use_cases.getApiQuestions;
+package use_cases.getApiQuestions;
 
 public class GetApiQuestionsOutputData {
     private final boolean success;

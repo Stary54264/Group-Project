@@ -1,5 +1,4 @@
-package src.use_cases.getResult;
-import src.*;
+package use_cases.getResult;
 
 public class getResultInteractor implements getResultInputBoundary{
     final getResultDataAccessInterface getResultDataAccessObject;
