@@ -1,8 +1,8 @@
 package src.interface_adapter.createOwnQuestions;
 
 import entity.Question;
-import use_cases.createOwnQuestions.CreateOwnQuestionsInputBoundary;
-import use_cases.createOwnQuestions.CreateOwnQuestionsInputData;
+import src.use_cases.createOwnQuestions.CreateOwnQuestionsInputBoundary;
+import src.use_cases.createOwnQuestions.CreateOwnQuestionsInputData;
 
 import java.util.List;
 
