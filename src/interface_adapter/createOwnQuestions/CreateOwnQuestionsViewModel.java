@@ -1,4 +1,4 @@
-package interface_adapter.createOwnQuestions;
+package src.interface_adapter.createOwnQuestions;
 
 import entity.Question;
 import interface_adapter.ViewModel;

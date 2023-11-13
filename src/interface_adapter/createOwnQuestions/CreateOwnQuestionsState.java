@@ -1,4 +1,4 @@
-package interface_adapter.createOwnQuestions;
+package src.interface_adapter.createOwnQuestions;
 
 import use_cases.createOwnQuestions.CreateOwnQuestionsOutputData;
 

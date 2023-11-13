@@ -1,5 +1,10 @@
-package use_cases.getApiQuestions;
+package src.use_cases.getApiQuestions;
+
+import src.entity.Test;
 
 public interface GetApiQuestionsDataAccessInterface {
-    String RetrieveQuestions(int numberOfQuestions, int questionCategory, GetApiQuestionsInputData.QuestionType questionType, GetApiQuestionsInputData.QuestionDifficulty difficulty);
+    //api access is static
+    void save(Test test);
+
+    boolean existsByID(int testID);
 }

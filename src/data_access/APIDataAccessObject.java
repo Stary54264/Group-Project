@@ -1,13 +1,18 @@
 package data_access;
 
+import entity.Question;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.List;
+
+import app.QuizFactory;
 
 public class APIDataAccessObject {
-    public static void GetQuiz(int numberOfQuestions, int category, int difficulty, int questionType) throws IOException, InterruptedException {
+    public static List<Question> RetrieveQuestions(int numberOfQuestions, int category, int difficulty, int questionType) throws IOException, InterruptedException {
         String query = String.format("https://opentdb.com/api.php?amount=%d", numberOfQuestions);
 
         if (category != 0) {
@@ -35,16 +40,15 @@ public class APIDataAccessObject {
                 break;
         }
 
-
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(query))
                 .method("GET", HttpRequest.BodyPublishers.noBody())
                 .build();
         HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println(response.body());
+        return QuizFactory.Parse(response.body());
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        GetQuiz(10, 9, 2, 1);
+        RetrieveQuestions(10, 9, 2, 1);
     }
 }

@@ -1,4 +1,4 @@
-package use_cases.createOwnQuestions;
+package src.use_cases.createOwnQuestions;
 
 import entity.Question;
 

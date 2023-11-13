@@ -1,20 +1,25 @@
 package entity;
 
+import java.util.ArrayList;
+
 public class Question {
-    private final int id; // generate random id to differentiate questions
     private String question;
     private String correctAnswer;
-    private String[] incorrectAnswers;
+    private ArrayList<String> incorrectAnswers;
 
-    public Question(int id, String question, String correctAnswer, String[] incorrectAnswers) {
-        this.id = id;
+    public Question(String question, String correctAnswer, ArrayList<String> incorrectAnswers) {
         this.question = question;
         this.correctAnswer = correctAnswer;
         this.incorrectAnswers = incorrectAnswers;
     }
 
-    public int getId() {
-        return id;
+
+    public void setCorrectAnswer(String correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
+
+    public void setIncorrectAnswers(ArrayList<String> incorrectAnswers) {
+        this.incorrectAnswers = incorrectAnswers;
     }
 
     public String getQuestion() {
@@ -25,7 +30,14 @@ public class Question {
         return correctAnswer;
     }
 
-    public String[] getIncorrectAnswers() {
+    public ArrayList<String> getIncorrectAnswers() {
         return incorrectAnswers;
+    }
+
+    public ArrayList<String> getAnswers() {
+        ArrayList<String> q = new ArrayList<>(1);
+        q.add(correctAnswer);
+        q.addAll(incorrectAnswers);
+        return q;
     }
 }

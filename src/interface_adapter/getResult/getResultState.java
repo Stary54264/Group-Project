@@ -1,4 +1,4 @@
-package interface_adapter.getResult;
+package src.interface_adapter.getResult;
 
 public class getResultState {
 }
