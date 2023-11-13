@@ -8,5 +8,11 @@ public class getResultInteractor implements getResultInputBoundary{
         this.getResultDataAccessObject = getResultDataAccessInterface;
         this.getResultPresenter = getResultOutputBoundary;
     }
+    public void execute(){
+        String result = getResultDataAccessObject.getResult();
+        getResultOutputData getResultOutputData = new getResultOutputData(result);
+        getResultPresenter.prepareSuccessView(getResultOutputData);
+    }
+
 
 }
