@@ -1,9 +1,9 @@
-package src.entity;
+package entity;
 
 import java.util.ArrayList;
 import java.util.List;
-import src.entity.Question;
-import src.entity.Result;
+import entity.Question;
+import entity.Result;
 
 public class Test {
     private final ArrayList<Question> questions;

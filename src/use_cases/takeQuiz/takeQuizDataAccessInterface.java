@@ -1,4 +1,4 @@
-package src.use_cases.takeQuiz;
+package use_cases.takeQuiz;
 
 import src.entity.Test;
 
