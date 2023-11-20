@@ -39,11 +39,15 @@ public class GetApiQuestionsInteractor implements GetApiQuestionsInputBoundary {
             apiPresenter.prepareFailView("Error occurred!"); // if throws exception, fail
         }
 
-        // create test with name & save & success view
-        Test test = testFactory.create((ArrayList<Question>) questions, category.name, testName);
-        apiDataAccessObject.save(test);
+        // create test with unique name & save & success view
+        if (apiDataAccessObject.existsByName(testName)) {
+            apiPresenter.prepareFailView("Name already exists!");
+        } else {
+            Test test = testFactory.create((ArrayList<Question>) questions, category.name, testName, "");
+            apiDataAccessObject.save(test);
 
-        GetApiQuestionsOutputData getApiQuestionsOutputData = new GetApiQuestionsOutputData(true, testName);
-        apiPresenter.prepareSuccessView(getApiQuestionsOutputData);
+            GetApiQuestionsOutputData getApiQuestionsOutputData = new GetApiQuestionsOutputData(true, testName);
+            apiPresenter.prepareSuccessView(getApiQuestionsOutputData);
+        }
     }
 }
