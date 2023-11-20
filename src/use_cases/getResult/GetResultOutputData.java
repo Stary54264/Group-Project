@@ -1,9 +1,9 @@
 package use_cases.getResult;
 
-public class getResultOutputData {
+public class GetResultOutputData {
     public String result;
 
-    public getResultOutputData(String result) {
+    public GetResultOutputData(String result) {
         this.result = result;
     }
 

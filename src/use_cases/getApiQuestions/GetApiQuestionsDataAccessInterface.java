@@ -6,5 +6,5 @@ public interface GetApiQuestionsDataAccessInterface {
     //api access is static
     void save(Test test);
 
-    boolean existsByID(int testID);
+    boolean existsByName(String testName);
 }

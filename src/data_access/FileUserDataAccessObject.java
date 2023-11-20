@@ -2,10 +2,9 @@ package data_access;
 
 import entity.Test;
 
-import src.use_cases.createOwnQuestions.CreateOwnQuestionsDataAccessInterface;
 import use_cases.getApiQuestions.GetApiQuestionsDataAccessInterface;
 import use_cases.takeQuiz.takeQuizDataAccessInterface;
-public class FileUserDataAccessObject implements takeQuizDataAccessInterface, GetApiQuestionsDataAccessInterface, CreateOwnQuestionsDataAccessInterface {
+public class FileUserDataAccessObject implements takeQuizDataAccessInterface, GetApiQuestionsDataAccessInterface {
 
     @Override
     public Test getTest(String name) {
