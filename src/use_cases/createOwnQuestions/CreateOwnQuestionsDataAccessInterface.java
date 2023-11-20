@@ -1,9 +1,10 @@
-package use_cases.createOwnQuestions;
+package src.use_cases.createOwnQuestions;
 
 import entity.Question;
+import entity.Test;
 
 import java.util.List;
 
 public interface CreateOwnQuestionsDataAccessInterface {
-    void save(List<Question> questionList);
+    void save(Test test);
 }

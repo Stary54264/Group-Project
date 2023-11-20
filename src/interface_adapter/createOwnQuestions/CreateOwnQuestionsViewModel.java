@@ -1,15 +1,15 @@
-package interface_adapter.createOwnQuestions;
+package src.interface_adapter.createOwnQuestions;
 
 import entity.Question;
 import interface_adapter.ViewModel;
-import use_cases.createOwnQuestions.CreateOwnQuestionsOutputData;
+import src.use_cases.createOwnQuestions.CreateOwnQuestionsOutputData;
 
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
 public class CreateOwnQuestionsViewModel extends ViewModel {
-    private List<Question> defaultQuestionList;
-    private CreateOwnQuestionsState questionsState = new CreateOwnQuestionsState(new CreateOwnQuestionsOutputData(defaultQuestionList));
+    private CreateOwnQuestionsOutputData output;
+    private CreateOwnQuestionsState questionsState = new CreateOwnQuestionsState(output);
 
     public CreateOwnQuestionsViewModel() {
         super("questions");

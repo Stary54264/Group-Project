@@ -1,6 +1,6 @@
-package interface_adapter.createOwnQuestions;
+package src.interface_adapter.createOwnQuestions;
 
-import use_cases.createOwnQuestions.CreateOwnQuestionsOutputData;
+import src.use_cases.createOwnQuestions.CreateOwnQuestionsOutputData;
 
 public class CreateOwnQuestionsState {
     private CreateOwnQuestionsOutputData questionsOutputData;

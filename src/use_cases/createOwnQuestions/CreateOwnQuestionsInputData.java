@@ -1,28 +1,28 @@
-package use_cases.createOwnQuestions;
+package src.use_cases.createOwnQuestions;
 
 import entity.Question;
-
+import entity.Test;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CreateOwnQuestionsInputData {
     private final List<String> questions;
-    private final List<Integer> ids;
     private final List<String> answers;
-    private final List<String[]> incorrectAnswers;
+    private final List<ArrayList<String>> incorrectAnswers;
+    private final Test test;
 
-    public CreateOwnQuestionsInputData(List<String> questions, List<Integer> ids, List<String> answers, List<String[]> incorrectAnswers) {
+    public CreateOwnQuestionsInputData(List<String> questions, List<String> answers, List<ArrayList<String>> incorrectAnswers) {
         this.questions = questions;
-        this.ids = ids;
         this.answers = answers;
         this.incorrectAnswers = incorrectAnswers;
-    }
-    public List<Question> getQuestions() {
-        List<Question> output = new ArrayList<>();
+        ArrayList<Question> output = new ArrayList<>();
         for (int i = 0; i < questions.size(); i++) {
-            Question question = new Question(ids.get(i), questions.get(i), answers.get(i), incorrectAnswers.get(i));
+            Question question = new Question(questions.get(i), answers.get(i), incorrectAnswers.get(i));
             output.add(i, question);
         }
-        return output;
+        this.test = new Test(output);
+    }
+    public Test getCreateTest(){
+        return test;
     }
 }
