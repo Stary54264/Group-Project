@@ -1,4 +1,4 @@
-package src.use_cases.createOwnQuestions;
+package use_cases.createOwnQuestions;
 
 import app.TestFactory;
 import entity.Question;
