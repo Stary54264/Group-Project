@@ -1,5 +1,8 @@
 package use_cases.getResult;
 import use_cases.*;
+import entity.*;
+
+import java.util.ArrayList;
 
 public class GetResultInteractor implements GetResultInputBoundary{
     final GetResultDataAccessInterface getResultDataAccessObject;
@@ -10,8 +13,16 @@ public class GetResultInteractor implements GetResultInputBoundary{
     }
     @Override
     public void execute(GetResultInputData getResultInputData) {
-
-        GetResultOutputData getResultOutputData = new GetResultOutputData(result);
+        String name = getResultInputData.getName();
+        Test result = getResultDataAccessObject.getTest(name);
+        ArrayList<Result> results = result.getResults();
+        double sum = 0;
+        for (Result r : results) {
+            sum += r.getAverage();
+        }
+        double resultAverage = sum / results.size();
+        String finalResult = Double.toString(resultAverage);
+        GetResultOutputData getResultOutputData = new GetResultOutputData(finalResult);
         getResultPresenter.prepareSuccessView(getResultOutputData);
     }
 }
