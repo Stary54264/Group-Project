@@ -1,9 +1,10 @@
-package interface_adapter.createOwnQuestions;
+package src.interface_adapter.createOwnQuestions;
 
 import entity.Question;
 import src.use_cases.createOwnQuestions.CreateOwnQuestionsInputBoundary;
 import src.use_cases.createOwnQuestions.CreateOwnQuestionsInputData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CreateOwnQuestionsController {
@@ -12,8 +13,8 @@ public class CreateOwnQuestionsController {
     public CreateOwnQuestionsController(CreateOwnQuestionsInputBoundary createOwnQuestionsInteractor) {
         this.createOwnQuestionsInteractor = createOwnQuestionsInteractor;
     }
-    public void execute(List<String> questions, List<Integer> ids, List<String> answers, List<String[]> incorrectAnswers) {
-        CreateOwnQuestionsInputData createInput = new CreateOwnQuestionsInputData(questions, ids, answers, incorrectAnswers);
+    public void execute(List<String> questions, List<String> answers, List<ArrayList<String>> incorrectAnswers) {
+        CreateOwnQuestionsInputData createInput = new CreateOwnQuestionsInputData(questions, answers, incorrectAnswers);
         createOwnQuestionsInteractor.execute(createInput);
     }
 }

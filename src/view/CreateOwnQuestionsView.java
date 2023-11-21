@@ -1,13 +1,8 @@
 package view;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
-public class QuizView implements ActionListener, PropertyChangeListener {
-
+public class CreateOwnQuestionsView {
     public final String viewname = "Create Questions";
     private final CreateOwnQuestionsViewModel createOwnQuestionsViewModel;
     private final JTextField questionField = new JTextField();
@@ -16,13 +11,11 @@ public class QuizView implements ActionListener, PropertyChangeListener {
     private final CreateOwnQuestionsController createOwnQuestionsController;
     private final JButton createQuestions;
     private final JButton cancel;
-    
-    public void actionPerformed(ActionEvent e) {
 
-    }
-
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-
+    public CreateOwnQuestionsView(CreateOwnQuestionsController controller,
+                                  CreateOwnQuestionsViewModel viewModel) {
+        this.createOwnQuestionsController = controller;
+        this.createOwnQuestionsViewModel = viewModel;
+        createOwnQuestionsViewModel.add
     }
 }
