@@ -1,9 +1,10 @@
 package interface_adapter.getApiQuestions;
 
+import app.Category;
 import use_cases.getApiQuestions.GetApiQuestionsInputBoundary;
 import use_cases.getApiQuestions.GetApiQuestionsInputData;
-import use_cases.getApiQuestions.GetApiQuestionsInputData.QuestionType;
-import use_cases.getApiQuestions.GetApiQuestionsInputData.QuestionDifficulty;
+import app.QuestionType;
+import app.QuestionDifficulty;
 
 public class GetApiQuestionsController {
     final GetApiQuestionsInputBoundary getApiQuestionsInteractor;
@@ -11,10 +12,10 @@ public class GetApiQuestionsController {
         this.getApiQuestionsInteractor = getApiQuestionsInteractor;
     }
 
-    public void execute(int numberOfQuestions, int questionCategory,
-                        QuestionType questionType, QuestionDifficulty difficulty) {
+    public void execute(int numberOfQuestions, Category questionCategory,
+                        QuestionType questionType, QuestionDifficulty difficulty, String testName) {
         GetApiQuestionsInputData getApiQuestionsInputData = new GetApiQuestionsInputData(
-                numberOfQuestions, questionCategory, questionType, difficulty);
+                numberOfQuestions, questionCategory, questionType, difficulty, testName);
 
         getApiQuestionsInteractor.execute(getApiQuestionsInputData);
     }
