@@ -13,7 +13,6 @@ public class Question {
         this.incorrectAnswers = incorrectAnswers;
     }
 
-
     public void setCorrectAnswer(String correctAnswer) {
         this.correctAnswer = correctAnswer;
     }

@@ -52,7 +52,7 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
             Result newResult = prepareResult();
 
             activeTest.addResult(newResult);
-            outputBoundary.prepareResultView(activeTest, newResult);
+            outputBoundary.prepareResultView(activeTest.getName());
             clearState();
         } else {
             currentIndex = testOrder[currentQuestionIndex];

@@ -14,10 +14,6 @@ import java.util.List;
 
 import app.QuizFactory;
 
-import static app.Category.AnyCategory;
-import static app.QuestionDifficulty.ALL;
-import static app.QuestionType.BOOL;
-
 public class APIDataAccessObject {
     public static List<Question> RetrieveQuestions(int numberOfQuestions, Category category, QuestionDifficulty difficulty,
                                                    QuestionType questionType) throws IOException, InterruptedException {
@@ -63,6 +59,6 @@ public class APIDataAccessObject {
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        RetrieveQuestions(10, AnyCategory, ALL, BOOL);
+        //RetrieveQuestions(10, AnyCategory, ALL, BOOL);
     }
 }

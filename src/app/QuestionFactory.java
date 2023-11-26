@@ -1,4 +1,4 @@
-package src.app;
+package app;
 import entity.Question;
 
 import java.util.ArrayList;
@@ -26,8 +26,9 @@ public class QuestionFactory {
         incorrectAnswers = q.getIncorrectAnswers();
     }
     public Question Build() {
-        question.setQuestion(questionText);
+        //question.set(questionText);
         question.setCorrectAnswer(correctAnswer);
         question.setIncorrectAnswers(incorrectAnswers);
+        return question;
     }
 }

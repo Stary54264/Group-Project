@@ -1,5 +1,7 @@
 package data_access;
 
+import app.Category;
+import entity.CommonTestFactory;
 import entity.Question;
 import entity.Test;
 
@@ -12,28 +14,38 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.List;
+import java.util.Objects;
 
 public class FileUserDataAccessObject implements takeQuizDataAccessInterface, GetApiQuestionsDataAccessInterface, GetResultDataAccessInterface{
+    private final List<Test> tests = new ArrayList<>();
+    private final String path;
+    public FileUserDataAccessObject(String folderPath) throws IOException {
+        ArrayList<Question> questions = new ArrayList<>();
+        Category category = Category.AnyCategory;
+        String testName = "name";
+        String comment = "";
 
-    public FileUserDataAccessObject(String csvPath, TestFactory testFactory) throws IOException {
-        private final Map<String, Test> tests = new HashMap<>();
+        Test test = new CommonTestFactory().setQuestions(questions).setCategory(category.name).setName(testName).setComment(comment).Build();
 
-        Test test = testFactory.create(questions, category, testName, comment);
-        tests.put(testName, test);
+        path = folderPath;
+        reloadTests();
+    }
+    private void reloadTests() {
 
     }
+
     @Override
     public Test getTest(String name) {
-        return null;
+        return tests.stream().filter(t -> name.equals(t.getName())).findAny().orElse(null);
     }
 
     @Override
     public void save(Test test) {
-        // implement later
+        if (!tests.contains(test)) tests.add(test);
+
     }
 
     @Override

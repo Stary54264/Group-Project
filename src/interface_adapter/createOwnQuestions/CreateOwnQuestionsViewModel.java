@@ -1,8 +1,8 @@
-package src.interface_adapter.createOwnQuestions;
+package interface_adapter.createOwnQuestions;
 
 import entity.Question;
 import interface_adapter.ViewModel;
-import src.use_cases.createOwnQuestions.CreateOwnQuestionsOutputData;
+import use_cases.createOwnQuestions.CreateOwnQuestionsOutputData;
 
 import java.beans.PropertyChangeListener;
 import java.util.List;

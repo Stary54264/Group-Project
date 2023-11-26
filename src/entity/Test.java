@@ -1,9 +1,6 @@
 package entity;
 
 import java.util.ArrayList;
-import java.util.List;
-import entity.Question;
-import entity.Result;
 
 public class Test {
     private final ArrayList<Question> questions;

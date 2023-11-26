@@ -1,6 +1,6 @@
 package use_cases.createOwnQuestions;
 
-import app.TestFactory;
+import entity.TestFactory;
 import entity.Question;
 
 import java.util.List;
