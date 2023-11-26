@@ -1,6 +1,7 @@
 package interface_adapter.uploadQuestions;
 
 import use_cases.uploadQuestions.UploadQuestionsInputBoundary;
+import use_cases.uploadQuestions.UploadQuestionsInputData;
 
 public class UploadQuestionsController {
 
@@ -9,7 +10,9 @@ public class UploadQuestionsController {
         this.UploadQuestionsUseCaseInteractor = UploadQuestionsUseCaseInteractor;
     }
 
-    public void execute() {
-        UploadQuestionsUseCaseInteractor.execute();
+    public void execute(String testName, String filePath) {
+        UploadQuestionsInputData uploadQuestionsInputData = new UploadQuestionsInputData(
+                testName, filePath);
+        UploadQuestionsUseCaseInteractor.execute(uploadQuestionsInputData);
     }
 }

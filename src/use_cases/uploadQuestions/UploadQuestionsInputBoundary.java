@@ -1,5 +1,5 @@
 package use_cases.uploadQuestions;
 
 public interface UploadQuestionsInputBoundary {
-    void execute();
+    void execute(UploadQuestionsInputData uploadQuestionsInputData);
 }
