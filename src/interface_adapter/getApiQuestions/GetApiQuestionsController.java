@@ -2,8 +2,8 @@ package interface_adapter.getApiQuestions;
 
 import use_cases.getApiQuestions.GetApiQuestionsInputBoundary;
 import use_cases.getApiQuestions.GetApiQuestionsInputData;
-import use_cases.getApiQuestions.GetApiQuestionsInputData.QuestionType;
-import use_cases.getApiQuestions.GetApiQuestionsInputData.QuestionDifficulty;
+import app.QuestionType;
+import app.QuestionDifficulty;
 
 public class GetApiQuestionsController {
     final GetApiQuestionsInputBoundary getApiQuestionsInteractor;
