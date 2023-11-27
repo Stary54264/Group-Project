@@ -10,7 +10,6 @@ public class takeQuizInputData{
     public takeQuizInputData(String userAnswer) {
         this.userAnswer = userAnswer;
     }
-
     public String getUserAnswer() {
         return userAnswer;
     }

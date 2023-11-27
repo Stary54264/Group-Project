@@ -16,7 +16,7 @@ public class manageQuizInteractor implements manageQuizInputBoundary {
     @Override
     public void deleteTest(manageQuizInputdata data) {
         List<Test> tests = dataAccessInterface.getTests();
-        outputBoundary.refreshTests(tests);
+        outputBoundary.refreshTests(new manageQuizOutputData(tests));
     }
 
     @Override

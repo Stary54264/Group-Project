@@ -52,7 +52,7 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
             Result newResult = prepareResult();
 
             activeTest.addResult(newResult);
-            outputBoundary.prepareResultView(activeTest, newResult);
+            outputBoundary.prepareResultView(activeTest.getName());
             clearState();
         } else {
             currentIndex = testOrder[currentQuestionIndex];
@@ -63,9 +63,9 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
     }
 
     private Result prepareResult() {
-        HashMap<Integer, Question> qs = new HashMap<>();
+        boolean[] qs = new boolean[testOrder.length];
         for (int i = 0; i < testOrder.length; i++) {
-            qs.put(i, wrongAnswers.get(testOrder[i])) ;
+            qs[i] = wrongAnswers.get(testOrder[i]) == null;
         }
         return new Result(new Date(), qs);
     }

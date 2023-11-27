@@ -5,7 +5,7 @@ import entity.Test;
 import java.util.List;
 
 public interface manageQuizOutputBoundary {
-    void prepareEditInterface(Test test);
+    void prepareEditInterface(String name);
 
-    void refreshTests(List<Test> newTests);
+    void refreshTests(manageQuizOutputData data);
 }

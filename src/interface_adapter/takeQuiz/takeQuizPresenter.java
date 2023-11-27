@@ -17,7 +17,7 @@ public class takeQuizPresenter implements takeQuizOutputBoundary {
     }
 
     @Override
-    public void prepareResultView(Test test, Result result) {
+    public void prepareResultView(String name) {
 
     }
 }

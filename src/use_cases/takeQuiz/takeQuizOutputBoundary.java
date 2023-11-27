@@ -4,9 +4,7 @@ import entity.Result;
 import entity.Test;
 
 public interface takeQuizOutputBoundary {
-
     void prepareFailed();
     void prepareNextQuestion(takeQuizOutputData data);
-
-    void prepareResultView(Test test, Result result);
+    void prepareResultView(String name);
 }

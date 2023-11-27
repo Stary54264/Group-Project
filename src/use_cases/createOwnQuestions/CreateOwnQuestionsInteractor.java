@@ -1,6 +1,9 @@
 package use_cases.createOwnQuestions;
 
-import entity.TestFactory;
+import app.TestBuilder;
+import entity.Question;
+
+import java.util.List;
 
 public class CreateOwnQuestionsInteractor implements CreateOwnQuestionsInputBoundary {
     final CreateOwnQuestionsOutputBoundary questionsPresenter;

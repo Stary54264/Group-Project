@@ -1,14 +1,15 @@
 package entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
 public class Result {
     private final Date timeTaken;
-    private final Map<Integer, Question> results;
+    private final boolean[] results;
     private String comment;
 
-    public Result(Date timeTaken, Map<Integer, Question> results) {
+    public Result(Date timeTaken, boolean[] results) {
         this.timeTaken = timeTaken;
         this.results = results;
     }
@@ -19,10 +20,10 @@ public class Result {
 
     public double getAverage() {
         double a = 0;
-        for (Question b: results.values()) {
-            if (b != null) a++;
+        for (boolean b: results) {
+            if (!b) a++;
         }
-        a /= results.values().size();
+        a /= results.length;
         return a;
     }
 

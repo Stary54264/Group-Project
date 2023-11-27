@@ -8,17 +8,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 
-public class QuizView implements ActionListener, PropertyChangeListener {
-    public final String viewname = "Create Questions";
+public class MainView implements ActionListener, PropertyChangeListener {
+    public final String viewname = "Main Menu";
     private final CreateOwnQuestionsViewModel createOwnQuestionsViewModel;
-    private final JTextField questionField = new JTextField();
-    private final JTextField answerField = new JTextField();
-    private final JList<String> incorrectList = new JList<String>();
     private final CreateOwnQuestionsController createOwnQuestionsController;
-    private final JButton createQuestions;
-    private final JButton cancel;
-    
+    private final ArrayList<TestPanel> tests;
+    private final JButton createQuestions, apiQuestions, uploadQuestions, createTest;
+
+    public MainView() {
+    }
+
     public void actionPerformed(ActionEvent e) {
 
     }
@@ -28,9 +29,3 @@ public class QuizView implements ActionListener, PropertyChangeListener {
 
     }
 }
-
-//{"name":"name", "category":"General","comment":"yep", "questions":[
-//  {"text": "yep", "correctAnswer":"true", "wrongAnswers":["false"]}
-// ],
-// "results":[{"date":978132901297,"comment":"yep", [true, false, true]}
-// ]}
