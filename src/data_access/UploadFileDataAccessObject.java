@@ -25,15 +25,14 @@ public class UploadFileDataAccessObject implements UploadQuestionsUserDataAccess
             String row;
             while ((row = reader.readLine()) != null) {
                 String[] col = row.split(",");
-                questionBuilder.setQuestionText(String.valueOf(col[0]));
-                questionBuilder.setCorrectAnswer(String.valueOf(col[1]));
                 ArrayList<String> incorrectAnswers = new ArrayList<>(Arrays.asList(
                         String.valueOf(col[2]), String.valueOf(col[3]), String.valueOf(col[4])));
-                questionBuilder.setIncorrectAnswers(incorrectAnswers);
-                questions.add(questionBuilder.Build());
+                testBuilder.addQuestion(questionBuilder.
+                        setQuestionText(String.valueOf(col[0])).
+                        setCorrectAnswer(String.valueOf(col[1])).
+                        setIncorrectAnswers(incorrectAnswers).build());
             }
-            testBuilder.
-            return(testBuilder.Build());
+            return(testBuilder.setName(testName).setCategory("").setComment("").build());
         }
     }
 }
