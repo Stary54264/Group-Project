@@ -2,6 +2,7 @@ package data_access;
 
 import app.QuestionType;
 import app.QuestionDifficulty;
+import app.Serializer;
 import entity.Question;
 
 import java.io.IOException;
@@ -9,16 +10,14 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.List;
-
-import app.QuizFactory;
+import java.util.ArrayList;
 
 import static app.QuestionDifficulty.ALL;
 import static app.QuestionType.BOOL;
 
 public class APIDataAccessObject {
-    public static List<Question> RetrieveQuestions(int numberOfQuestions, int category, QuestionDifficulty difficulty,
-                                                   QuestionType questionType) throws IOException, InterruptedException {
+    public static ArrayList<Question> RetrieveQuestionsTrivia1(int numberOfQuestions, int category, QuestionDifficulty difficulty,
+                                                               QuestionType questionType) throws IOException, InterruptedException {
         String query = String.format("https://opentdb.com/api.php?amount=%d", numberOfQuestions);
 
         if (category != 0) {
@@ -57,10 +56,15 @@ public class APIDataAccessObject {
                 .method("GET", HttpRequest.BodyPublishers.noBody())
                 .build();
         HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        return QuizFactory.Parse(response.body());
+        return Serializer.ParseTrivia(response.body());
+    }
+
+    public static ArrayList<Question> RetrieveQuestionsTrivia2() {
+        // TODO fmwof
+        return null;
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        RetrieveQuestions(10, 9, ALL, BOOL);
+        RetrieveQuestionsTrivia1(10, 9, ALL, BOOL);
     }
 }

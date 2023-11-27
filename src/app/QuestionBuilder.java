@@ -7,14 +7,17 @@ public class QuestionBuilder {
     private Question question;
     private String questionText, correctAnswer;
     private ArrayList<String> incorrectAnswers;
-    public void setQuestionText(String questionText) {
+    public QuestionBuilder setQuestionText(String questionText) {
         this.questionText = questionText;
+        return this;
     }
-    public void setCorrectAnswer(String correctAnswer) {
+    public QuestionBuilder setCorrectAnswer(String correctAnswer) {
         this.correctAnswer = correctAnswer;
+        return this;
     }
-    public void setIncorrectAnswers(ArrayList<String> incorrectAnswers) {
+    public QuestionBuilder setIncorrectAnswers(ArrayList<String> incorrectAnswers) {
         this.incorrectAnswers = incorrectAnswers;
+        return this;
     }
     public QuestionBuilder() {
         this.question = new Question("", "", new ArrayList<String>());
@@ -25,7 +28,8 @@ public class QuestionBuilder {
         correctAnswer = q.getCorrectAnswer();
         incorrectAnswers = q.getIncorrectAnswers();
     }
-    public Question Build() {
+    public Question build() {
+        if (questionText.isEmpty() || correctAnswer.isEmpty() || incorrectAnswers.contains("")) return null;
         question.setQuestion(questionText);
         question.setCorrectAnswer(correctAnswer);
         question.setIncorrectAnswers(incorrectAnswers);

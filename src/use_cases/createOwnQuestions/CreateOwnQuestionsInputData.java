@@ -1,5 +1,6 @@
 package use_cases.createOwnQuestions;
 
+import app.TestBuilder;
 import entity.Question;
 import entity.Test;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class CreateOwnQuestionsInputData {
             Question question = new Question(questions.get(i), answers.get(i), incorrectAnswers.get(i));
             output.add(i, question);
         }
-        this.test = new Test(output);
+        this.test = ;
     }
     public Test getCreateTest(){
         return test;
