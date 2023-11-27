@@ -18,7 +18,7 @@ public class GetResultView extends JPanel implements ActionListener, PropertyCha
         this.result = new JLabel();
         this.getResult = new JButton("Get Result");
         this.getResult.addActionListener(this);
-        this.add(new LabelTextPanel("Result", result));
+        this.add(result);
         this.add(getResult);
         this.getResultViewModel.addPropertyChangeListener(this);
     }
