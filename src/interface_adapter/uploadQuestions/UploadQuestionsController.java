@@ -12,9 +12,9 @@ public class UploadQuestionsController {
         this.UploadQuestionsUseCaseInteractor = UploadQuestionsUseCaseInteractor;
     }
 
-    public void execute(String testName, String csvPath) {
+    public void execute(String testName, String jsonPath) {
         UploadQuestionsInputData uploadQuestionsInputData = new UploadQuestionsInputData(
-                testName, csvPath);
+                testName, jsonPath);
         UploadQuestionsUseCaseInteractor.execute(uploadQuestionsInputData);
     }
 }

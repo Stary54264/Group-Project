@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public interface UploadQuestionsUserDataAccessInterface {
-    Test readTest(String testName, String csvPath);
+    Test readTest(String testName, String jsonPath);
     void save(Test test);
     boolean existsByName(String testName);
 }
