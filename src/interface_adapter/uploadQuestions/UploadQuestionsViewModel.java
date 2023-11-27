@@ -8,7 +8,6 @@ import java.beans.PropertyChangeSupport;
 public class UploadQuestionsViewModel extends ViewModel {
     public final String TITLE_LABEL = "Clear View";
     public static final String UPLOAD_BUTTON_LABEL = "Upload";
-    public static final String CANCEL_BUTTON_LABEL = "Cancel";
     private UploadQuestionsState uploadQuestionsState = new UploadQuestionsState();
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
