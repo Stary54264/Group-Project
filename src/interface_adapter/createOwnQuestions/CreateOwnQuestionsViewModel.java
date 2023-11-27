@@ -17,7 +17,7 @@ public class CreateOwnQuestionsViewModel extends ViewModel {
     public static final String ANSWER_LABEL = "Answer: ";
     public static final String INCORRECT_LABEL = "Incorrect answer: ";
     private CreateOwnQuestionsOutputData output;
-    private CreateOwnQuestionsState questionsState = new CreateOwnQuestionsState(output);
+    private CreateOwnQuestionsState questionsState = new CreateOwnQuestionsState();
 
     public CreateOwnQuestionsViewModel() {
         super("questions");
