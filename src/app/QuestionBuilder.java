@@ -1,9 +1,9 @@
-package src.app;
+package app;
 import entity.Question;
 
 import java.util.ArrayList;
 
-public class QuestionFactory {
+public class QuestionBuilder {
     private Question question;
     private String questionText, correctAnswer;
     private ArrayList<String> incorrectAnswers;
@@ -16,10 +16,10 @@ public class QuestionFactory {
     public void setIncorrectAnswers(ArrayList<String> incorrectAnswers) {
         this.incorrectAnswers = incorrectAnswers;
     }
-    public QuestionFactory() {
+    public QuestionBuilder() {
         this.question = new Question("", "", new ArrayList<String>());
     }
-    public QuestionFactory(Question q) {
+    public QuestionBuilder(Question q) {
         question = q;
         questionText = q.getQuestion();
         correctAnswer = q.getCorrectAnswer();
@@ -29,5 +29,6 @@ public class QuestionFactory {
         question.setQuestion(questionText);
         question.setCorrectAnswer(correctAnswer);
         question.setIncorrectAnswers(incorrectAnswers);
+        return question;
     }
 }

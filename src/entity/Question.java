@@ -25,6 +25,9 @@ public class Question {
     public String getQuestion() {
         return question;
     }
+    public void setQuestion(String s) {
+        question = s;
+    }
 
     public String getCorrectAnswer() {
         return correctAnswer;
