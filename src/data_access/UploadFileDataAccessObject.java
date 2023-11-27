@@ -9,7 +9,7 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.ArrayList;
 
-public class UploadFileDataAccessObject implements UploadQuestionsUserDataAccessInterface {
+public class UploadFileDataAccessObject {
     private final ArrayList<Question> questions = new ArrayList<>();
     private final QuestionBuilder questionBuilder;
     private final TestBuilder testBuilder;
@@ -19,9 +19,9 @@ public class UploadFileDataAccessObject implements UploadQuestionsUserDataAccess
         this.testBuilder = testBuilder;
     }
 
-    @Override
-    public Test readTest(String testName, String csvPath) throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(new File(csvPath)))) {
+    public Test readTest(String testName, String csvPath) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(new File(csvPath)));
             String row;
             while ((row = reader.readLine()) != null) {
                 String[] col = row.split(",");
@@ -32,7 +32,9 @@ public class UploadFileDataAccessObject implements UploadQuestionsUserDataAccess
                         setCorrectAnswer(String.valueOf(col[1])).
                         setIncorrectAnswers(incorrectAnswers).build());
             }
-            return(testBuilder.setName(testName).setCategory("General").setComment("").build());
         }
+        catch (Exception E) {
+        }
+        return(testBuilder.setName(testName).setCategory("General").setComment("").build());
     }
 }
