@@ -4,7 +4,7 @@ import entity.Test;
 
 import use_cases.getApiQuestions.GetApiQuestionsDataAccessInterface;
 import use_cases.takeQuiz.takeQuizDataAccessInterface;
-public class FileUserDataAccessObject implements takeQuizDataAccessInterface, GetApiQuestionsDataAccessInterface, src.use_cases.createOwnQuestions.CreateOwnQuestionsDataAccessInterface {
+public class FileUserDataAccessObject implements takeQuizDataAccessInterface, GetApiQuestionsDataAccessInterface, use_cases.createOwnQuestions.CreateOwnQuestionsDataAccessInterface {
 
     @Override
     public Test getTest(String name) {
@@ -14,10 +14,5 @@ public class FileUserDataAccessObject implements takeQuizDataAccessInterface, Ge
     @Override
     public void save(Test test) {
         // implement later
-    }
-
-    @Override
-    public boolean existsByID(int testID) {
-        return false; // implement later
     }
 }

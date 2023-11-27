@@ -10,23 +10,14 @@ public class Test {
     private String category, name, comment;
     private final ArrayList<Result> results;
 
-    public Test() {
-        this.questions = new ArrayList<>();
-        this.results = new ArrayList<>();
-    }
-
-    public Test(ArrayList<Question> questions) {
+    public Test(String name, String Category, ArrayList<Question> questions, ArrayList<Result> results) {
         this.questions = questions;
-        this.results = new ArrayList<>();
+        this.results = results;
     }
 
     public void setQuestions(ArrayList<Question> questions) {
         this.questions.clear();
         this.questions.addAll(questions);
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public void setComment(String comment) {
