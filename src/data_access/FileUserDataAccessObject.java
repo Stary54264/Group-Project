@@ -5,19 +5,13 @@ import entity.CommonTestFactory;
 import entity.Question;
 import entity.Test;
 
-import entity.TestFactory;
 import use_cases.getApiQuestions.GetApiQuestionsDataAccessInterface;
 import use_cases.takeQuiz.takeQuizDataAccessInterface;
 import use_cases.getResult.GetResultDataAccessInterface;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 public class FileUserDataAccessObject implements takeQuizDataAccessInterface, GetApiQuestionsDataAccessInterface, GetResultDataAccessInterface{
     private final List<Test> tests = new ArrayList<>();
