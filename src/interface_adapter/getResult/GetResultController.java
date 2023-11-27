@@ -1,8 +1,6 @@
 package interface_adapter.getResult;
-
-import use_cases.getResult.GetResultInputBoundary;
 import use_cases.getResult.GetResultInputData;
-
+import use_cases.getResult.GetResultInputBoundary;
 public class GetResultController {
     final GetResultInputBoundary getResultUseCaseInteractor;
     public GetResultController(GetResultInputBoundary getResultUseCaseInteractor) {
