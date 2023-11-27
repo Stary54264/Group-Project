@@ -1,5 +1,6 @@
-package src.use_cases.createOwnQuestions;
+package use_cases.createOwnQuestions;
 
 public interface CreateOwnQuestionsOutputBoundary {
     void prepareSuccessView(CreateOwnQuestionsOutputData output);
+
 }
