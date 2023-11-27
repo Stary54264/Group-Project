@@ -7,5 +7,5 @@ import java.io.IOException;
 public interface UploadQuestionsUserDataAccessInterface {
     Test getTest(String testName);
     void save(Test test);
-    boolean existByName(String testName);
+    boolean existsByName(String testName);
 }
