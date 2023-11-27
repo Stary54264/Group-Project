@@ -1,14 +1,13 @@
 package use_cases.getApiQuestions;
+import app.TestBuilder;
 import entity.Question;
 import app.QuestionType;
 import app.QuestionDifficulty;
 import entity.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
-import static data_access.APIDataAccessObject.RetrieveQuestions;
+import static data_access.APIDataAccessObject.RetrieveQuestionsTrivia1;
 
 public class GetApiQuestionsInteractor implements GetApiQuestionsInputBoundary {
     final GetApiQuestionsDataAccessInterface apiDataAccessObject;
@@ -27,14 +26,14 @@ public class GetApiQuestionsInteractor implements GetApiQuestionsInputBoundary {
         QuestionType type = getApiQuestionsInputData.getQuestionType();
         QuestionDifficulty difficulty = getApiQuestionsInputData.getDifficulty();
 
-        List<Question> questions = null;
+        ArrayList<Question> questions = null;
         try {
-            questions = RetrieveQuestions(number, category, difficulty, type);
+            questions = RetrieveQuestionsTrivia1(number, category, difficulty, type);
         } catch (Exception e) {
             apiPresenter.prepareFailView("Error occurred!"); // if throws exception, fail
         }
 
         // create test with name & save & success view
-        Test test = new Test((ArrayList<Question>) questions);
+        Test test = new TestBuilder().setQuestions(questions).setName()
     }
 }
