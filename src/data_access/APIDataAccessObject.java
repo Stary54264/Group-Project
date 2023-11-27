@@ -12,8 +12,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
 
-import app.QuizFactory;
-
 public class APIDataAccessObject {
     public static List<Question> RetrieveQuestions(int numberOfQuestions, Category category, QuestionDifficulty difficulty,
                                                    QuestionType questionType) throws IOException, InterruptedException {

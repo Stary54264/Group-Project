@@ -43,7 +43,7 @@ public class GetApiQuestionsInteractor implements GetApiQuestionsInputBoundary {
         if (apiDataAccessObject.existsByName(testName)) {
             apiPresenter.prepareFailView("Name already exists!");
         } else {
-            Test test = testFactory.create((ArrayList<Question>) questions, category.name, testName, "");
+            Test test = testFactory.create((ArrayList<Question>) questions, category.name, testName);
             apiDataAccessObject.save(test);
 
             GetApiQuestionsOutputData getApiQuestionsOutputData = new GetApiQuestionsOutputData(true, testName);

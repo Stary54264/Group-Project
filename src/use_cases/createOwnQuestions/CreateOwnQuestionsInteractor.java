@@ -1,5 +1,7 @@
 package use_cases.createOwnQuestions;
 
+import entity.TestFactory;
+
 public class CreateOwnQuestionsInteractor implements CreateOwnQuestionsInputBoundary {
     final CreateOwnQuestionsOutputBoundary questionsPresenter;
     final CreateOwnQuestionsDataAccessInterface questionsDataAccessInterface;

@@ -39,4 +39,12 @@ public class CommonTestFactory implements TestFactory {
         test.setQuestions(questions);
         return test;
     }
+
+    @Override
+    public Test create(ArrayList<Question> questions, String category, String testName) {
+        test.setName(testName);
+        test.setCategory(category);
+        test.setQuestions(questions);
+        return test;
+    }
 }
