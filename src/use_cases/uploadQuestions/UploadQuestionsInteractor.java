@@ -24,10 +24,10 @@ public class UploadQuestionsInteractor implements UploadQuestionsInputBoundary {
         Test test = userDataAccessObject.readTest(testName, jsonPath);
         if (!userDataAccessObject.existsByName(testName)) {
             userDataAccessObject.save(test);
-            uploadQuestionsPresenter.prepareSuccessView("Uploaded successfully!");
+            uploadQuestionsPresenter.prepareView("Uploaded successfully!");
         }
         else {
-            uploadQuestionsPresenter.prepareFailView("Test name already exist!");
+            uploadQuestionsPresenter.prepareView("Test name already exist!");
         }
     }
 }
