@@ -9,19 +9,18 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class UploadFileDataAccessObject implements UploadQuestionsUserDataAccessInterface {
-    private final File csvFile;
     private final ArrayList<Question> questions = new ArrayList<>();
-    private final Test test;
     private final QuestionFactory questionFactory;
-    private TestFactory testFactory;
+    private final TestFactory testFactory;
 
-    public UploadFileDataAccessObject(String csvPath,
-                                      QuestionFactory questionFactory,
-                                      TestFactory testFactory) throws IOException {
+    public UploadFileDataAccessObject(QuestionFactory questionFactory, TestFactory testFactory) {
         this.questionFactory = questionFactory;
         this.testFactory = testFactory;
-        csvFile = new File(csvPath);
-        try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
+    }
+
+    @Override
+    public Test readTest(String testName, String csvPath) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(new File(csvPath)))) {
             String row;
             while ((row = reader.readLine()) != null) {
                 String[] col = row.split(",");
@@ -34,12 +33,7 @@ public class UploadFileDataAccessObject implements UploadQuestionsUserDataAccess
                 questions.add(questionFactory.create(
                         questionContent, correctAnswer, incorrectAnswers));
             }
-            this.test = testFactory.create(questions);
+            return(testFactory.create(questions, testName));
         }
-    }
-
-    @Override
-    public Test readTest() {
-        return test;
     }
 }
