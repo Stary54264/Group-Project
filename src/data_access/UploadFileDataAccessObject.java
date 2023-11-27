@@ -39,7 +39,7 @@ public class UploadFileDataAccessObject implements UploadQuestionsUserDataAccess
     }
 
     @Override
-    public Test readQuestions() {
+    public Test readTest() {
         return test;
     }
 }
