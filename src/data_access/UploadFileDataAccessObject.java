@@ -32,7 +32,7 @@ public class UploadFileDataAccessObject implements UploadQuestionsUserDataAccess
                         setCorrectAnswer(String.valueOf(col[1])).
                         setIncorrectAnswers(incorrectAnswers).build());
             }
-            return(testBuilder.setName(testName).setCategory("").setComment("").build());
+            return(testBuilder.setName(testName).setCategory("General").setComment("").build());
         }
     }
 }
