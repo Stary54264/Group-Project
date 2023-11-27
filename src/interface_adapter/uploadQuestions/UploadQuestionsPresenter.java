@@ -15,7 +15,7 @@ public class UploadQuestionsPresenter implements UploadQuestionsOutputBoundary {
     @Override
     public void prepareView(String message) {
         UploadQuestionsState uploadQuestionsState = uploadQuestionsViewModel.getState();
-        uploadQuestionsState.setUser(message);
+        uploadQuestionsState.setMessage(message);
         uploadQuestionsViewModel.firePropertyChanged();
     }
 }
