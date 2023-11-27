@@ -76,13 +76,10 @@ public class CreateOwnQuestionsView extends JPanel implements ActionListener, Pr
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(next)) {
-                            questions.add(questionField.getText());
-                            answers.add(answerField.getText());
-                            ArrayList<String> temp = new ArrayList<String>();
-                            temp.add(incorrect1Field.getText());
-                            temp.add(incorrect2Field.getText());
-                            temp.add(incorrect3Field.getText());
-                            incorrectAnswers.add(temp);
+                            CreateOwnQuestionsState curr = createOwnQuestionsViewModel.getState();
+                            curr.addQuestions(curr.getQuestion());
+                            curr.addAnswers(curr.getAnswer());
+                            curr.addIncorrectAnswers(curr.getIncorrect());
                             for (int i = 0; i < textFields.size(); i++) {
                                 textFields.get(i).setText(null);
                             }
@@ -96,14 +93,130 @@ public class CreateOwnQuestionsView extends JPanel implements ActionListener, Pr
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        for (int i = 0; i < textFields.size(); i++) {
+                            textFields.get(i).setText(null);
+                        }
                         CreateOwnQuestionsState currState = createOwnQuestionsViewModel.getState();
-                        createOwnQuestionsController.execute(questions, answers, incorrectAnswers);
+                        createOwnQuestionsController.execute(
+                                currState.getQuestions(), currState.getAnswers(), currState.getIncorrectAnswers());
                         JOptionPane.showMessageDialog(null, "Successfully created a test!");
                     }
                 }
         );
-    }
+        questionField.addKeyListener(
+                new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        CreateOwnQuestionsState currState = createOwnQuestionsViewModel.getState();
+                        String text = questionField.getText() + e.getKeyChar();
+                        currState.setQuestion(text);
+                        createOwnQuestionsViewModel.setState(currState);
+                    }
 
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+
+                    }
+                }
+        );
+        answerField.addKeyListener(
+                new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        CreateOwnQuestionsState currState = createOwnQuestionsViewModel.getState();
+                        String text = answerField.getText() + e.getKeyChar();
+                        currState.setAnswer(text);
+                        createOwnQuestionsViewModel.setState(currState);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+
+                    }
+                }
+        );
+        incorrect1Field.addKeyListener(
+                new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        createIncorrectKeyListener(incorrect1Field, e, 0);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+
+                    }
+                }
+        );
+        incorrect2Field.addKeyListener(
+                new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        createIncorrectKeyListener(incorrect2Field, e, 1);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+
+                    }
+                }
+        );
+        incorrect3Field.addKeyListener(
+                new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        createIncorrectKeyListener(incorrect3Field, e, 2);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+
+                    }
+                }
+        );
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        this.add(title);
+        this.add(questionPanel);
+        this.add(answerPanel);
+        this.add(incorrect1Panel);
+        this.add(incorrect2Panel);
+        this.add(incorrect3Panel);
+        this.add(buttons);
+    }
+    private void createIncorrectKeyListener(JTextField field, KeyEvent e, int pos) {
+        CreateOwnQuestionsState currState = createOwnQuestionsViewModel.getState();
+        ArrayList<String> currIncorrect = currState.getIncorrect();
+        String text = field.getText() + e.getKeyChar();
+        currIncorrect.set(pos, text);
+        currState.setIncorrect(currIncorrect);
+        createOwnQuestionsViewModel.setState(currState);
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
 
