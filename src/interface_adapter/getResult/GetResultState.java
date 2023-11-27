@@ -1,5 +1,4 @@
 package interface_adapter.getResult;
-
 public class GetResultState {
     private String result = "";
     public GetResultState(GetResultState copy) {
