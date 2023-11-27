@@ -25,7 +25,7 @@ public class QuestionFactory {
         correctAnswer = q.getCorrectAnswer();
         incorrectAnswers = q.getIncorrectAnswers();
     }
-    public Question Build() {
+    public Question build() {
         //question.set(questionText);
         question.setCorrectAnswer(correctAnswer);
         question.setIncorrectAnswers(incorrectAnswers);
