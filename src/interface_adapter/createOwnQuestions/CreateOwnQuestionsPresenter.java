@@ -12,7 +12,7 @@ public class CreateOwnQuestionsPresenter implements CreateOwnQuestionsOutputBoun
 
     @Override
     public void prepareSuccessView(CreateOwnQuestionsOutputData output) {
-        CreateOwnQuestionsState currState = new CreateOwnQuestionsState(output);
+        CreateOwnQuestionsState currState = new CreateOwnQuestionsState();
         questionsViewModel.setState(currState);
     }
 }

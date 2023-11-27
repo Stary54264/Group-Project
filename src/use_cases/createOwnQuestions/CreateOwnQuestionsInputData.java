@@ -1,5 +1,6 @@
 package use_cases.createOwnQuestions;
 
+import app.TestBuilder;
 import entity.Question;
 import entity.Test;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ public class CreateOwnQuestionsInputData {
     private final List<String> answers;
     private final List<ArrayList<String>> incorrectAnswers;
     private final Test test;
-
+    // use new question builder for each question
     public CreateOwnQuestionsInputData(List<String> questions, List<String> answers, List<ArrayList<String>> incorrectAnswers) {
         this.questions = questions;
         this.answers = answers;
@@ -20,7 +21,7 @@ public class CreateOwnQuestionsInputData {
             Question question = new Question(questions.get(i), answers.get(i), incorrectAnswers.get(i));
             output.add(i, question);
         }
-        this.test = new Test(output);
+        this.test = ;
     }
     public Test getCreateTest(){
         return test;

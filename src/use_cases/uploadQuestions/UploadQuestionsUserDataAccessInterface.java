@@ -5,5 +5,7 @@ import entity.Test;
 import java.io.IOException;
 
 public interface UploadQuestionsUserDataAccessInterface {
-    Test readTest(String testName, String csvPath) throws IOException;
+    Test readTest(String testName, String csvPath);
+    void save(Test test);
+    boolean existsByName(String testName);
 }
