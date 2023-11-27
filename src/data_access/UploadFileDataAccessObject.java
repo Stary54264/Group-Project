@@ -1,21 +1,22 @@
 package data_access;
 
 import entity.Question;
-import entity.QuestionFactory;
+import app.QuestionBuilder;
 import entity.Test;
-import entity.TestFactory;
+import app.TestBuilder;
 import use_cases.uploadQuestions.UploadQuestionsUserDataAccessInterface;
 import java.io.*;
+import java.util.Arrays;
 import java.util.ArrayList;
 
 public class UploadFileDataAccessObject implements UploadQuestionsUserDataAccessInterface {
     private final ArrayList<Question> questions = new ArrayList<>();
-    private final QuestionFactory questionFactory;
-    private final TestFactory testFactory;
+    private final QuestionBuilder questionBuilder;
+    private final TestBuilder testBuilder;
 
-    public UploadFileDataAccessObject(QuestionFactory questionFactory, TestFactory testFactory) {
-        this.questionFactory = questionFactory;
-        this.testFactory = testFactory;
+    public UploadFileDataAccessObject(QuestionBuilder questionBuilder, TestBuilder testBuilder) {
+        this.questionBuilder = questionBuilder;
+        this.testBuilder = testBuilder;
     }
 
     @Override
@@ -24,16 +25,15 @@ public class UploadFileDataAccessObject implements UploadQuestionsUserDataAccess
             String row;
             while ((row = reader.readLine()) != null) {
                 String[] col = row.split(",");
-                String questionContent = String.valueOf(col[0]);
-                String correctAnswer = String.valueOf(col[1]);
-                ArrayList<String> incorrectAnswers = new ArrayList<>();
-                incorrectAnswers.add(String.valueOf(col[2]));
-                incorrectAnswers.add(String.valueOf(col[3]));
-                incorrectAnswers.add(String.valueOf(col[4]));
-                questions.add(questionFactory.create(
-                        questionContent, correctAnswer, incorrectAnswers));
+                questionBuilder.setQuestionText(String.valueOf(col[0]));
+                questionBuilder.setCorrectAnswer(String.valueOf(col[1]));
+                ArrayList<String> incorrectAnswers = new ArrayList<>(Arrays.asList(
+                        String.valueOf(col[2]), String.valueOf(col[3]), String.valueOf(col[4])));
+                questionBuilder.setIncorrectAnswers(incorrectAnswers);
+                questions.add(questionBuilder.Build());
             }
-            return(testFactory.create(questions, testName));
+            testBuilder.
+            return(testBuilder.Build());
         }
     }
 }
