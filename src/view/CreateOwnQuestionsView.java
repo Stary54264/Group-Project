@@ -1,5 +1,8 @@
 package view;
 
+import interface_adapter.createOwnQuestions.CreateOwnQuestionsController;
+import interface_adapter.createOwnQuestions.CreateOwnQuestionsViewModel;
+
 import javax.swing.*;
 import interface_adapter.ViewModel;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsState;
