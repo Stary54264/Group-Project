@@ -10,7 +10,7 @@ public class CreateOwnQuestionsInputData {
     private final List<String> answers;
     private final List<ArrayList<String>> incorrectAnswers;
     private final Test test;
-
+    // use new question builder for each question
     public CreateOwnQuestionsInputData(List<String> questions, List<String> answers, List<ArrayList<String>> incorrectAnswers) {
         this.questions = questions;
         this.answers = answers;
