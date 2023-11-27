@@ -1,8 +1,9 @@
 package interface_adapter.getResult;
-import interface_adapter.ViewModel;
 import java.beans.PropertyChangeListener;
+import interface_adapter.ViewModel;
 import java.beans.PropertyChangeSupport;
 public class GetResultViewModel extends ViewModel {
+
     private GetResultState state = new GetResultState();
     public GetResultViewModel() {super("getResult");}
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
