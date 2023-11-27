@@ -22,10 +22,6 @@ public class TestBuilder {
         name = t.getName();
         category = t.getCategory();
     }
-    public TestBuilder AddQuestion(Question q) {
-        questions.add(q);
-        return this;
-    }
 
     public TestBuilder setCategory(String category) {this.category = category; return this;}
 
@@ -36,7 +32,7 @@ public class TestBuilder {
     public TestBuilder setQuestions(ArrayList<Question> questions) {this.questions = questions; return this;}
     public TestBuilder addQuestion(Question q) {this.questions.add(q); return this;}
 
-    public Test Build() {
+    public Test build() {
         Test t = new Test(name, category, questions, results);
         t.setComment(comment);
         return t;
