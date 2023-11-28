@@ -8,19 +8,25 @@ import java.util.List;
 public class CreateOwnQuestionsInteractor implements CreateOwnQuestionsInputBoundary {
     final CreateOwnQuestionsOutputBoundary questionsPresenter;
     final CreateOwnQuestionsDataAccessInterface questionsDataAccessInterface;
-    final TestFactory testFactory;
 
-    public CreateOwnQuestionsInteractor(CreateOwnQuestionsOutputBoundary questionsPresenter, CreateOwnQuestionsDataAccessInterface questionsDataAccessInterface, TestFactory testFactory) {
+    public CreateOwnQuestionsInteractor(CreateOwnQuestionsOutputBoundary questionsPresenter, CreateOwnQuestionsDataAccessInterface questionsDataAccessInterface) {
         this.questionsPresenter = questionsPresenter;
         this.questionsDataAccessInterface = questionsDataAccessInterface;
-        this.testFactory = testFactory;
     }
 
     @Override
     public void execute(CreateOwnQuestionsInputData createOwnQuestionsInputData) {
-        questionsDataAccessInterface.save(createOwnQuestionsInputData.getCreateTest());
+        if (!createOwnQuestionsInputData.getCreateTest().getQuestions().contains(null)) {
+            questionsDataAccessInterface.save(createOwnQuestionsInputData.getCreateTest());
+        }
         CreateOwnQuestionsOutputData outputData = new CreateOwnQuestionsOutputData(createOwnQuestionsInputData.getCreateTest());
-        questionsPresenter.prepareSuccessView(outputData);
+        if (outputData.getQuestionList().contains(null)) {
+            questionsPresenter.prepareFailView();
+        }
+        else {
+            questionsPresenter.prepareSuccessView(outputData);
+        }
+
 
     }
 

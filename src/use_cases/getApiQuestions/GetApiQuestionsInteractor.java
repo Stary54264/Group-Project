@@ -26,6 +26,7 @@ public class GetApiQuestionsInteractor implements GetApiQuestionsInputBoundary {
         Category category = getApiQuestionsInputData.getQuestionCategory();
         QuestionType type = getApiQuestionsInputData.getQuestionType();
         QuestionDifficulty difficulty = getApiQuestionsInputData.getDifficulty();
+        String testName = getApiQuestionsInputData.getTestName();
 
         ArrayList<Question> questions = null;
         try {
@@ -38,7 +39,9 @@ public class GetApiQuestionsInteractor implements GetApiQuestionsInputBoundary {
         if (apiDataAccessObject.existsByName(testName)) {
             apiPresenter.prepareFailView("Name already exists!");
         } else {
+
             Test test = new TestBuilder().setName(testName).setQuestions(questions).setCategory(category.name).build();
+
             apiDataAccessObject.save(test);
 
             GetApiQuestionsOutputData getApiQuestionsOutputData = new GetApiQuestionsOutputData(true, testName);

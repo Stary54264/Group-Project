@@ -1,5 +1,6 @@
 package data_access;
 
+import app.Category;
 import app.QuestionType;
 import app.QuestionDifficulty;
 import app.Serializer;
@@ -16,7 +17,7 @@ import static app.QuestionDifficulty.ALL;
 import static app.QuestionType.BOOL;
 
 public class APIDataAccessObject {
-    public static ArrayList<Question> RetrieveQuestionsTrivia1(int numberOfQuestions, int category, QuestionDifficulty difficulty,
+    public static ArrayList<Question> RetrieveQuestionsTrivia1(int numberOfQuestions, Category category, QuestionDifficulty difficulty,
                                                                QuestionType questionType) throws IOException, InterruptedException {
         String query = String.format("https://opentdb.com/api.php?amount=%d", numberOfQuestions);
 
