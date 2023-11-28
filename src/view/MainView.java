@@ -19,6 +19,8 @@ public class MainView implements ActionListener, PropertyChangeListener {
     public final String viewname = "Main Menu";
     private final CreateOwnQuestionsViewModel createOwnQuestionsViewModel;
     private final CreateOwnQuestionsController createOwnQuestionsController;
+    private final UploadQuestionsController uploadQuestionsController;
+    private final UploadQuestionsViewModel uploadQuestionsViewModel;
     private final ArrayList<TestPanel> tests;
     private final JButton createQuestions, apiQuestions, uploadQuestions, createTest;
 
