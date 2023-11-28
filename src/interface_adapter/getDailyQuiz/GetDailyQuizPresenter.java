@@ -4,9 +4,10 @@ import use_cases.getApiQuestions.GetApiQuestionsOutputBoundary;
 import use_cases.getApiQuestions.GetApiQuestionsOutputData;
 
 public class GetDailyQuizPresenter implements GetApiQuestionsOutputBoundary {
-
-    // needs view models
-    public GetDailyQuizPresenter() {}
+    private final GetDailyQuizViewModel viewModel;
+    public GetDailyQuizPresenter(GetDailyQuizViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
 
     @Override
     public void prepareSuccessView(GetApiQuestionsOutputData response) {

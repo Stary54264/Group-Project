@@ -1,4 +1,30 @@
 package interface_adapter.manageQuiz;
 
-public class manageQuizViewModel {
+import interface_adapter.ViewModel;
+
+import java.beans.PropertyChangeListener;
+
+public class manageQuizViewModel extends ViewModel {
+    private manageQuizState state;
+    public manageQuizViewModel() {
+        super("ManageQuiz");
+    }
+
+    public void setState(manageQuizState state) {
+        this.state = state;
+    }
+
+    public manageQuizState getState() {
+        return state;
+    }
+
+    @Override
+    public void firePropertyChanged() {
+
+    }
+
+    @Override
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+
+    }
 }

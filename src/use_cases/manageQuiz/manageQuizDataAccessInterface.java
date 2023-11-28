@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface manageQuizDataAccessInterface {
     List<Test> getTests();
-    void deleteTest(Test test);
+    void deleteTest(String name);
 }

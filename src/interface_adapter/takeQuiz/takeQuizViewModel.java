@@ -13,8 +13,8 @@ public class takeQuizViewModel extends ViewModel {
     public void setState(takeQuizState state) {
 
     }
-    public takeQuizViewModel(String viewName) {
-        super(viewName);
+    public takeQuizViewModel() {
+        super("Take Quiz");
     }
 
     @Override

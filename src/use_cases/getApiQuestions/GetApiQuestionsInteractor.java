@@ -30,16 +30,18 @@ public class GetApiQuestionsInteractor implements GetApiQuestionsInputBoundary {
 
         ArrayList<Question> questions = null;
         try {
-            questions = RetrieveQuestionsTrivia1(number, category, difficulty, type);
+            questions = RetrieveQuestionsTrivia1(number, category.value, difficulty, type);
         } catch (Exception e) {
             apiPresenter.prepareFailView("Error occurred!"); // if throws exception, fail
         }
-
+        String testName = "APITEST"+apiDataAccessObject.getTestCount();
         // create test with unique name & save & success view
         if (apiDataAccessObject.existsByName(testName)) {
             apiPresenter.prepareFailView("Name already exists!");
         } else {
-            Test test = new TestBuilder().setQuestions(questions).setCategory(category.getName()).setName(testName).build();
+
+            Test test = new TestBuilder().setName(testName).setQuestions(questions).setCategory(category.name).build();
+
             apiDataAccessObject.save(test);
 
             GetApiQuestionsOutputData getApiQuestionsOutputData = new GetApiQuestionsOutputData(true, testName);
