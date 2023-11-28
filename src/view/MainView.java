@@ -85,6 +85,9 @@ public class MainView implements ActionListener, PropertyChangeListener {
                     public void keyReleased(KeyEvent e) {
                     }
                 });
+        this.add(testNameInfo);
+        this.add(jsonPathInfo);
+        this.add(buttons);
     }
 
     public void actionPerformed(ActionEvent e) {
