@@ -8,6 +8,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class GetApiQuestionsViewModel extends ViewModel {
+    public static final String TITLE_LABEL = "Set Questions";
     public static final String NAME_LABEL = "Test Name: ";
     public static final String NUMBER_LABEL = "Number of Questions: ";
     public static final String CATEGORY_LABEL = "Choose Category: ";
