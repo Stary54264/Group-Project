@@ -67,6 +67,24 @@ public class MainView implements ActionListener, PropertyChangeListener {
                     public void keyReleased(KeyEvent e) {
                     }
                 });
+        jsonPathInputField.addKeyListener(
+                new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        UploadQuestionsState currentState = uploadQuestionsViewModel.getState();
+                        String text = jsonPathInputField.getText() + e.getKeyChar();
+                        currentState.setJsonPath(text);
+                        uploadQuestionsViewModel.setState(currentState);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+                    }
+                });
     }
 
     public void actionPerformed(ActionEvent e) {
