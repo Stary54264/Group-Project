@@ -24,8 +24,17 @@ public class MainView implements ActionListener, PropertyChangeListener {
     private final ArrayList<TestPanel> tests;
     private final JButton createQuestions, apiQuestions, uploadQuestions, createTest;
 
-    public MainView() {
-
+    public MainView(UploadQuestionsController uploadQuestionsController,
+                    UploadQuestionsViewModel uploadQuestionsViewModel) {
+        this.uploadQuestionsController = uploadQuestionsController;
+        this.uploadQuestionsViewModel = uploadQuestionsViewModel;
+        LabelTextPanel testNameInfo = new LabelTextPanel(
+                new JLabel(UploadQuestionsViewModel.TEST_NAME_LABEL), testNameInputField);
+        LabelTextPanel jsonPathInfo = new LabelTextPanel(
+                new JLabel(UploadQuestionsViewModel.JSON_PATH_LABEL), jsonPathInputField);
+        JPanel buttons = new JPanel();
+        uploadQuestions = new JButton(UploadQuestionsViewModel.UPLOAD_BUTTON_LABEL);
+        buttons.add(uploadQuestions);
     }
 
     public void actionPerformed(ActionEvent e) {
