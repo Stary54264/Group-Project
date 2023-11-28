@@ -37,6 +37,18 @@ public class MainView implements ActionListener, PropertyChangeListener {
         JPanel buttons = new JPanel();
         uploadQuestions = new JButton(UploadQuestionsViewModel.UPLOAD_BUTTON_LABEL);
         buttons.add(uploadQuestions);
+        uploadQuestions.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(uploadQuestions)) {
+                            UploadQuestionsState currentState = uploadQuestionsViewModel.getState();
+                            uploadQuestionsController.execute(
+                                    currentState.getTestName(),
+                                    currentState.getJsonPath());
+                        }
+                    }
+                });
     }
 
     public void actionPerformed(ActionEvent e) {
