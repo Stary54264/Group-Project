@@ -21,6 +21,8 @@ public class MainView implements ActionListener, PropertyChangeListener {
     private final CreateOwnQuestionsController createOwnQuestionsController;
     private final UploadQuestionsController uploadQuestionsController;
     private final UploadQuestionsViewModel uploadQuestionsViewModel;
+    private final JTextField testNameInputField = new JTextField();
+    private final JTextField jsonPathInputField = new JTextField();
     private final ArrayList<TestPanel> tests;
     private final JButton createQuestions, apiQuestions, uploadQuestions, createTest;
 
