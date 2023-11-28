@@ -3,13 +3,13 @@ package use_cases.uploadQuestions;
 import entity.Test;
 
 public class UploadQuestionsInteractor implements UploadQuestionsInputBoundary {
-    final UploadQuestionsUserDataAccessInterface userDataAccessObject;
+    final UploadQuestionsDataAccessInterface dataAccessObject;
     final UploadQuestionsOutputBoundary uploadQuestionsPresenter;
 
     public UploadQuestionsInteractor(
-            UploadQuestionsUserDataAccessInterface userDataAccessInterface,
+            UploadQuestionsDataAccessInterface dataAccessInterface,
             UploadQuestionsOutputBoundary uploadQuestionsOutputBoundary) {
-        this.userDataAccessObject = userDataAccessInterface;
+        this.dataAccessObject = dataAccessInterface;
         this.uploadQuestionsPresenter = uploadQuestionsOutputBoundary;
     }
 
@@ -17,9 +17,9 @@ public class UploadQuestionsInteractor implements UploadQuestionsInputBoundary {
     public void execute(UploadQuestionsInputData uploadQuestionsInputData) {
         String testName = uploadQuestionsInputData.getTestName();
         String jsonPath = uploadQuestionsInputData.getJsonPath();
-        Test test = userDataAccessObject.readTest(testName, jsonPath);
-        if (!userDataAccessObject.existsByName(testName)) {
-            userDataAccessObject.save(test);
+        Test test = dataAccessObject.readTest(testName, jsonPath);
+        if (!dataAccessObject.existsByName(testName)) {
+            dataAccessObject.save(test);
             uploadQuestionsPresenter.prepareView("Uploaded successfully!");
         }
         else {
