@@ -4,7 +4,7 @@ import entity.Question;
 import app.QuestionBuilder;
 import entity.Test;
 import app.TestBuilder;
-import use_cases.uploadQuestions.UploadQuestionsUserDataAccessInterface;
+import use_cases.uploadQuestions.UploadQuestionsDataAccessInterface;
 import java.io.*;
 import java.util.Arrays;
 import java.util.ArrayList;

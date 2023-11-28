@@ -5,12 +5,12 @@ import entity.Test;
 import use_cases.createOwnQuestions.CreateOwnQuestionsDataAccessInterface;
 import use_cases.getApiQuestions.GetApiQuestionsDataAccessInterface;
 import use_cases.takeQuiz.takeQuizDataAccessInterface;
-import use_cases.uploadQuestions.UploadQuestionsUserDataAccessInterface;
+import use_cases.uploadQuestions.UploadQuestionsDataAccessInterface;
 
 public class FileTestDataAccessObject implements takeQuizDataAccessInterface,
         GetApiQuestionsDataAccessInterface,
         CreateOwnQuestionsDataAccessInterface,
-        UploadQuestionsUserDataAccessInterface {
+        UploadQuestionsDataAccessInterface {
 
     @Override
     public Test getTest(String name) {
