@@ -23,7 +23,7 @@ public class GetResultView extends JPanel implements ActionListener, PropertyCha
         this.getResultViewModel.addPropertyChangeListener(this);
     }
     @Override
-    public void actionPerformed(ActionEvent e) {System.out.println("Click " + evt.getActionCommand());}
+    public void actionPerformed(ActionEvent e) {System.out.println("Click " + e.getActionCommand());}
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
