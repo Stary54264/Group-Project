@@ -1,5 +1,6 @@
 package use_cases.createOwnQuestions;
 
+import app.QuestionBuilder;
 import app.TestBuilder;
 import entity.Question;
 import entity.Test;
@@ -7,21 +8,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CreateOwnQuestionsInputData {
-    private final List<String> questions;
-    private final List<String> answers;
-    private final List<ArrayList<String>> incorrectAnswers;
-    private final Test test;
-    // use new question builder for each question
-    public CreateOwnQuestionsInputData(List<String> questions, List<String> answers, List<ArrayList<String>> incorrectAnswers) {
+
+    private List<String> questions;
+    private List<String> answers;
+    private List<ArrayList<String>> incorrectAnswers;
+    private String name;
+    private String comment;
+    private String category;
+    private Test test;
+    private TestBuilder tBuilder = new TestBuilder();
+    public CreateOwnQuestionsInputData(List<String> questions, List<String> answers,
+                                       List<ArrayList<String>> incorrectAnswers, String name,
+                                       String comment, String category) {
         this.questions = questions;
         this.answers = answers;
         this.incorrectAnswers = incorrectAnswers;
         ArrayList<Question> output = new ArrayList<>();
         for (int i = 0; i < questions.size(); i++) {
-            Question question = new Question(questions.get(i), answers.get(i), incorrectAnswers.get(i));
+            QuestionBuilder builder = new QuestionBuilder();
+            builder.setQuestionText(questions.get(i));
+            builder.setCorrectAnswer(answers.get(i));
+            builder.setIncorrectAnswers(incorrectAnswers.get(i));
+            Question question = builder.build();
             output.add(i, question);
+
         }
-        this.test = ;
+        tBuilder.setName(name);
+        tBuilder.setQuestions(output);
+        tBuilder.setComment(comment);
+        tBuilder.setCategory(category);
+        this.test = tBuilder.build();
     }
     public Test getCreateTest(){
         return test;

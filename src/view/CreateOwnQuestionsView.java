@@ -1,5 +1,6 @@
 package view;
 
+import entity.Question;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsController;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsViewModel;
 
@@ -20,6 +21,7 @@ import java.beans.PropertyChangeListener;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class CreateOwnQuestionsView extends JPanel implements ActionListener, PropertyChangeListener {
@@ -96,10 +98,24 @@ public class CreateOwnQuestionsView extends JPanel implements ActionListener, Pr
                         for (int i = 0; i < textFields.size(); i++) {
                             textFields.get(i).setText(null);
                         }
+                        String name = JOptionPane.showInputDialog("Enter the name for your test: ");
+                        String comment = JOptionPane.showInputDialog("Enter a comment for your test: ");
+                        String category = JOptionPane.showInputDialog("Enter a category for your test: ");
                         CreateOwnQuestionsState currState = createOwnQuestionsViewModel.getState();
                         createOwnQuestionsController.execute(
-                                currState.getQuestions(), currState.getAnswers(), currState.getIncorrectAnswers());
-                        JOptionPane.showMessageDialog(null, "Successfully created a test!");
+                                currState.getQuestions(), currState.getAnswers(), currState.getIncorrectAnswers(),
+                                name, comment, category);
+                        CreateOwnQuestionsState newState = createOwnQuestionsViewModel.getState();
+                        if (Objects.equals(newState.getError(), "")) {
+                            JOptionPane.showMessageDialog(
+                                    null, "Successfully created a test.");
+                        }
+                        else {
+                            JOptionPane.showMessageDialog(null, newState.getError());
+                        }
+                        newState.clearAll();
+                        createOwnQuestionsViewModel.setState(newState);
+
                     }
                 }
         );

@@ -12,6 +12,7 @@ public class CreateOwnQuestionsState {
     private ArrayList<String> incorrect = new ArrayList<String>();
     private List<String> answers = new ArrayList<String>();
     private List<ArrayList<String>> incorrectAnswers = new ArrayList<ArrayList<String>>();
+    private String error = "";
 
     public CreateOwnQuestionsState(CreateOwnQuestionsState copy) {
         this.questions = copy.questions;
@@ -62,4 +63,19 @@ public class CreateOwnQuestionsState {
         incorrectAnswers.add(incorrect);
     }
 
+    public String getError() {
+        return error;
+    }
+    public void setError(String error) {
+        this.error = error;
+    }
+    public void clearAll() {
+        this.question = "";
+        this.answer = "";
+        this.incorrect.clear();
+        this.questions.clear();
+        this.answers.clear();
+        this.incorrectAnswers.clear();
+        this.error = "";
+    }
 }

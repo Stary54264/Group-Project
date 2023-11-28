@@ -6,6 +6,7 @@ import use_cases.createOwnQuestions.CreateOwnQuestionsOutputData;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsState;
 
 import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.List;
 
 public class CreateOwnQuestionsViewModel extends ViewModel {
@@ -30,12 +31,15 @@ public class CreateOwnQuestionsViewModel extends ViewModel {
     public CreateOwnQuestionsState getState() {
         return this.questionsState;
     }
-    @Override
+    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
+
+    // This is what the Signup Presenter will call to let the ViewModel know
+    // to alert the View
     public void firePropertyChanged() {
-
+        support.firePropertyChange("state", null, this.questionsState);
     }
-    @Override
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
 
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        support.addPropertyChangeListener(listener);
     }
 }
