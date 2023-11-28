@@ -1,4 +1,5 @@
 package use_cases.getApiQuestions;
+import app.Category;
 import app.TestBuilder;
 import entity.Question;
 import app.QuestionType;
@@ -22,22 +23,22 @@ public class GetApiQuestionsInteractor implements GetApiQuestionsInputBoundary {
     @Override
     public void execute(GetApiQuestionsInputData getApiQuestionsInputData) {
         int number = getApiQuestionsInputData.getNumberOfQuestions();
-        int category = getApiQuestionsInputData.getQuestionCategory();
+        Category category = getApiQuestionsInputData.getQuestionCategory();
         QuestionType type = getApiQuestionsInputData.getQuestionType();
         QuestionDifficulty difficulty = getApiQuestionsInputData.getDifficulty();
 
         ArrayList<Question> questions = null;
         try {
-            questions = RetrieveQuestionsTrivia1(number, category, difficulty, type);
+            questions = RetrieveQuestionsTrivia1(number, category.value, difficulty, type);
         } catch (Exception e) {
             apiPresenter.prepareFailView("Error occurred!"); // if throws exception, fail
         }
-
+        String testName = "APITEST"+apiDataAccessObject.getTestCount();
         // create test with unique name & save & success view
         if (apiDataAccessObject.existsByName(testName)) {
             apiPresenter.prepareFailView("Name already exists!");
         } else {
-            Test test = testFactory.create((ArrayList<Question>) questions, category.name, testName, "");
+            Test test = new TestBuilder().setName(testName).setQuestions(questions).setCategory(category.name).build();
             apiDataAccessObject.save(test);
 
             GetApiQuestionsOutputData getApiQuestionsOutputData = new GetApiQuestionsOutputData(true, testName);
