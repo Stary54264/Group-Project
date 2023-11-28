@@ -49,6 +49,24 @@ public class MainView implements ActionListener, PropertyChangeListener {
                         }
                     }
                 });
+        testNameInputField.addKeyListener(
+                new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        UploadQuestionsState currentState = uploadQuestionsViewModel.getState();
+                        String text = testNameInputField.getText() + e.getKeyChar();
+                        currentState.setTestName(text);
+                        uploadQuestionsViewModel.setState(currentState);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+                    }
+                });
     }
 
     public void actionPerformed(ActionEvent e) {
