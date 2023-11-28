@@ -1,10 +1,6 @@
 package use_cases.uploadQuestions;
 
-import data_access.FileUserDataAccessObject;
 import entity.Test;
-import app.TestBuilder;
-
-import java.io.IOException;
 
 public class UploadQuestionsInteractor implements UploadQuestionsInputBoundary {
     final UploadQuestionsUserDataAccessInterface userDataAccessObject;

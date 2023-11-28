@@ -1,8 +1,5 @@
 package data_access;
 
-import app.QuestionBuilder;
-import app.TestBuilder;
-
 import entity.Test;
 
 import use_cases.createOwnQuestions.CreateOwnQuestionsDataAccessInterface;
@@ -10,11 +7,7 @@ import use_cases.getApiQuestions.GetApiQuestionsDataAccessInterface;
 import use_cases.takeQuiz.takeQuizDataAccessInterface;
 import use_cases.uploadQuestions.UploadQuestionsUserDataAccessInterface;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-
-public class FileUserDataAccessObject implements takeQuizDataAccessInterface,
+public class FileTestDataAccessObject implements takeQuizDataAccessInterface,
         GetApiQuestionsDataAccessInterface,
         CreateOwnQuestionsDataAccessInterface,
         UploadQuestionsUserDataAccessInterface {

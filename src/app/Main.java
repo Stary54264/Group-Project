@@ -1,6 +1,6 @@
 package app;
 
-import data_access.FileUserDataAccessObject;
+import data_access.FileTestDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsViewModel;
 import interface_adapter.getApiQuestions.GetApiQuestionsViewModel;
@@ -31,7 +31,7 @@ public class Main {
         GetResultViewModel getResultViewModel = new GetResultViewModel();
         manageQuizViewModel manageQuizViewModel = new manageQuizViewModel();
 
-        FileUserDataAccessObject userDataAccessObject;
+        FileTestDataAccessObject userDataAccessObject;
         try {
 
         }
