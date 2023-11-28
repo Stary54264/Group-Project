@@ -1,4 +1,5 @@
 package use_cases.getApiQuestions;
+import app.Category;
 import app.TestBuilder;
 import entity.Question;
 import app.QuestionType;
@@ -22,9 +23,10 @@ public class GetApiQuestionsInteractor implements GetApiQuestionsInputBoundary {
     @Override
     public void execute(GetApiQuestionsInputData getApiQuestionsInputData) {
         int number = getApiQuestionsInputData.getNumberOfQuestions();
-        int category = getApiQuestionsInputData.getQuestionCategory();
+        Category category = getApiQuestionsInputData.getQuestionCategory();
         QuestionType type = getApiQuestionsInputData.getQuestionType();
         QuestionDifficulty difficulty = getApiQuestionsInputData.getDifficulty();
+        String testName = getApiQuestionsInputData.getTestName();
 
         ArrayList<Question> questions = null;
         try {
@@ -37,7 +39,7 @@ public class GetApiQuestionsInteractor implements GetApiQuestionsInputBoundary {
         if (apiDataAccessObject.existsByName(testName)) {
             apiPresenter.prepareFailView("Name already exists!");
         } else {
-            Test test = testFactory.create((ArrayList<Question>) questions, category.name, testName, "");
+            Test test = new TestBuilder().setQuestions(questions).setCategory(category.getName()).setName(testName).build();
             apiDataAccessObject.save(test);
 
             GetApiQuestionsOutputData getApiQuestionsOutputData = new GetApiQuestionsOutputData(true, testName);
