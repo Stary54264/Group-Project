@@ -1,10 +1,9 @@
 package view;
 
-import interface_adapter.createOwnQuestions.CreateOwnQuestionsController;
-import interface_adapter.createOwnQuestions.CreateOwnQuestionsViewModel;
 import interface_adapter.takeQuiz.takeQuizState;
 import interface_adapter.takeQuiz.takeQuizViewModel;
 import interface_adapter.takeQuiz.takeQuizController;
+import interface_adapter.getResult.GetResultController;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -16,12 +15,14 @@ public class QuizView extends JPanel implements ActionListener, PropertyChangeLi
     public final String viewname = "Create Questions";
     private final takeQuizViewModel takeQuizViewModel;
     private final takeQuizController takeQuizController;
+    private final GetResultController getResultController;
     private final JTextPane questionField = new JTextPane();
     private final AnswerButton A1, A2, A3, A4;
 
-    public QuizView(takeQuizViewModel takeQuizViewModel, takeQuizController takeQuizController) {
+    public QuizView(takeQuizViewModel takeQuizViewModel, takeQuizController takeQuizController, GetResultController getResultController) {
         this.takeQuizViewModel = takeQuizViewModel;
         this.takeQuizController = takeQuizController;
+        this.getResultController = getResultController;
         this.A1 = new AnswerButton(new JButton("answer 1"), 0);
         this.add(A1);
         this.A2 = new AnswerButton(new JButton("answer 2"), 1);

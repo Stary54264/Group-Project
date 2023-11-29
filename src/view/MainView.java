@@ -36,8 +36,14 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
     private ArrayList<TestPanel> tests;
     private final JButton createQuestions, apiQuestions, uploadQuestions, getDailyQuiz, refreshTests;
 
-    public MainView(CreateOwnQuestionsViewModel createOwnQuestionsViewModel, CreateOwnQuestionsController createOwnQuestionsController, UploadQuestionsController uploadQuestionsController,
-                    UploadQuestionsViewModel uploadQuestionsViewModel, manageQuizController manageQuizController, manageQuizViewModel manageQuizViewModel, interface_adapter.takeQuiz.takeQuizController takeQuizController, interface_adapter.takeQuiz.takeQuizViewModel takeQuizViewModel) {
+    public MainView(CreateOwnQuestionsViewModel createOwnQuestionsViewModel,
+                    CreateOwnQuestionsController createOwnQuestionsController,
+                    UploadQuestionsController uploadQuestionsController,
+                    UploadQuestionsViewModel uploadQuestionsViewModel,
+                    manageQuizController manageQuizController,
+                    manageQuizViewModel manageQuizViewModel,
+                    takeQuizController takeQuizController,
+                    takeQuizViewModel takeQuizViewModel) {
         this.createOwnQuestionsViewModel = createOwnQuestionsViewModel;
         this.createOwnQuestionsController = createOwnQuestionsController;
         this.uploadQuestionsController = uploadQuestionsController;
