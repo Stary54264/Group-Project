@@ -64,7 +64,7 @@ public class Main {
         );
         GetApiQuestionsController getApiQuestionsController = new GetApiQuestionsController(
                 new GetApiQuestionsInteractor(fileUserDataAccessObject,
-                        new GetApiQuestionsPresenter()
+                        new GetApiQuestionsPresenter(getApiQuestionsViewModel, takeQuizViewModel, viewManagerModel)
                 )
         );
         UploadQuestionsController uploadQuestionsController = new UploadQuestionsController(
