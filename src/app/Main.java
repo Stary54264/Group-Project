@@ -5,6 +5,9 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsController;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsPresenter;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsViewModel;
+import interface_adapter.getDailyQuiz.GetDailyQuizController;
+import interface_adapter.getDailyQuiz.GetDailyQuizPresenter;
+import interface_adapter.getDailyQuiz.GetDailyQuizViewModel;
 import use_cases.createOwnQuestions.CreateOwnQuestionsInteractor;
 import interface_adapter.getApiQuestions.GetApiQuestionsController;
 import interface_adapter.getApiQuestions.GetApiQuestionsPresenter;
@@ -13,6 +16,7 @@ import use_cases.getApiQuestions.GetApiQuestionsInteractor;
 import interface_adapter.getResult.GetResultController;
 import interface_adapter.getResult.GetResultPresenter;
 import interface_adapter.getResult.GetResultViewModel;
+import use_cases.getDailyQuiz.GetDailyQuizInteractor;
 import use_cases.getResult.GetResultInteractor;
 import interface_adapter.manageQuiz.manageQuizController;
 import interface_adapter.manageQuiz.manageQuizPresenter;
@@ -53,6 +57,7 @@ public class Main {
         manageQuizViewModel manageQuizViewModel = new manageQuizViewModel();
         takeQuizViewModel takeQuizViewModel = new takeQuizViewModel();
         UploadQuestionsViewModel uploadQuestionsViewModel = new UploadQuestionsViewModel();
+        GetDailyQuizViewModel getDailyQuizViewModel = new GetDailyQuizViewModel();
 
         FileTestDataAccessObject fileUserDataAccessObject = new FileTestDataAccessObject();
 
@@ -91,6 +96,12 @@ public class Main {
                         fileUserDataAccessObject
                 )
         );
+        GetDailyQuizController getDailyQuizController = new GetDailyQuizController(
+                new GetDailyQuizInteractor(
+                        fileUserDataAccessObject,
+                        new GetDailyQuizPresenter(getDailyQuizViewModel)
+                )
+        );
 
         CreateOwnQuestionsView createOwnQuestionsView = new CreateOwnQuestionsView(
                 createOwnQuestionsController,
@@ -101,11 +112,13 @@ public class Main {
                 getApiQuestionsViewModel
         );
         GetResultView getResultView = new GetResultView(getResultViewModel);
+
         QuizView quizView = new QuizView(
             takeQuizViewModel,
             takeQuizController,
             getResultController
         );
+
         MainView mainView = new MainView(
                 createOwnQuestionsViewModel,
                 createOwnQuestionsController,
@@ -114,7 +127,9 @@ public class Main {
                 manageQuizController,
                 manageQuizViewModel,
                 takeQuizController,
-                takeQuizViewModel
+                takeQuizViewModel,
+                getDailyQuizController,
+                getDailyQuizViewModel
         );
 
         views.add(createOwnQuestionsView, createOwnQuestionsView.viewname);

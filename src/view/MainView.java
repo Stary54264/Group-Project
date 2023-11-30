@@ -2,14 +2,17 @@ package view;
 
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsController;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsViewModel;
-import interface_adapter.takeQuiz.takeQuizState;
 import interface_adapter.uploadQuestions.UploadQuestionsController;
-import interface_adapter.uploadQuestions.UploadQuestionsState;
 import interface_adapter.uploadQuestions.UploadQuestionsViewModel;
+import interface_adapter.uploadQuestions.UploadQuestionsState;
 import interface_adapter.manageQuiz.manageQuizViewModel;
 import interface_adapter.manageQuiz.manageQuizController;
 import interface_adapter.takeQuiz.takeQuizViewModel;
 import interface_adapter.takeQuiz.takeQuizController;
+import interface_adapter.takeQuiz.takeQuizState;
+import interface_adapter.getDailyQuiz.GetDailyQuizViewModel;
+import interface_adapter.getDailyQuiz.GetDailyQuizController;
+import interface_adapter.getDailyQuiz.GetDailyQuizState;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -31,6 +34,8 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
     private final manageQuizViewModel manageQuizViewModel;
     private final takeQuizController takeQuizController;
     private final takeQuizViewModel takeQuizViewModel;
+    private final GetDailyQuizController getDailyQuizController;
+    private final GetDailyQuizViewModel getDailyQuizViewModel;
     private final JTextField testNameInputField = new JTextField();
     private final JTextField jsonPathInputField = new JTextField();
     private ArrayList<TestPanel> tests;
@@ -43,7 +48,9 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
                     manageQuizController manageQuizController,
                     manageQuizViewModel manageQuizViewModel,
                     takeQuizController takeQuizController,
-                    takeQuizViewModel takeQuizViewModel) {
+                    takeQuizViewModel takeQuizViewModel,
+                    GetDailyQuizController getDailyQuizController,
+                    GetDailyQuizViewModel getDailyQuizViewModel) {
         this.createOwnQuestionsViewModel = createOwnQuestionsViewModel;
         this.createOwnQuestionsController = createOwnQuestionsController;
         this.uploadQuestionsController = uploadQuestionsController;
@@ -52,6 +59,8 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
         this.manageQuizViewModel = manageQuizViewModel;
         this.takeQuizController = takeQuizController;
         this.takeQuizViewModel = takeQuizViewModel;
+        this.getDailyQuizController = getDailyQuizController;
+        this.getDailyQuizViewModel = getDailyQuizViewModel;
 
         LabelTextPanel testNameInfo = new LabelTextPanel(new JLabel(UploadQuestionsViewModel.TEST_NAME_LABEL), testNameInputField);
         LabelTextPanel jsonPathInfo = new LabelTextPanel(new JLabel(UploadQuestionsViewModel.JSON_PATH_LABEL), jsonPathInputField);
@@ -118,7 +127,17 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
                     }
                 }
                 );
-
+        getDailyQuiz.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(getDailyQuiz)) {
+                            getDailyQuizController.execute();
+                            GetDailyQuizState state = getDailyQuizViewModel.getState();
+                            takeQuizController.start(state.getDailyTest());
+                        }
+                    }
+                });
         tests = new ArrayList<>();
         this.add(testNameInfo);
         this.add(jsonPathInfo);

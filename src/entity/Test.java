@@ -13,6 +13,8 @@ public class Test {
     public Test(String name, String Category, ArrayList<Question> questions, ArrayList<Result> results) {
         this.questions = questions;
         this.results = results;
+        this.name = name;
+        this.category = Category;
     }
 
     public void setQuestions(ArrayList<Question> questions) {

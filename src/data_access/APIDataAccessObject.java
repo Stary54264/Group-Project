@@ -5,6 +5,7 @@ import app.QuestionType;
 import app.QuestionDifficulty;
 import app.Serializer;
 import entity.Question;
+import entity.Test;
 
 import java.io.IOException;
 import java.net.URI;
@@ -17,18 +18,15 @@ import static app.QuestionDifficulty.ALL;
 import static app.QuestionType.BOOL;
 
 public class APIDataAccessObject {
-    public static ArrayList<Question> RetrieveQuestionsTrivia1(int numberOfQuestions, Category category, QuestionDifficulty difficulty,
-                                                               QuestionType questionType) throws IOException, InterruptedException {
+    public static String RetrieveQuestionsTrivia1(int numberOfQuestions, Category category, QuestionDifficulty difficulty,
+                                                               QuestionType questionType){
         String query = String.format("https://opentdb.com/api.php?amount=%d", numberOfQuestions);
 
-        if (category != 0) {
-            query += String.format("&category=%d", category);
+        if (category != Category.AnyCategory) {
+            query += String.format("&category=%d", category.value);
         }
 
         switch (difficulty) {
-            case ALL:
-                query += "&difficulty=all";
-                break;
             case EASY:
                 query += "&difficulty=easy";
                 break;
@@ -41,9 +39,6 @@ public class APIDataAccessObject {
         }
 
         switch (questionType) {
-            case ALL:
-                query += "&type=all";
-                break;
             case BOOL:
                 query += "&type=boolean";
                 break;
@@ -51,21 +46,38 @@ public class APIDataAccessObject {
                 query += "&type=multiple";
                 break;
         }
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(query))
-                .method("GET", HttpRequest.BodyPublishers.noBody())
-                .build();
-        HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        return Serializer.ParseTrivia(response.body());
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(query))
+                    .method("GET", HttpRequest.BodyPublishers.noBody())
+                    .build();
+            HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            return response.body();
+        } catch (Exception e) {
+            System.out.println("request error (1)");
+            return null;
+        }
     }
 
-    public static ArrayList<Question> RetrieveQuestionsTrivia2() {
-        // TODO fmwof
-        return null;
+    public static String RetrieveQuestionsTrivia2() {
+        try {
+            String query = "https://the-trivia-api.com/v2/questions/";
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(query))
+                    .method("GET", HttpRequest.BodyPublishers.noBody())
+                    .build();
+            HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            return response.body();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
-    public static void main(String[] args) throws IOException, InterruptedException {
-        RetrieveQuestionsTrivia1(10, 9, ALL, BOOL);
+    public static void main(String[] args) {
+        //ArrayList<Question> s = RetrieveQuestionsTrivia2();
+        String s = RetrieveQuestionsTrivia1(15, Category.Politics, ALL, BOOL);
+        Test t = Serializer.DecodeTest(s, "pog");
+        System.out.println(t.getName());
+        System.out.println(t.getQuestions().size());
     }
 }

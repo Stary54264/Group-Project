@@ -1,5 +1,4 @@
 package use_cases.getResult;
-import use_cases.*;
 import entity.*;
 
 import java.util.ArrayList;

@@ -28,9 +28,10 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
         currentQuestionIndex = 0;
         testOrder = IntStream.range(0, t.getQuestions().size()).toArray();
         Collections.shuffle(Arrays.asList(testOrder));
+        System.out.println(testOrder.length +"s" + t.getQuestions().size() + "order");
         Question currentQuestion = t.getQuestions().get(testOrder[currentQuestionIndex]);
 
-        takeQuizOutputData out = new takeQuizOutputData(currentQuestion.getQuestion(), currentQuestion.getAnswers());
+        takeQuizOutputData out = new takeQuizOutputData(name, currentQuestion.getQuestion(), currentQuestion.getAnswers());
         outputBoundary.prepareNextQuestion(out);
     }
 
@@ -57,7 +58,7 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
         } else {
             currentIndex = testOrder[currentQuestionIndex];
             currentQuestion = questions.get(currentIndex);
-            takeQuizOutputData out = new takeQuizOutputData(currentQuestion.getQuestion(), currentQuestion.getAnswers());
+            takeQuizOutputData out = new takeQuizOutputData(null, currentQuestion.getQuestion(), currentQuestion.getAnswers());
             outputBoundary.prepareNextQuestion(out);
         }
     }
