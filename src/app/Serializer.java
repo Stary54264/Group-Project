@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 public class Serializer {
     public static ArrayList<Question> ParseTrivia(String inp) {
-        final String regex = "\\{\\\"type\\\":\\\"(multiple|boolean)\\\",.*?\\\"question\\\":\\\"(.*?)\\\",\\\"correct_answer\\\":\\\"(.*?)\\\",\\\"incorrect_answers\\\":\\[\\\"(.*?)\\\"(?:, \\\"(.*?)\\\", \\\"(.*?)\\\")?\\]\\}";        final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+        final String regex = "\\{\\\"type\\\":\\\"(multiple|boolean)\\\",.*?\\\"question\\\":\\\"(.*?)\\\",\\\"correct_answer\\\":\\\"(.*?)\\\",\\\"incorrect_answers\\\":\\[\\\"(.*?)\\\"(?:, ?\\\"(.*?)\\\", ?\\\"(.*?)\\\")?\\]\\}";        final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         final Matcher matcher = pattern.matcher(inp);
         ArrayList<Question> out = new ArrayList<>();
 

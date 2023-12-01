@@ -108,15 +108,18 @@ public class Main {
                 createOwnQuestionsViewModel
         );
         GetAPIQuestionsView getApiQuestionsView = new GetAPIQuestionsView(
+                viewManagerModel,
+                manageQuizViewModel,
+                takeQuizController,
                 getApiQuestionsController,
                 getApiQuestionsViewModel
         );
         GetResultView getResultView = new GetResultView(getResultViewModel);
 
         QuizView quizView = new QuizView(
-            takeQuizViewModel,
+                viewManagerModel, takeQuizViewModel,
             takeQuizController,
-                getResultController);
+                getResultController, manageQuizViewModel);
 
         MainView mainView = new MainView(
                 viewManagerModel,

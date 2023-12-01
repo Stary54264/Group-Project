@@ -4,6 +4,7 @@ import entity.Question;
 import entity.Test;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static data_access.APIDataAccessObject.RetrieveQuestionsTrivia1;
 
@@ -31,14 +32,13 @@ public class GetApiQuestionsInteractor implements GetApiQuestionsInputBoundary {
         } catch (Exception e) {
             apiPresenter.prepareFailView("Error occurred!"); // if throws exception, fail
         }
-        String testName = "APITEST"+apiDataAccessObject.getTestCount();
+        String testName = getApiQuestionsInputData.getTestName();
+        System.out.println("Name:"+testName);
+        Test test = Serializer.DecodeTest(questions, testName);
         // create test with unique name & save & success view
-        if (apiDataAccessObject.existsByName(testName)) {
+        if (apiDataAccessObject.existsByName(testName) || test.getQuestions().isEmpty()) {
             apiPresenter.prepareFailView("Name already exists!");
         } else {
-
-            Test test = Serializer.DecodeTest(questions, testName);
-
             apiDataAccessObject.save(test);
 
             GetApiQuestionsOutputData getApiQuestionsOutputData = new GetApiQuestionsOutputData(true, testName);

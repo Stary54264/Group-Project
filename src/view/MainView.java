@@ -194,6 +194,7 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
         JScrollPane scrollPane = new JScrollPane();
         scrollPane. setPreferredSize(new Dimension(450, 450));
         scrollPane.setViewportView(testContainer);
+        testContainer.add(new JLabel("Tests:"));
         testContainer.setLayout(new BoxLayout(testContainer, BoxLayout.Y_AXIS));
 
         rightSide.setLayout(new BoxLayout(rightSide, BoxLayout.Y_AXIS));
@@ -225,13 +226,13 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
             testContainer.remove(t);
         }
         tests.clear();
-
+        System.out.println(newTests.keySet());
         for (String s: newTests.keySet()) {
             TestPanel t = new TestPanel(s, newTests.get(s));
             tests.add(t);
             testContainer.add(t);
         }
-        testContainer.validate();
+        testContainer.revalidate();
     }
 
     private class TestPanel extends JPanel {
@@ -279,6 +280,7 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
                         public void actionPerformed(ActionEvent evt) {
                             if (evt.getSource().equals(delete)) {
                                 manageQuizController.deleteTest(name);
+
                                 updateTests(manageQuizViewModel.getState().getTests());
                             }
                         }

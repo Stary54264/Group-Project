@@ -47,6 +47,7 @@ public class APIDataAccessObject {
                 break;
         }
         try {
+            System.out.println("API CALL:"+query);
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(query))
                     .method("GET", HttpRequest.BodyPublishers.noBody())

@@ -26,17 +26,12 @@ public class GetApiQuestionsPresenter implements GetApiQuestionsOutputBoundary {
         state.setTestName(response.getTestName());
         this.getApiQuestionsViewModel.setState(state);
         getApiQuestionsViewModel.firePropertyChanged();
-        viewManagerModel.setActiveView(getApiQuestionsViewModel.getViewName());
-        viewManagerModel.firePropertyChanged();
 
         //Example: sign up view - On success, switch to the login test.view.
-        takeQuizState quizState = quizViewModel.getState();
+        takeQuizState quizState = new takeQuizState();
         quizState.setTestName(response.getTestName());
-        quizState.setFinished(false);
         this.quizViewModel.setState(quizState);
         quizViewModel.firePropertyChanged();
-        viewManagerModel.setActiveView(quizViewModel.getViewName());
-        viewManagerModel.firePropertyChanged();
     }
 
     @Override

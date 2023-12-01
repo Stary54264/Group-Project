@@ -7,7 +7,7 @@ import java.beans.PropertyChangeListener;
 public class manageQuizViewModel extends ViewModel {
     private manageQuizState state = new manageQuizState();
     public manageQuizViewModel() {
-        super("ManageQuiz");
+        super("Main Menu");
     }
 
     public void setState(manageQuizState state) {

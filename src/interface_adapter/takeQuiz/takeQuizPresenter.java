@@ -44,6 +44,7 @@ public class takeQuizPresenter implements takeQuizOutputBoundary {
     @Override
     public void prepareResultView(String name) {
         viewModel.getState().setFinished(true);
+        viewModel.getState().setTestName(name);
         viewModel.firePropertyChanged();
 
         this.viewManagerModel.setActiveView(resultviewModel.getViewName());

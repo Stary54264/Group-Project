@@ -3,7 +3,7 @@ import entity.*;
 
 import java.util.ArrayList;
 
-public class GetResultInteractor implements GetResultInputBoundary{
+public class GetResultInteractor implements GetResultInputBoundary {
     final GetResultDataAccessInterface getResultDataAccessObject;
     final GetResultOutputBoundary getResultPresenter;
     public GetResultInteractor(GetResultDataAccessInterface getResultDataAccessInterface, GetResultOutputBoundary getResultOutputBoundary){
