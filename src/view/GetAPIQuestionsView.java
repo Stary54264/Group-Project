@@ -2,10 +2,13 @@ package view;
 
 import app.Category;
 import app.QuestionDifficulty;
+import interface_adapter.ViewManagerModel;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsViewModel;
 import interface_adapter.getApiQuestions.GetApiQuestionsController;
 import interface_adapter.getApiQuestions.GetApiQuestionsState;
 import interface_adapter.getApiQuestions.GetApiQuestionsViewModel;
+import interface_adapter.manageQuiz.manageQuizViewModel;
+import interface_adapter.takeQuiz.takeQuizController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +23,7 @@ import java.util.Objects;
 public class GetAPIQuestionsView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "get api questions";
     private final GetApiQuestionsViewModel getApiQuestionsViewModel;
-    private final JTextField nameInputField = new JTextField();
+    private final JTextField nameInputField = new JTextField(15);
     private final JSpinner numberInputField = new JSpinner();
     private final JComboBox<String> categoryBox = new JComboBox<>();
     private final JComboBox<String> typeBox = new JComboBox<>();
@@ -29,7 +32,10 @@ public class GetAPIQuestionsView extends JPanel implements ActionListener, Prope
     private final JButton cancel;
     private final JButton takequiz;
 
-    public GetAPIQuestionsView(GetApiQuestionsController controller,
+    public GetAPIQuestionsView(ViewManagerModel viewManagerModel,
+                               manageQuizViewModel manageQuizViewModel,
+                               takeQuizController takeQuizController,
+                               GetApiQuestionsController controller,
                                GetApiQuestionsViewModel viewModel) {
         this.getApiQuestionsController = controller;
         this.getApiQuestionsViewModel = viewModel;
@@ -78,18 +84,27 @@ public class GetAPIQuestionsView extends JPanel implements ActionListener, Prope
         takequiz = new JButton(GetApiQuestionsViewModel.QUIZ_LABEL);
         buttons.add(takequiz);
 
-        cancel.addActionListener(this);
+        cancel.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource().equals(cancel)) {
+                    viewManagerModel.setActiveView(manageQuizViewModel.getViewName());
+                    viewManagerModel.firePropertyChanged();
+                }
+            }
+        });
+
         takequiz.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(takequiz)) {
                             GetApiQuestionsState state = getApiQuestionsViewModel.getState();
-                            getApiQuestionsController.execute(state.getNumber(), state.getCategory(), state.getType(),
+                            getApiQuestionsController.execute((int)numberInputField.getValue(), state.getCategory(), state.getType(),
                                     state.getDiff(), state.getTestName());
                             GetApiQuestionsState newState = getApiQuestionsViewModel.getState();
                             if (Objects.equals(newState.getTestNameError(), null)) {
                                 JOptionPane.showMessageDialog(
                                         null, "Successfully created a test.");
+                                takeQuizController.start(newState.getTestName());
                             }
                             else {
                                 JOptionPane.showMessageDialog(null, newState.getTestNameError());
