@@ -33,7 +33,7 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
     private final ViewManagerModel viewManagerModel;
     private final CreateOwnQuestionsController createOwnQuestionsController;
     private final CreateOwnQuestionsViewModel createOwnQuestionsViewModel;
-    private final GetApiQuestionsViewModel GetApiQuestionsViewModel;
+    private final GetApiQuestionsViewModel getApiQuestionsViewModel;
     private final UploadQuestionsController uploadQuestionsController;
     private final UploadQuestionsViewModel uploadQuestionsViewModel;
     private final manageQuizController manageQuizController;
@@ -62,7 +62,7 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
         this.viewManagerModel = viewManagerModel;
         this.createOwnQuestionsViewModel = createOwnQuestionsViewModel;
         this.createOwnQuestionsController = createOwnQuestionsController;
-        GetApiQuestionsViewModel = getApiQuestionsViewModel;
+        this.getApiQuestionsViewModel = getApiQuestionsViewModel;
         this.uploadQuestionsController = uploadQuestionsController;
         this.uploadQuestionsViewModel = uploadQuestionsViewModel;
         this.manageQuizController = manageQuizController;
