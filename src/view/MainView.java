@@ -258,7 +258,26 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
                     new ActionListener() {
                         public void actionPerformed(ActionEvent evt) {
                             if (evt.getSource().equals(edit)) {
-                                //createOwnQuestionsController.execute();
+                                String testName = JOptionPane.showInputDialog(
+                                        "Enter the test you want to edit: ");
+                                int questionNum = Integer.parseInt(JOptionPane.showInputDialog(
+                                        "Enter the question number you want to edit: "));
+                                String question = JOptionPane.showInputDialog(
+                                        "Enter the new question: ");
+                                String answer = JOptionPane.showInputDialog(
+                                        "Enter the new answer: ");
+                                ArrayList<String> incorrect = new ArrayList<String>();
+                                String incorrect1 = JOptionPane.showInputDialog(
+                                        "Enter the first incorrect answer: ");
+                                String incorrect2 = JOptionPane.showInputDialog(
+                                        "Enter the second incorrect answer: ");
+                                String incorrect3 = JOptionPane.showInputDialog(
+                                        "Enter the third incorrect answer: ");
+                                incorrect.add(incorrect1);
+                                incorrect.add(incorrect2);
+                                incorrect.add(incorrect3);
+                                createOwnQuestionsController.editExecute(testName, questionNum,
+                                        question, answer, incorrect);
                             }
                         }
                     }

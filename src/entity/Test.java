@@ -6,7 +6,7 @@ import entity.Question;
 import entity.Result;
 
 public class Test {
-    private final ArrayList<Question> questions;
+    private ArrayList<Question> questions;
     private String category, name, comment;
     private final ArrayList<Result> results;
 
@@ -18,8 +18,7 @@ public class Test {
     }
 
     public void setQuestions(ArrayList<Question> questions) {
-        this.questions.clear();
-        this.questions.addAll(questions);
+        this.questions = questions;
     }
 
     public void setComment(String comment) {
