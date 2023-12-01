@@ -11,7 +11,7 @@ class LabelTextPanel extends JPanel {
         this.add(textField);
     }
 
-    LabelTextPanel(JLabel label, JInternalFrame numFiled) {
+    LabelTextPanel(JLabel label, JSpinner numFiled) {
         this.add(label);
         this.add(numFiled);
     }
