@@ -1,9 +1,11 @@
 package view;
 
+import interface_adapter.ViewManagerModel;
 import interface_adapter.takeQuiz.takeQuizState;
 import interface_adapter.takeQuiz.takeQuizViewModel;
 import interface_adapter.takeQuiz.takeQuizController;
 import interface_adapter.getResult.GetResultController;
+import interface_adapter.manageQuiz.manageQuizViewModel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,17 +15,35 @@ import java.beans.PropertyChangeListener;
 
 public class QuizView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewname = "Take Quiz";
+    private final ViewManagerModel viewManagerModel;
     private final takeQuizViewModel takeQuizViewModel;
     private final takeQuizController takeQuizController;
     private final GetResultController getResultController;
+    private final manageQuizViewModel manageQuizViewModel;
     private final JLabel questionField = new JLabel();
+    private final JButton cancel;
     private final AnswerButton A1, A2, A3, A4;
 
-    public QuizView(takeQuizViewModel takeQuizViewModel, takeQuizController takeQuizController, GetResultController getResultController) {
+    public QuizView(ViewManagerModel viewManagerModel, takeQuizViewModel takeQuizViewModel, takeQuizController takeQuizController, GetResultController getResultController, interface_adapter.manageQuiz.manageQuizViewModel manageQuizViewModel) {
+        this.viewManagerModel = viewManagerModel;
         this.takeQuizViewModel = takeQuizViewModel;
         this.takeQuizController = takeQuizController;
         this.getResultController = getResultController;
+        this.manageQuizViewModel = manageQuizViewModel;
 
+        cancel = new JButton("Menu");
+        cancel.addActionListener(
+                // This creates an anonymous subclass of ActionListener and instantiates it.
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(cancel)) {
+                            viewManagerModel.setActiveView(manageQuizViewModel.getViewName());
+                            viewManagerModel.firePropertyChanged();
+                        }
+                    }
+                }
+        );
+        this.add(cancel);
         this.takeQuizViewModel.addPropertyChangeListener(this);
         this.add(questionField);
         this.A1 = new AnswerButton(new JButton("answer 1"), 0);

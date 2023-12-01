@@ -114,9 +114,9 @@ public class Main {
         GetResultView getResultView = new GetResultView(getResultViewModel);
 
         QuizView quizView = new QuizView(
-            takeQuizViewModel,
+                viewManagerModel, takeQuizViewModel,
             takeQuizController,
-                getResultController);
+                getResultController, manageQuizViewModel);
 
         MainView mainView = new MainView(
                 viewManagerModel,
