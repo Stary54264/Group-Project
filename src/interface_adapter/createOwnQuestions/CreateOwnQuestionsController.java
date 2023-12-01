@@ -18,4 +18,5 @@ public class CreateOwnQuestionsController {
                 name, comment, category);
         createOwnQuestionsInteractor.execute(createInput);
     }
+
 }

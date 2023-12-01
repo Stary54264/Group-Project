@@ -9,6 +9,7 @@ import use_cases.getResult.GetResultDataAccessInterface;
 import use_cases.manageQuiz.manageQuizDataAccessInterface;
 import use_cases.takeQuiz.takeQuizDataAccessInterface;
 import use_cases.uploadQuestions.UploadQuestionsDataAccessInterface;
+import use_cases.EditQuestions.EditQuestionsDataAccessInterface;
 
 import java.util.List;
 
@@ -19,7 +20,8 @@ public class FileTestDataAccessObject implements
         GetDailyQuizDataAccessInterface,
         CreateOwnQuestionsDataAccessInterface,
         UploadQuestionsDataAccessInterface,
-        GetResultDataAccessInterface {
+        GetResultDataAccessInterface,
+        EditQuestionsDataAccessInterface {
 
     public int getTestCount() {
         // TODO fmwof

@@ -14,14 +14,16 @@ public class CreateOwnQuestionsViewModel extends ViewModel {
     public static final String TITLE_LABEL = "Create Questions";
     public static final String FINISHED_BUTTON_LABEL = "Finish";
     public static final String NEXT_BUTTON_LABEL = "Next";
+
     public static final String QUESTION_LABEL = "Question: ";
     public static final String ANSWER_LABEL = "Answer: ";
     public static final String INCORRECT_LABEL = "Incorrect answer: ";
+
     private CreateOwnQuestionsOutputData output;
     private CreateOwnQuestionsState questionsState = new CreateOwnQuestionsState();
 
     public CreateOwnQuestionsViewModel() {
-        super("questions");
+        super("create questions");
     }
 
     public void setState(CreateOwnQuestionsState questionsState) {

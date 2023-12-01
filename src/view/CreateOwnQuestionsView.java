@@ -90,7 +90,18 @@ public class CreateOwnQuestionsView extends JPanel implements ActionListener, Pr
                     }
                 }
         );
-        cancel.addActionListener(this);
+        cancel.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        for (JTextField textField : textFields) {
+                            textField.setText(null);
+                        }
+                        CreateOwnQuestionsState currState = createOwnQuestionsViewModel.getState();
+                        currState.clearAll();
+                    }
+                }
+        );
         finished.addActionListener(
                 new ActionListener() {
                     @Override
