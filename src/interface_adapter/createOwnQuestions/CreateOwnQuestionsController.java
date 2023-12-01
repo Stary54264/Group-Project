@@ -18,11 +18,11 @@ public class CreateOwnQuestionsController {
                 name, comment, category);
         createOwnQuestionsInteractor.execute(createInput);
     }
-    public void execute(String testName, int questionNum, String question,
+    public void editExecute(String testName, int questionNum, String question,
                         String answer, ArrayList<String> incorrectAnswers) {
         CreateOwnQuestionsInputData editQuestionsInputData = new CreateOwnQuestionsInputData(
                 testName, questionNum, question, answer, incorrectAnswers);
-        createOwnQuestionsInteractor.execute(editQuestionsInputData);
+        createOwnQuestionsInteractor.editExecute(editQuestionsInputData);
 
     }
 }

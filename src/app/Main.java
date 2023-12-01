@@ -105,7 +105,9 @@ public class Main {
 
         CreateOwnQuestionsView createOwnQuestionsView = new CreateOwnQuestionsView(
                 createOwnQuestionsController,
-                createOwnQuestionsViewModel
+                createOwnQuestionsViewModel,
+                viewManagerModel,
+                manageQuizViewModel
         );
         GetAPIQuestionsView getApiQuestionsView = new GetAPIQuestionsView(
                 viewManagerModel,

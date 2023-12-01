@@ -12,6 +12,7 @@ public class CreateOwnQuestionsState {
     private ArrayList<String> incorrect = new ArrayList<String>();
     private List<String> answers = new ArrayList<String>();
     private List<ArrayList<String>> incorrectAnswers = new ArrayList<ArrayList<String>>();
+
     private String error = "";
 
     public CreateOwnQuestionsState(CreateOwnQuestionsState copy) {
@@ -23,7 +24,9 @@ public class CreateOwnQuestionsState {
         incorrect.add("");
     }
     public CreateOwnQuestionsState() {
-
+        incorrect.add("");
+        incorrect.add("");
+        incorrect.add("");
     }
     public String getQuestion() {
         return question;
