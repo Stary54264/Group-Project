@@ -30,8 +30,8 @@ public class manageQuizInteractor implements manageQuizInputBoundary {
     private Map<String, String> getNames() {
         List<Test> tests = dataAccessInterface.getTests();
         Map<String, String> out = new HashMap<String, String>();
-        for (int i = 0; i < tests.size(); i++) {
-            out.put(tests.get(i).getName(), tests.get(i).getComment());
+        for (Test test : tests) {
+            out.put(test.getName(), test.getComment());
         }
         return out;
     }

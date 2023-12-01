@@ -1,22 +1,14 @@
 package interface_adapter.getDailyQuiz;
 
-import app.Category;
-import app.QuestionDifficulty;
-import app.QuestionType;
-import use_cases.getApiQuestions.GetApiQuestionsInputBoundary;
-import use_cases.getApiQuestions.GetApiQuestionsInputData;
+import use_cases.getDailyQuiz.GetDailyQuizInputBoundary;
 
 public class GetDailyQuizController {
-    final GetApiQuestionsInputBoundary getApiQuestionsInteractor;
-    public GetDailyQuizController(GetApiQuestionsInputBoundary getApiQuestionsInteractor) {
-        this.getApiQuestionsInteractor = getApiQuestionsInteractor;
+    final GetDailyQuizInputBoundary interactor;
+    public GetDailyQuizController(GetDailyQuizInputBoundary interactor) {
+        this.interactor = interactor;
     }
 
-    public void execute(int numberOfQuestions, Category questionCategory,
-                        QuestionType questionType, QuestionDifficulty difficulty, String testName) {
-        GetApiQuestionsInputData getApiQuestionsInputData = new GetApiQuestionsInputData(
-                numberOfQuestions, questionCategory, questionType, difficulty, testName);
-
-        getApiQuestionsInteractor.execute(getApiQuestionsInputData);
+    public void execute() {
+        interactor.execute();
     }
 }

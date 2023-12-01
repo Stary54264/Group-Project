@@ -5,7 +5,7 @@ import interface_adapter.ViewModel;
 import java.beans.PropertyChangeListener;
 
 public class manageQuizViewModel extends ViewModel {
-    private manageQuizState state;
+    private manageQuizState state = new manageQuizState();
     public manageQuizViewModel() {
         super("ManageQuiz");
     }

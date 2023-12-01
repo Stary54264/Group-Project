@@ -1,5 +1,0 @@
-{"category":"General","comment":"yep", "questions":[
-{"text": "yep", "correctAnswer":"true", "wrongAnswers":["false"]}
-],
-"results":[{"date":978132901297,"comment":"yep", [true, false, true]}
-]}

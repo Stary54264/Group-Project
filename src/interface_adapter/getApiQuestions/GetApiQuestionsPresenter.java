@@ -1,6 +1,7 @@
 package interface_adapter.getApiQuestions;
 
 import interface_adapter.ViewManagerModel;
+import interface_adapter.takeQuiz.takeQuizState;
 import interface_adapter.takeQuiz.takeQuizViewModel;
 import use_cases.getApiQuestions.GetApiQuestionsOutputBoundary;
 import use_cases.getApiQuestions.GetApiQuestionsOutputData;
@@ -29,11 +30,12 @@ public class GetApiQuestionsPresenter implements GetApiQuestionsOutputBoundary {
         viewManagerModel.firePropertyChanged();
 
         //Example: sign up view - On success, switch to the login test.view.
-        LoginState loginState = loginViewModel.getState();
-        loginState.setUsername(response.getUsername());
-        this.loginViewModel.setState(loginState);
-        loginViewModel.firePropertyChanged();
-        viewManagerModel.setActiveView(loginViewModel.getViewName());
+        takeQuizState quizState = quizViewModel.getState();
+        quizState.setTestName(response.getTestName());
+        quizState.setFinished(false);
+        this.quizViewModel.setState(quizState);
+        quizViewModel.firePropertyChanged();
+        viewManagerModel.setActiveView(quizViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
 

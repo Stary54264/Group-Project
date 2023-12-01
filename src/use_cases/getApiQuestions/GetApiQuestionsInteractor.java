@@ -1,9 +1,6 @@
 package use_cases.getApiQuestions;
-import app.Category;
-import app.TestBuilder;
+import app.*;
 import entity.Question;
-import app.QuestionType;
-import app.QuestionDifficulty;
 import entity.Test;
 
 import java.util.ArrayList;
@@ -26,11 +23,11 @@ public class GetApiQuestionsInteractor implements GetApiQuestionsInputBoundary {
         Category category = getApiQuestionsInputData.getQuestionCategory();
         QuestionType type = getApiQuestionsInputData.getQuestionType();
         QuestionDifficulty difficulty = getApiQuestionsInputData.getDifficulty();
-        String testName = getApiQuestionsInputData.getTestName();
+        //String testName = getApiQuestionsInputData.getTestName();
 
-        ArrayList<Question> questions = null;
+        String questions = "";
         try {
-            questions = RetrieveQuestionsTrivia1(number, category.value, difficulty, type);
+            questions = RetrieveQuestionsTrivia1(number, category, difficulty, type);
         } catch (Exception e) {
             apiPresenter.prepareFailView("Error occurred!"); // if throws exception, fail
         }
@@ -40,7 +37,7 @@ public class GetApiQuestionsInteractor implements GetApiQuestionsInputBoundary {
             apiPresenter.prepareFailView("Name already exists!");
         } else {
 
-            Test test = new TestBuilder().setName(testName).setQuestions(questions).setCategory(category.name).build();
+            Test test = Serializer.DecodeTest(questions, testName);
 
             apiDataAccessObject.save(test);
 

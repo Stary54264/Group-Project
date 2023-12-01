@@ -1,21 +1,36 @@
 package app;
 
-import data_access.FileUserDataAccessObject;
+import data_access.FileTestDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsController;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsPresenter;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsViewModel;
+import interface_adapter.getDailyQuiz.GetDailyQuizController;
+import interface_adapter.getDailyQuiz.GetDailyQuizPresenter;
+import interface_adapter.getDailyQuiz.GetDailyQuizViewModel;
+import use_cases.createOwnQuestions.CreateOwnQuestionsInteractor;
 import interface_adapter.getApiQuestions.GetApiQuestionsController;
 import interface_adapter.getApiQuestions.GetApiQuestionsPresenter;
 import interface_adapter.getApiQuestions.GetApiQuestionsViewModel;
+import use_cases.getApiQuestions.GetApiQuestionsInteractor;
 import interface_adapter.getResult.GetResultController;
 import interface_adapter.getResult.GetResultPresenter;
 import interface_adapter.getResult.GetResultViewModel;
-import interface_adapter.manageQuiz.manageQuizController;
-import interface_adapter.manageQuiz.manageQuizViewModel;
-import use_cases.createOwnQuestions.CreateOwnQuestionsInteractor;
-import use_cases.getApiQuestions.GetApiQuestionsInteractor;
+import use_cases.getDailyQuiz.GetDailyQuizInteractor;
 import use_cases.getResult.GetResultInteractor;
+import interface_adapter.manageQuiz.manageQuizController;
+import interface_adapter.manageQuiz.manageQuizPresenter;
+import interface_adapter.manageQuiz.manageQuizViewModel;
+import use_cases.manageQuiz.manageQuizInteractor;
+import interface_adapter.takeQuiz.takeQuizController;
+import interface_adapter.takeQuiz.takeQuizPresenter;
+import interface_adapter.takeQuiz.takeQuizViewModel;
+import use_cases.takeQuiz.takeQuizInteractor;
+import interface_adapter.uploadQuestions.UploadQuestionsController;
+import interface_adapter.uploadQuestions.UploadQuestionsPresenter;
+import interface_adapter.uploadQuestions.UploadQuestionsViewModel;
+import use_cases.uploadQuestions.UploadQuestionsInteractor;
+
 import view.*;
 
 import javax.swing.*;
@@ -40,33 +55,87 @@ public class Main {
         GetApiQuestionsViewModel getApiQuestionsViewModel = new GetApiQuestionsViewModel();
         GetResultViewModel getResultViewModel = new GetResultViewModel();
         manageQuizViewModel manageQuizViewModel = new manageQuizViewModel();
+        takeQuizViewModel takeQuizViewModel = new takeQuizViewModel();
+        UploadQuestionsViewModel uploadQuestionsViewModel = new UploadQuestionsViewModel();
+        GetDailyQuizViewModel getDailyQuizViewModel = new GetDailyQuizViewModel();
 
-        FileUserDataAccessObject fileUserDataAccessObject = new FileUserDataAccessObject();
+        FileTestDataAccessObject fileUserDataAccessObject = new FileTestDataAccessObject();
 
         CreateOwnQuestionsController createOwnQuestionsController = new CreateOwnQuestionsController(
-                new CreateOwnQuestionsInteractor(new CreateOwnQuestionsPresenter(createOwnQuestionsViewModel),
-                        fileUserDataAccessObject));
+                new CreateOwnQuestionsInteractor(
+                        new CreateOwnQuestionsPresenter(createOwnQuestionsViewModel),
+                        fileUserDataAccessObject
+                )
+        );
         GetApiQuestionsController getApiQuestionsController = new GetApiQuestionsController(
                 new GetApiQuestionsInteractor(fileUserDataAccessObject,
-                        new GetApiQuestionsPresenter())
+                        new GetApiQuestionsPresenter(getApiQuestionsViewModel, takeQuizViewModel, viewManagerModel)
+                )
+        );
+        UploadQuestionsController uploadQuestionsController = new UploadQuestionsController(
+            new UploadQuestionsInteractor(
+                    fileUserDataAccessObject,
+                    new UploadQuestionsPresenter(uploadQuestionsViewModel)
+            )
         );
         GetResultController getResultController = new GetResultController(
                 new GetResultInteractor(fileUserDataAccessObject,
-                        new GetResultPresenter(viewManagerModel, getResultViewModel))
+                        new GetResultPresenter(viewManagerModel, getResultViewModel)
+                )
         );
-        manageQuizController manageQuizController = new manageQuizController();
+        manageQuizController manageQuizController = new manageQuizController(
+                new manageQuizInteractor(
+                        new manageQuizPresenter(manageQuizViewModel),
+                        fileUserDataAccessObject
+                )
+        );
 
-        CreateOwnQuestionsView createOwnQuestionsView = new CreateOwnQuestionsView(createOwnQuestionsController,
-                createOwnQuestionsViewModel);
+        takeQuizController takeQuizController = new takeQuizController(
+                new takeQuizInteractor(
+                        new takeQuizPresenter(takeQuizViewModel, getResultViewModel, viewManagerModel),
+                        fileUserDataAccessObject
+                )
+        );
+        GetDailyQuizController getDailyQuizController = new GetDailyQuizController(
+                new GetDailyQuizInteractor(
+                        fileUserDataAccessObject,
+                        new GetDailyQuizPresenter(getDailyQuizViewModel)
+                )
+        );
+
+        CreateOwnQuestionsView createOwnQuestionsView = new CreateOwnQuestionsView(
+                createOwnQuestionsController,
+                createOwnQuestionsViewModel
+        );
+        GetAPIQuestionsView getApiQuestionsView = new GetAPIQuestionsView(
+                getApiQuestionsController,
+                getApiQuestionsViewModel
+        );
+        GetResultView getResultView = new GetResultView(getResultViewModel);
+
+        QuizView quizView = new QuizView(
+            takeQuizViewModel,
+            takeQuizController,
+                getResultController);
+
+        MainView mainView = new MainView(
+                viewManagerModel,
+                createOwnQuestionsViewModel,
+                createOwnQuestionsController,
+                getApiQuestionsViewModel, uploadQuestionsController,
+                uploadQuestionsViewModel,
+                manageQuizController,
+                manageQuizViewModel,
+                takeQuizController,
+                takeQuizViewModel,
+                getDailyQuizController,
+                getDailyQuizViewModel
+        );
+
         views.add(createOwnQuestionsView, createOwnQuestionsView.viewname);
-        GetAPIQuestionsView getApiQuestionsView = new GetAPIQuestionsView(getApiQuestionsController,
-                getApiQuestionsViewModel);
         views.add(getApiQuestionsView, getApiQuestionsView.viewName);
-        GetResultView getResultView = new GetResultView(getResultController, getResultViewModel);
         views.add(getResultView, getResultView.viewname);
-        QuizView quizView = new QuizView(manageQuizController, manageQuizViewModel);
         views.add(quizView, quizView.viewname);
-        MainView mainView = new MainView();
         views.add(mainView, mainView.viewname);
 
         viewManagerModel.setActiveView(mainView.viewname);
