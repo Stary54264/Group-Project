@@ -27,11 +27,11 @@ import java.util.Objects;
 public class CreateOwnQuestionsView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewname = "Create Questions";
     private final CreateOwnQuestionsViewModel createOwnQuestionsViewModel;
-    private final JTextField questionField = new JTextField();
-    private final JTextField answerField = new JTextField();
-    private final JTextField incorrect1Field = new JTextField();
-    private final JTextField incorrect2Field = new JTextField();
-    private final JTextField incorrect3Field = new JTextField();
+    private final JTextField questionField = new JTextField(15);
+    private final JTextField answerField = new JTextField(15);
+    private final JTextField incorrect1Field = new JTextField(15);
+    private final JTextField incorrect2Field = new JTextField(15);
+    private final JTextField incorrect3Field = new JTextField(15);
     private final CreateOwnQuestionsController createOwnQuestionsController;
     private final JButton next;
     private final JButton finished;

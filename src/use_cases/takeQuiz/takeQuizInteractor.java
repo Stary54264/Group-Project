@@ -43,12 +43,14 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
 
         if (Objects.equals(currentQuestion.getCorrectAnswer(), inputData.getUserAnswer())) {
             wrongAnswers.add(null);
+            System.out.println("YEP!");
         } else {
             wrongAnswers.add(currentQuestion);
+            System.out.println("WRONG!");
         }
         currentQuestionIndex ++;
 
-        if (currentQuestionIndex-1 > testOrder.length) {
+        if (currentQuestionIndex >= testOrder.length) {
 
             Result newResult = prepareResult();
 

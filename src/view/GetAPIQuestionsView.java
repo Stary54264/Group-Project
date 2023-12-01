@@ -15,7 +15,7 @@ import java.beans.PropertyChangeListener;
 public class GetAPIQuestionsView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "get api questions";
     private final GetApiQuestionsViewModel getApiQuestionsViewModel;
-    private final JTextField nameInputField = new JTextField();
+    private final JTextField nameInputField = new JTextField(15);
     private final JInternalFrame numberInputField = new JInternalFrame();
     private final JComboBox<String> categoryBox = new JComboBox<>();
     private final JComboBox<String> typeBox = new JComboBox<>();

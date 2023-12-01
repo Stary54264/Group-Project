@@ -92,7 +92,7 @@ public class Main {
 
         takeQuizController takeQuizController = new takeQuizController(
                 new takeQuizInteractor(
-                        new takeQuizPresenter(takeQuizViewModel),
+                        new takeQuizPresenter(takeQuizViewModel, getResultViewModel, viewManagerModel),
                         fileUserDataAccessObject
                 )
         );
@@ -116,13 +116,13 @@ public class Main {
         QuizView quizView = new QuizView(
             takeQuizViewModel,
             takeQuizController,
-            getResultController
-        );
+                getResultController);
 
         MainView mainView = new MainView(
+                viewManagerModel,
                 createOwnQuestionsViewModel,
                 createOwnQuestionsController,
-                uploadQuestionsController,
+                getApiQuestionsViewModel, uploadQuestionsController,
                 uploadQuestionsViewModel,
                 manageQuizController,
                 manageQuizViewModel,

@@ -21,7 +21,7 @@ public class CreateOwnQuestionsViewModel extends ViewModel {
     private CreateOwnQuestionsState questionsState = new CreateOwnQuestionsState();
 
     public CreateOwnQuestionsViewModel() {
-        super("questions");
+        super("Create Questions");
     }
 
     public void setState(CreateOwnQuestionsState questionsState) {

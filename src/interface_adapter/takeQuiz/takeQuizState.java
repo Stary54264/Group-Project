@@ -9,7 +9,7 @@ public class takeQuizState {
     public void setFinished(boolean finished) {
         this.finished = finished;
     }
-    public boolean getFinished() {
+    public boolean isFinished() {
         return finished;
     }
     public void setQuestion(String question) {
@@ -26,6 +26,9 @@ public class takeQuizState {
     }
     public String getAnswer(int i) {
         return answers[i];
+    }
+    public int getAnswerCount() {
+        return answers.length;
     }
     public void setAnswers(String[] answers) {
         this.answers = answers;

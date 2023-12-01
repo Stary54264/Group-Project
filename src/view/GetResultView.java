@@ -9,7 +9,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class GetResultView extends JPanel implements ActionListener, PropertyChangeListener{
-    public final String viewname = "Result View";
+    public final String viewname = "getResult";
     private final GetResultViewModel getResultViewModel;
     JLabel result;
     final JButton getResult;
