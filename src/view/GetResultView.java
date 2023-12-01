@@ -1,12 +1,7 @@
 package view;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.getResult.GetResultController;
-import interface_adapter.getResult.GetResultState;
 import interface_adapter.getResult.GetResultViewModel;
 import interface_adapter.manageQuiz.manageQuizViewModel;
-import interface_adapter.takeQuiz.takeQuizController;
-import interface_adapter.takeQuiz.takeQuizViewModel;
-import view.LabelTextPanel;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
