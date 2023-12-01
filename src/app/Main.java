@@ -114,7 +114,7 @@ public class Main {
                 getApiQuestionsController,
                 getApiQuestionsViewModel
         );
-        GetResultView getResultView = new GetResultView(getResultViewModel);
+        GetResultView getResultView = new GetResultView(getResultViewModel, viewManagerModel, manageQuizViewModel);
 
         QuizView quizView = new QuizView(
                 viewManagerModel, takeQuizViewModel,
