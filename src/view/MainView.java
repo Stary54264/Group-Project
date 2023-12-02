@@ -115,6 +115,8 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
                             uploadQuestionsController.execute(
                                     currentState.getTestName(),
                                     currentState.getTxtPath());
+                            JOptionPane.showMessageDialog(
+                                    MainView.this, currentState.getMessage());
                         }
                     }
                 });
@@ -178,8 +180,6 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        UploadQuestionsState uploadQuestionsState = (UploadQuestionsState) evt.getNewValue();
-        JOptionPane.showMessageDialog(MainView.this, uploadQuestionsState.getMessage());
         System.out.println("main prp");
     }
 

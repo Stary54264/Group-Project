@@ -52,8 +52,6 @@ public class FileTestDataAccessObject implements
             }
             return Serializer.DecodeTest(content, testName);
         } catch (Exception e) {
-            System.out.println("File does not exist!");
-            e.printStackTrace();
         }
         return null;
     }
