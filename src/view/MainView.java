@@ -27,6 +27,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Objects;
 
 public class MainView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewname = "Main Menu";
@@ -258,10 +259,9 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
                     new ActionListener() {
                         public void actionPerformed(ActionEvent evt) {
                             if (evt.getSource().equals(edit)) {
-                                String testName = JOptionPane.showInputDialog(
-                                        "Enter the test you want to edit: ");
-                                int questionNum = Integer.parseInt(JOptionPane.showInputDialog(
-                                        "Enter the question number you want to edit: "));
+                                String questionNum = JOptionPane.showInputDialog(
+                                        "Enter the question number you want to edit: ");
+
                                 String question = JOptionPane.showInputDialog(
                                         "Enter the new question: ");
                                 String answer = JOptionPane.showInputDialog(
@@ -276,8 +276,22 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
                                 incorrect.add(incorrect1);
                                 incorrect.add(incorrect2);
                                 incorrect.add(incorrect3);
-                                createOwnQuestionsController.editExecute(testName, questionNum,
-                                        question, answer, incorrect);
+                                if (Objects.equals(question, "") || Objects.equals(answer, "") ||
+                                        incorrect.contains("")) {
+                                    JOptionPane.showMessageDialog(null,
+                                            "Failed to edit test, question content not valid");
+                                }
+                                else {
+                                    try {
+                                        createOwnQuestionsController.editExecute(name, Integer.parseInt(questionNum),
+                                                question, answer, incorrect);
+                                    } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                                        JOptionPane.showMessageDialog(null,
+                                                "Failed to edit test, question number not valid");
+                                    }
+                                }
+
+
                             }
                         }
                     }

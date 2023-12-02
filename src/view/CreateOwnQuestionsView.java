@@ -132,6 +132,7 @@ public class CreateOwnQuestionsView extends JPanel implements ActionListener, Pr
                         }
                         newState.clearAll();
                         createOwnQuestionsViewModel.setState(newState);
+                        cancel.doClick();
 
                     }
                 }
