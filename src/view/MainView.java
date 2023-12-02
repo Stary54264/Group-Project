@@ -42,8 +42,6 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
     private final takeQuizViewModel takeQuizViewModel;
     private final GetDailyQuizController getDailyQuizController;
     private final GetDailyQuizViewModel getDailyQuizViewModel;
-    private final JTextField testNameInputField = new JTextField(15);
-    private final JTextField jsonPathInputField = new JTextField(15);
     private ArrayList<TestPanel> tests;
     private final JButton createQuestions, apiQuestions, uploadQuestions, getDailyQuiz, refreshTests;
     private final JPanel testContainer;
@@ -71,9 +69,6 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
         this.takeQuizViewModel = takeQuizViewModel;
         this.getDailyQuizController = getDailyQuizController;
         this.getDailyQuizViewModel = getDailyQuizViewModel;
-
-        LabelTextPanel testNameInfo = new LabelTextPanel(new JLabel(UploadQuestionsViewModel.TEST_NAME_LABEL), testNameInputField);
-        LabelTextPanel jsonPathInfo = new LabelTextPanel(new JLabel(UploadQuestionsViewModel.JSON_PATH_LABEL), jsonPathInputField);
 
         JPanel buttons = new JPanel();
         createQuestions = new JButton("Create Own Questions");
@@ -112,50 +107,14 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(uploadQuestions)) {
                             UploadQuestionsState currentState = uploadQuestionsViewModel.getState();
+                            currentState.setTestName(JOptionPane.showInputDialog("Enter the name for your test: "));
+                            currentState.setJsonPath(JOptionPane.showInputDialog("Enter the path for  your test file: "));
                             uploadQuestionsController.execute(
                                     currentState.getTestName(),
                                     currentState.getJsonPath());
                         }
                     }
                 });
-        testNameInputField.addKeyListener(
-                new KeyListener() {
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-                        UploadQuestionsState currentState = uploadQuestionsViewModel.getState();
-                        String text = testNameInputField.getText() + e.getKeyChar();
-                        currentState.setTestName(text);
-                        uploadQuestionsViewModel.setState(currentState);
-                    }
-
-                    @Override
-                    public void keyPressed(KeyEvent e) {
-                    }
-
-                    @Override
-                    public void keyReleased(KeyEvent e) {
-                    }
-                }
-                );
-        jsonPathInputField.addKeyListener(
-                new KeyListener() {
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-                        UploadQuestionsState currentState = uploadQuestionsViewModel.getState();
-                        String text = jsonPathInputField.getText() + e.getKeyChar();
-                        currentState.setJsonPath(text);
-                        uploadQuestionsViewModel.setState(currentState);
-                    }
-
-                    @Override
-                    public void keyPressed(KeyEvent e) {
-                    }
-
-                    @Override
-                    public void keyReleased(KeyEvent e) {
-                    }
-                }
-                );
         getDailyQuiz.addActionListener(
                 new ActionListener() {
                     @Override
@@ -185,8 +144,6 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
         JPanel rightSide = new JPanel();
 
         leftSide.setLayout(new BoxLayout(leftSide, BoxLayout.Y_AXIS));
-        leftSide.add(testNameInfo);
-        leftSide.add(jsonPathInfo);
         buttons.setLayout(new GridLayout(0,1));
         leftSide.add(buttons);
 
