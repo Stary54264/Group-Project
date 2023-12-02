@@ -16,8 +16,8 @@ public class UploadQuestionsInteractor implements UploadQuestionsInputBoundary {
     @Override
     public void execute(UploadQuestionsInputData uploadQuestionsInputData) {
         String testName = uploadQuestionsInputData.getTestName();
-        String jsonPath = uploadQuestionsInputData.getJsonPath();
-        Test test = dataAccessObject.readTest(testName, jsonPath);
+        String txtPath = uploadQuestionsInputData.getTxtPath();
+        Test test = dataAccessObject.readTest(testName, txtPath);
         if (!dataAccessObject.existsByName(testName)) {
             dataAccessObject.save(test);
             uploadQuestionsPresenter.prepareView("Uploaded successfully!");
