@@ -11,9 +11,7 @@ import use_cases.manageQuiz.manageQuizDataAccessInterface;
 import use_cases.takeQuiz.takeQuizDataAccessInterface;
 import use_cases.uploadQuestions.UploadQuestionsDataAccessInterface;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
+import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,8 +42,7 @@ public class FileTestDataAccessObject implements
     }
 
     @Override
-    public Test readTest(String testName, String jsonPath) {
-        // TODO stary
+    public Test readTest(String testName, String txtPath) {
         return null;
     }
 
@@ -62,7 +59,7 @@ public class FileTestDataAccessObject implements
             myWriter.close();
 
         } catch (Exception e) {
-            System.out.println("File thingy went wrong (save)");
+            System.out.println("File thing went wrong (save)");
             e.printStackTrace();
         }
         refresh();
