@@ -1,5 +1,5 @@
 package use_cases.uploadQuestions;
 
 public interface UploadQuestionsOutputBoundary {
-    void prepareView(String message);
+    void prepareView(boolean successful);
 }

@@ -18,12 +18,13 @@ public class UploadQuestionsInteractor implements UploadQuestionsInputBoundary {
         String testName = uploadQuestionsInputData.getTestName();
         String txtPath = uploadQuestionsInputData.getTxtPath();
         Test test = dataAccessObject.readTest(testName, txtPath);
-        if (!dataAccessObject.existsByName(testName) && test != null) {
+        boolean successful = !dataAccessObject.existsByName(testName);
+        if (successful) {
             dataAccessObject.save(test);
-            uploadQuestionsPresenter.prepareView("Uploaded successfully!");
+            uploadQuestionsPresenter.prepareView(successful);
         }
         else {
-            uploadQuestionsPresenter.prepareView("Test name already exist!");
+            uploadQuestionsPresenter.prepareView(!successful);
         }
     }
 }
