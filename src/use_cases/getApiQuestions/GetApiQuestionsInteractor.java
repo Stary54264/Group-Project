@@ -1,10 +1,6 @@
 package use_cases.getApiQuestions;
 import app.*;
-import entity.Question;
 import entity.Test;
-
-import java.util.ArrayList;
-import java.util.Objects;
 
 import static data_access.APIDataAccessObject.RetrieveQuestionsTrivia1;
 
@@ -41,7 +37,7 @@ public class GetApiQuestionsInteractor implements GetApiQuestionsInputBoundary {
         } else {
             apiDataAccessObject.save(test);
 
-            GetApiQuestionsOutputData getApiQuestionsOutputData = new GetApiQuestionsOutputData(true, testName);
+            GetApiQuestionsOutputData getApiQuestionsOutputData = new GetApiQuestionsOutputData(testName);
             apiPresenter.prepareSuccessView(getApiQuestionsOutputData);
         }
     }

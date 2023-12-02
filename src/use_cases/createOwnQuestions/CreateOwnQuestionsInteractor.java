@@ -1,12 +1,10 @@
 package use_cases.createOwnQuestions;
 
 import app.QuestionBuilder;
-import app.TestBuilder;
 import entity.Question;
 import entity.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CreateOwnQuestionsInteractor implements CreateOwnQuestionsInputBoundary {
     final CreateOwnQuestionsOutputBoundary questionsPresenter;

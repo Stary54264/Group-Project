@@ -10,9 +10,7 @@ import interface_adapter.uploadQuestions.UploadQuestionsViewModel;
 import interface_adapter.uploadQuestions.UploadQuestionsState;
 import interface_adapter.manageQuiz.manageQuizViewModel;
 import interface_adapter.manageQuiz.manageQuizController;
-import interface_adapter.takeQuiz.takeQuizViewModel;
 import interface_adapter.takeQuiz.takeQuizController;
-import interface_adapter.takeQuiz.takeQuizState;
 import interface_adapter.getDailyQuiz.GetDailyQuizViewModel;
 import interface_adapter.getDailyQuiz.GetDailyQuizController;
 import interface_adapter.getDailyQuiz.GetDailyQuizState;
@@ -22,28 +20,16 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
 import java.util.Map;
 
 public class MainView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewname = "Main Menu";
-    private final ViewManagerModel viewManagerModel;
     private final CreateOwnQuestionsController createOwnQuestionsController;
-    private final CreateOwnQuestionsViewModel createOwnQuestionsViewModel;
-    private final GetApiQuestionsViewModel getApiQuestionsViewModel;
-    private final UploadQuestionsController uploadQuestionsController;
-    private final UploadQuestionsViewModel uploadQuestionsViewModel;
     private final manageQuizController manageQuizController;
     private final manageQuizViewModel manageQuizViewModel;
     private final takeQuizController takeQuizController;
-    private final takeQuizViewModel takeQuizViewModel;
-    private final GetDailyQuizController getDailyQuizController;
-    private final GetDailyQuizViewModel getDailyQuizViewModel;
-    private ArrayList<TestPanel> tests;
     private final JButton createQuestions, apiQuestions, uploadQuestions, getDailyQuiz, refreshTests;
     private final JPanel testContainer;
 
@@ -56,21 +42,12 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
                     manageQuizController manageQuizController,
                     manageQuizViewModel manageQuizViewModel,
                     takeQuizController takeQuizController,
-                    takeQuizViewModel takeQuizViewModel,
                     GetDailyQuizController getDailyQuizController,
                     GetDailyQuizViewModel getDailyQuizViewModel) {
-        this.viewManagerModel = viewManagerModel;
-        this.createOwnQuestionsViewModel = createOwnQuestionsViewModel;
         this.createOwnQuestionsController = createOwnQuestionsController;
-        this.getApiQuestionsViewModel = getApiQuestionsViewModel;
-        this.uploadQuestionsController = uploadQuestionsController;
-        this.uploadQuestionsViewModel = uploadQuestionsViewModel;
         this.manageQuizController = manageQuizController;
         this.manageQuizViewModel = manageQuizViewModel;
         this.takeQuizController = takeQuizController;
-        this.takeQuizViewModel = takeQuizViewModel;
-        this.getDailyQuizController = getDailyQuizController;
-        this.getDailyQuizViewModel = getDailyQuizViewModel;
 
         JPanel buttons = new JPanel();
         createQuestions = new JButton(CreateOwnQuestionsViewModel.TITLE_LABEL);
@@ -115,9 +92,9 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
                         if (e.getSource().equals(uploadQuestions)) {
                             UploadQuestionsState currentState = uploadQuestionsViewModel.getState();
                             currentState.setTestName(JOptionPane.showInputDialog(
-                                    uploadQuestionsViewModel.TEST_NAME_LABEL));
+                                    UploadQuestionsViewModel.TEST_NAME_LABEL));
                             currentState.setTxtPath(JOptionPane.showInputDialog(
-                                    uploadQuestionsViewModel.TXT_PATH_LABEL));
+                                    UploadQuestionsViewModel.TXT_PATH_LABEL));
                             uploadQuestionsController.execute(
                                     currentState.getTestName(),
                                     currentState.getTxtPath());
@@ -133,7 +110,12 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
                         if (e.getSource().equals(getDailyQuiz)) {
                             getDailyQuizController.execute();
                             GetDailyQuizState state = getDailyQuizViewModel.getState();
-                            takeQuizController.start(state.getDailyTest());
+                            if (state.isSuccess()) {
+                                takeQuizController.start(state.getDailyTest());
+                            } else {
+                                JOptionPane.showMessageDialog(
+                                        null, "Failed to create Daily Quiz");
+                            }
                         }
                     }
                 });
@@ -149,7 +131,6 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
                         }
                     }
                 });
-        tests = new ArrayList<>();
 
         JLabel titleName = new JLabel("Program");
         JPanel title = new JPanel();
@@ -221,11 +202,9 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
 
     private void updateTests(Map<String, String[]> newTests) {
         testContainer.removeAll();
-        tests.clear();
         System.out.println(newTests.keySet());
         for (String s: newTests.keySet()) {
             TestPanel t = new TestPanel(s, newTests.get(s)[0], newTests.get(s)[1]);
-            tests.add(t);
             testContainer.add(t);
             testContainer.add(Box.createVerticalStrut(5));
         }
@@ -314,7 +293,6 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
                     new ActionListener() {
                         public void actionPerformed(ActionEvent evt) {
                             if (evt.getSource().equals(play)) {
-                                takeQuizState currentState = takeQuizViewModel.getState();
                                 takeQuizController.start(name);
                             }
                         }

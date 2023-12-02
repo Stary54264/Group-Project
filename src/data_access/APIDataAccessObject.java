@@ -4,15 +4,12 @@ import app.Category;
 import app.QuestionType;
 import app.QuestionDifficulty;
 import app.Serializer;
-import entity.Question;
 import entity.Test;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
 
 import static app.QuestionDifficulty.ALL;
 import static app.QuestionType.BOOL;

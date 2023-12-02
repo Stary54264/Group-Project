@@ -10,7 +10,6 @@ import javax.swing.*;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsState;
 import interface_adapter.manageQuiz.manageQuizViewModel;
 import interface_adapter.takeQuiz.takeQuizController;
-import interface_adapter.takeQuiz.takeQuizState;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -20,15 +19,12 @@ import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 
 public class CreateOwnQuestionsView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewname = "Create Questions";
     private final CreateOwnQuestionsViewModel createOwnQuestionsViewModel;
-    private final ViewManagerModel viewManagerModel;
-    private final manageQuizViewModel manageQuizViewModel;
     private final JTextField nameField = new JTextField(25);
     private final JTextField commentField = new JTextField(25);
     private final JTextField questionField = new JTextField(25);
@@ -38,12 +34,7 @@ public class CreateOwnQuestionsView extends JPanel implements ActionListener, Pr
     private final JTextField incorrect3Field = new JTextField(25);
     private final CreateOwnQuestionsController createOwnQuestionsController;
     private final JButton next, back;
-    private final JButton finished;
-    private final JButton cancel;
     private final JLabel pageNumber;
-    private List<String> questions = new ArrayList<String>();
-    private List<String> answers = new ArrayList<String>();
-    private List<ArrayList<String>> incorrectAnswers = new ArrayList<ArrayList<String>>();
 
     public CreateOwnQuestionsView(CreateOwnQuestionsController controller,
                                   CreateOwnQuestionsViewModel viewModel,
@@ -52,8 +43,6 @@ public class CreateOwnQuestionsView extends JPanel implements ActionListener, Pr
                                   takeQuizController takeQuizController) {
         this.createOwnQuestionsController = controller;
         this.createOwnQuestionsViewModel = viewModel;
-        this.viewManagerModel = viewManagerModel;
-        this.manageQuizViewModel = manageQuizViewModel;
         createOwnQuestionsViewModel.addPropertyChangeListener(this);
         JLabel title = new JLabel(CreateOwnQuestionsViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -73,22 +62,15 @@ public class CreateOwnQuestionsView extends JPanel implements ActionListener, Pr
                 new JLabel(CreateOwnQuestionsViewModel.INCORRECT_LABEL), incorrect2Field);
         LabelTextPanel incorrect3Panel = new LabelTextPanel(
                 new JLabel(CreateOwnQuestionsViewModel.INCORRECT_LABEL), incorrect3Field);
-        ArrayList<JTextField> textFields = new ArrayList<JTextField>();
-
-        textFields.add(questionField);
-        textFields.add(answerField);
-        textFields.add(incorrect1Field);
-        textFields.add(incorrect2Field);
-        textFields.add(incorrect3Field);
 
         JPanel buttons = new JPanel();
         back = new JButton("Back");
         buttons.add(back);
         next = new JButton(CreateOwnQuestionsViewModel.NEXT_BUTTON_LABEL);
         buttons.add(next);
-        cancel = new JButton(CreateOwnQuestionsViewModel.CANCEL_BUTTON_LABEL);
+        JButton cancel = new JButton(CreateOwnQuestionsViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(cancel);
-        finished = new JButton(CreateOwnQuestionsViewModel.FINISHED_BUTTON_LABEL);
+        JButton finished = new JButton(CreateOwnQuestionsViewModel.FINISHED_BUTTON_LABEL);
         buttons.add(finished);
 
         pageNumber = new JLabel("Page 1");

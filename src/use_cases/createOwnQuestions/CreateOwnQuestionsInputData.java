@@ -8,8 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CreateOwnQuestionsInputData {
-    private Test test;
-    private Question question;
+    private final Test test;
     public CreateOwnQuestionsInputData(String name, String comment, List<QuestionBuilder> questions) {
         TestBuilder tBuilder = new TestBuilder();
         ArrayList<Question> output = new ArrayList<>();

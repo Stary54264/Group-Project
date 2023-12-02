@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CreateOwnQuestionsState {
-    private List<QuestionBuilder> builders;
+    private final List<QuestionBuilder> builders;
     private String name, comment;
     private int page;
     private String error = "";

@@ -49,10 +49,6 @@ public class takeQuizState {
         return lastCorrect;
     }
 
-    public String[] getAnswers() {
-        return answers;
-    }
-
     public void setAnswers(String[] answers) {
         this.answers = answers;
     }

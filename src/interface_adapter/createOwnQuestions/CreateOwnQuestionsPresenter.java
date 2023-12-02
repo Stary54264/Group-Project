@@ -5,8 +5,8 @@ import use_cases.createOwnQuestions.CreateOwnQuestionsOutputBoundary;
 import use_cases.createOwnQuestions.CreateOwnQuestionsOutputData;
 
 public class CreateOwnQuestionsPresenter implements CreateOwnQuestionsOutputBoundary {
-    private CreateOwnQuestionsViewModel questionsViewModel;
-    private ViewManagerModel viewManagerModel;
+    private final CreateOwnQuestionsViewModel questionsViewModel;
+    private final ViewManagerModel viewManagerModel;
     public CreateOwnQuestionsPresenter(ViewManagerModel viewManagerModel, CreateOwnQuestionsViewModel questionsViewModel) {
         this.questionsViewModel = questionsViewModel;
         this.viewManagerModel = viewManagerModel;

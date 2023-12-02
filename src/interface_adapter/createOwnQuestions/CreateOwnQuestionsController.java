@@ -4,7 +4,6 @@ import app.QuestionBuilder;
 import use_cases.createOwnQuestions.CreateOwnQuestionsInputBoundary;
 import use_cases.createOwnQuestions.CreateOwnQuestionsInputData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CreateOwnQuestionsController {

@@ -69,7 +69,7 @@ public class Main {
         );
         GetApiQuestionsController getApiQuestionsController = new GetApiQuestionsController(
                 new GetApiQuestionsInteractor(fileUserDataAccessObject,
-                        new GetApiQuestionsPresenter(getApiQuestionsViewModel, takeQuizViewModel, viewManagerModel)
+                        new GetApiQuestionsPresenter(getApiQuestionsViewModel, takeQuizViewModel)
                 )
         );
         UploadQuestionsController uploadQuestionsController = new UploadQuestionsController(
@@ -133,7 +133,6 @@ public class Main {
                 manageQuizController,
                 manageQuizViewModel,
                 takeQuizController,
-                takeQuizViewModel,
                 getDailyQuizController,
                 getDailyQuizViewModel
         );

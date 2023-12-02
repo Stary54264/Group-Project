@@ -35,11 +35,7 @@ public class QuestionBuilder {
         incorrectAnswers = new ArrayList<>();
         incorrectAnswers.add(""); incorrectAnswers.add(""); incorrectAnswers.add("");
     }
-    public QuestionBuilder(Question q) {
-        questionText = q.getQuestion();
-        correctAnswer = q.getCorrectAnswer();
-        incorrectAnswers = q.getIncorrectAnswers();
-    }
+
     public Question build() {
         if (questionText.isBlank() || correctAnswer.isBlank() || incorrectAnswers.get(0).isBlank()) return null;
 

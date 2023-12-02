@@ -17,7 +17,7 @@ public class GetResultInteractor implements GetResultInputBoundary {
         Test test = getResultDataAccessObject.getTest(name);
         ArrayList<Result> results = test.getResults();
         Result lastResult = results.get(results.size()-1);
-        boolean[] answers = lastResult.getResults();
+        boolean[] answers = lastResult.results();
         int right = 0, wrong = 0;
         for (boolean b: answers) {
             if (b) right++;
@@ -32,7 +32,7 @@ public class GetResultInteractor implements GetResultInputBoundary {
 
         String score = String.format("Average: %d%% (Correct: %d, Wrong: %d) ", newScore, right, wrong);
         SimpleDateFormat dt1 = new SimpleDateFormat("mm:ss");
-        String time = "Time taken: " + dt1.format(lastResult.getTimeTaken());
+        String time = "Time taken: " + dt1.format(lastResult.timeTaken());
 
         GetResultOutputData getResultOutputData = new GetResultOutputData(score, time);
 

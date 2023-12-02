@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 public class takeQuizInteractor implements takeQuizInputBoundary {
     private Test activeTest;
     private Date startTime;
-    private int[] testOrder;
+    private Integer[] testOrder;
     private int currentQuestionIndex;
     private final ArrayList<Question> wrongAnswers;
     private final takeQuizOutputBoundary outputBoundary;
@@ -27,7 +27,7 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
         Test t =  dataAccessInterface.getTest(name);
         activeTest = t;
         currentQuestionIndex = 0;
-        testOrder = IntStream.range(0, t.getQuestions().size()).toArray();
+        testOrder = IntStream.range(0, t.getQuestions().size()).boxed().toArray(Integer[]::new);
         Collections.shuffle(Arrays.asList(testOrder));
         System.out.println(testOrder.length +"s" + t.getQuestions().size() + "order");
         Question currentQuestion = t.getQuestions().get(testOrder[currentQuestionIndex]);
@@ -42,7 +42,7 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
         int currentIndex = testOrder[currentQuestionIndex];
         Question currentQuestion = questions.get(currentIndex);
 
-        boolean lastCorrect = Objects.equals(currentQuestion.getCorrectAnswer(), inputData.getUserAnswer());
+        boolean lastCorrect = Objects.equals(currentQuestion.getCorrectAnswer(), inputData.userAnswer());
         if (lastCorrect) {
             wrongAnswers.add(null);
             System.out.println("YEP!");
@@ -73,10 +73,9 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
         for (int i = 0; i < testOrder.length; i++) {
             qs[i] = wrongAnswers.get(testOrder[i]) == null;
         }
-        System.out.println(new Date().getTime());
-        System.out.println(startTime.getTime());
+
         Date a = new Date((new Date().getTime() - startTime.getTime())/1000);
-        System.out.println(a.getSeconds());
+
         return new Result(new Date((new Date().getTime() - startTime.getTime())), qs);
     }
 
