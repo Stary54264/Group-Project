@@ -8,8 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import static data_access.APIDataAccessObject.RetrieveQuestionsTrivia1;
-
 public class GetDailyQuizInteractor implements GetDailyQuizInputBoundary {
     final GetDailyQuizDataAccessInterface DataAccessObject;
     final GetDailyQuizOutputBoundary Presenter;

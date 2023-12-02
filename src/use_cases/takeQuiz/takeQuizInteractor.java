@@ -74,8 +74,6 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
             qs[i] = wrongAnswers.get(testOrder[i]) == null;
         }
 
-        Date a = new Date((new Date().getTime() - startTime.getTime())/1000);
-
         return new Result(new Date((new Date().getTime() - startTime.getTime())), qs);
     }
 
