@@ -107,8 +107,10 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(uploadQuestions)) {
                             UploadQuestionsState currentState = uploadQuestionsViewModel.getState();
-                            currentState.setTestName(JOptionPane.showInputDialog(uploadQuestionsViewModel.TEST_NAME_LABEL));
-                            currentState.setTxtPath(JOptionPane.showInputDialog(uploadQuestionsViewModel.TXT_PATH_LABEL));
+                            currentState.setTestName(JOptionPane.showInputDialog(
+                                    uploadQuestionsViewModel.TEST_NAME_LABEL));
+                            currentState.setTxtPath(JOptionPane.showInputDialog(
+                                    uploadQuestionsViewModel.TXT_PATH_LABEL));
                             uploadQuestionsController.execute(
                                     currentState.getTestName(),
                                     currentState.getTxtPath());
