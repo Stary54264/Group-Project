@@ -49,7 +49,8 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
     public MainView(ViewManagerModel viewManagerModel,
                     CreateOwnQuestionsViewModel createOwnQuestionsViewModel,
                     CreateOwnQuestionsController createOwnQuestionsController,
-                    interface_adapter.getApiQuestions.GetApiQuestionsViewModel getApiQuestionsViewModel, UploadQuestionsController uploadQuestionsController,
+                    GetApiQuestionsViewModel getApiQuestionsViewModel,
+                    UploadQuestionsController uploadQuestionsController,
                     UploadQuestionsViewModel uploadQuestionsViewModel,
                     manageQuizController manageQuizController,
                     manageQuizViewModel manageQuizViewModel,
@@ -177,6 +178,8 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        UploadQuestionsState uploadQuestionsState = (UploadQuestionsState) evt.getNewValue();
+        JOptionPane.showMessageDialog(MainView.this, uploadQuestionsState.getMessage());
         System.out.println("main prp");
     }
 
