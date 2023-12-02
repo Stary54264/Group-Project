@@ -43,6 +43,17 @@ public class FileTestDataAccessObject implements
 
     @Override
     public Test readTest(String testName, String txtPath) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(txtPath))) {
+            String line;
+            String content = "";
+            while ((line = bufferedReader.readLine()) != null) {
+                content += line + ' ';
+            }
+            return Serializer.DecodeTest(content, testName);
+        } catch (Exception e) {
+            System.out.println("File thing went wrong (read)");
+            e.printStackTrace();
+        }
         return null;
     }
 
