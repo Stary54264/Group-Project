@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 public class manageQuizOutputData {
-    private final Map<String, String> newTests;
-    public manageQuizOutputData(Map<String, String> newTests) {
+    private final Map<String, String[]> newTests;
+    public manageQuizOutputData(Map<String, String[]> newTests) {
         this.newTests = newTests;
     }
 
-    public Map<String, String> getNewTests() {
+    public Map<String, String[]> getNewTests() {
         return newTests;
     }
 }

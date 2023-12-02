@@ -180,14 +180,14 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
         System.out.println("main prp");
     }
 
-    private void updateTests(Map<String, String> newTests) {
+    private void updateTests(Map<String, String[]> newTests) {
         for (TestPanel t: tests) {
             testContainer.remove(t);
         }
         tests.clear();
         System.out.println(newTests.keySet());
         for (String s: newTests.keySet()) {
-            TestPanel t = new TestPanel(s, newTests.get(s));
+            TestPanel t = new TestPanel(s, newTests.get(s)[0], newTests.get(s)[1]);
             tests.add(t);
             testContainer.add(t);
         }
@@ -195,7 +195,7 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
     }
 
     private class TestPanel extends JPanel {
-        TestPanel(String name, String comment) {
+        TestPanel(String name, String comment, String stats) {
 
             JButton edit = new JButton("edit");
             JButton play = new JButton("play");
@@ -207,6 +207,8 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
 
             this.add(new JLabel(name));
             this.add(new JLabel(comment));
+            if (stats != null) this.add(new JLabel("Best: " + stats + "%"));
+            else this.add(new JLabel("Best: not taken yet!"));
             buttons.add(edit);
             buttons.add(play);
             buttons.add(delete);

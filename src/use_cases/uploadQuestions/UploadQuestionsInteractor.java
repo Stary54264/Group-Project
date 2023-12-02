@@ -18,7 +18,7 @@ public class UploadQuestionsInteractor implements UploadQuestionsInputBoundary {
         String testName = uploadQuestionsInputData.getTestName();
         String txtPath = uploadQuestionsInputData.getTxtPath();
         Test test = dataAccessObject.readTest(testName, txtPath);
-        if (!dataAccessObject.existsByName(testName)) {
+        if (!dataAccessObject.existsByName(testName) && test != null) {
             dataAccessObject.save(test);
             uploadQuestionsPresenter.prepareView("Uploaded successfully!");
         }

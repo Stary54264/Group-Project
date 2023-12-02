@@ -18,13 +18,8 @@ public class Result {
         return timeTaken;
     }
 
-    public double getAverage() {
-        double a = 0;
-        for (boolean b: results) {
-            if (!b) a++;
-        }
-        a /= results.length;
-        return a;
+    public boolean[] getResults() {
+        return results;
     }
 
     public String getComment() {

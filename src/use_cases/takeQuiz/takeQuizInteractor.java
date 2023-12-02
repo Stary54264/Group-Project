@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 
 public class takeQuizInteractor implements takeQuizInputBoundary {
     private Test activeTest;
+    private Date startTime;
     private int[] testOrder;
     private int currentQuestionIndex;
     private final ArrayList<Question> wrongAnswers;
@@ -30,7 +31,7 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
         Collections.shuffle(Arrays.asList(testOrder));
         System.out.println(testOrder.length +"s" + t.getQuestions().size() + "order");
         Question currentQuestion = t.getQuestions().get(testOrder[currentQuestionIndex]);
-
+        startTime = new Date();
         takeQuizOutputData out = new takeQuizOutputData(name, currentQuestion.getQuestion(), currentQuestion.getAnswers());
         outputBoundary.prepareNextQuestion(out);
     }
@@ -70,7 +71,11 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
         for (int i = 0; i < testOrder.length; i++) {
             qs[i] = wrongAnswers.get(testOrder[i]) == null;
         }
-        return new Result(new Date(), qs);
+        System.out.println(new Date().getTime());
+        System.out.println(startTime.getTime());
+        Date a = new Date((new Date().getTime() - startTime.getTime())/1000);
+        System.out.println(a.getSeconds());
+        return new Result(new Date((new Date().getTime() - startTime.getTime())), qs);
     }
 
     private void clearState() {

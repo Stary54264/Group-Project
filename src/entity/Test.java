@@ -7,7 +7,7 @@ import entity.Result;
 
 public class Test {
     private ArrayList<Question> questions;
-    private String category, name, comment;
+    private String category, name, comment, stats;
     private final ArrayList<Result> results;
 
     public Test(String name, String Category, ArrayList<Question> questions, ArrayList<Result> results) {
@@ -27,6 +27,14 @@ public class Test {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setStats(String stats) {
+        this.stats = stats;
+    }
+
+    public String getStats() {
+        return stats;
     }
 
     public ArrayList<Question> getQuestions() {

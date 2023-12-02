@@ -27,11 +27,11 @@ public class manageQuizInteractor implements manageQuizInputBoundary {
         outputBoundary.refreshTests(new manageQuizOutputData(getNames()));
     }
 
-    private Map<String, String> getNames() {
+    private Map<String, String[]> getNames() {
         List<Test> tests = dataAccessInterface.getTests();
-        Map<String, String> out = new HashMap<String, String>();
+        Map<String, String[]> out = new HashMap<String, String[]>();
         for (Test test : tests) {
-            out.put(test.getName(), test.getComment());
+            out.put(test.getName(), new String[] {test.getComment(), test.getStats()});
         }
         return out;
     }

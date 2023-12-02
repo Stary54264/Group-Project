@@ -43,7 +43,8 @@ public class FileTestDataAccessObject implements
 
     @Override
     public Test readTest(String testName, String txtPath) {
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(txtPath))) {
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(txtPath));
             String line;
             String content = "";
             while ((line = bufferedReader.readLine()) != null) {
@@ -71,7 +72,6 @@ public class FileTestDataAccessObject implements
 
         } catch (Exception e) {
             System.out.println("File thing went wrong (save)");
-            e.printStackTrace();
         }
         refresh();
     }

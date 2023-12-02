@@ -12,7 +12,8 @@ import java.util.regex.Pattern;
 
 public class Serializer {
     public static ArrayList<Question> ParseTrivia(String inp) {
-        final String regex = "\\{\\\"type\\\":\\\"(multiple|boolean)\\\",.*?\\\"question\\\":\\\"(.*?)\\\",\\\"correct_answer\\\":\\\"(.*?)\\\",\\\"incorrect_answers\\\":\\[\\\"(.*?)\\\"(?:, ?\\\"(.*?)\\\", ?\\\"(.*?)\\\")?\\]\\}";        final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+        final String regex = "\\{\\\"type\\\":\\\"(multiple|boolean)\\\",.*?\\\"question\\\":\\\"(.*?)\\\",\\\"correct_answer\\\":\\\"(.*?)\\\",\\\"incorrect_answers\\\":\\[\\\"(.*?)\\\"(?:, ?\\\"(.*?)\\\", ?\\\"(.*?)\\\")?\\]\\}";
+        final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         final Matcher matcher = pattern.matcher(inp);
         ArrayList<Question> out = new ArrayList<>();
 
@@ -51,7 +52,30 @@ public class Serializer {
     }
 
     public static Test DecodeTest(String input, String name) {
-        return new TestBuilder().setQuestions(ParseTrivia(input)).setName(name).setCategory("Any").build();
+        ArrayList<Question> questions = ParseTrivia(input);
+        final String comReg = "\"comment\":\"(.*?)\"";
+        final Pattern pattern = Pattern.compile(comReg, Pattern.MULTILINE);
+        final Matcher matcher = pattern.matcher(input);
+        String comment;
+        if (matcher.find()) {
+            comment = matcher.group(1);
+        } else comment = "";
+
+        final String statsReg = "\"stats\":\"(.*?)\"";
+        final Pattern pattern2 = Pattern.compile(statsReg, Pattern.MULTILINE);
+        final Matcher matcher2 = pattern2.matcher(input);
+
+        String stats;
+        if (matcher2.find()) {
+            stats = matcher2.group(1);
+        } else stats = "";
+        TestBuilder tb = new TestBuilder().setQuestions(questions).setName(name).setCategory("Any").setComment(comment);
+
+        if (!stats.isEmpty()) tb.setStats(stats);
+        System.out.println(stats.isEmpty());
+        System.out.println(stats);
+
+        return tb.build();
     }
 
     public static String EncodeTest(Test inp) {
@@ -68,6 +92,9 @@ public class Serializer {
             System.out.println(String.join("\", \"", q.getIncorrectAnswers()));
             out.append(s);
         }
+        out.append("\"comment\":\"").append(inp.getComment()).append("\"");
+        out.append("\"stats\":\"").append(inp.getStats()).append("\"");
+        System.out.println(inp.getStats());
         return out.toString();
     }
 }
