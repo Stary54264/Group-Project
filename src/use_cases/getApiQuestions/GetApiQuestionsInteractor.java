@@ -1,11 +1,10 @@
 package use_cases.getApiQuestions;
-import app.TestBuilder;
+import app.*;
 import entity.Question;
-import app.QuestionType;
-import app.QuestionDifficulty;
 import entity.Test;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static data_access.APIDataAccessObject.RetrieveQuestionsTrivia1;
 
@@ -22,22 +21,24 @@ public class GetApiQuestionsInteractor implements GetApiQuestionsInputBoundary {
     @Override
     public void execute(GetApiQuestionsInputData getApiQuestionsInputData) {
         int number = getApiQuestionsInputData.getNumberOfQuestions();
-        int category = getApiQuestionsInputData.getQuestionCategory();
+        Category category = getApiQuestionsInputData.getQuestionCategory();
         QuestionType type = getApiQuestionsInputData.getQuestionType();
         QuestionDifficulty difficulty = getApiQuestionsInputData.getDifficulty();
+        //String testName = getApiQuestionsInputData.getTestName();
 
-        ArrayList<Question> questions = null;
+        String questions = "";
         try {
             questions = RetrieveQuestionsTrivia1(number, category, difficulty, type);
         } catch (Exception e) {
             apiPresenter.prepareFailView("Error occurred!"); // if throws exception, fail
         }
-
+        String testName = getApiQuestionsInputData.getTestName();
+        System.out.println("Name:"+testName);
+        Test test = Serializer.DecodeTest(questions, testName);
         // create test with unique name & save & success view
-        if (apiDataAccessObject.existsByName(testName)) {
+        if (apiDataAccessObject.existsByName(testName) || test.getQuestions().isEmpty()) {
             apiPresenter.prepareFailView("Name already exists!");
         } else {
-            Test test = testFactory.create((ArrayList<Question>) questions, category.name, testName, "");
             apiDataAccessObject.save(test);
 
             GetApiQuestionsOutputData getApiQuestionsOutputData = new GetApiQuestionsOutputData(true, testName);

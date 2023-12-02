@@ -6,18 +6,19 @@ import entity.Question;
 import entity.Result;
 
 public class Test {
-    private final ArrayList<Question> questions;
+    private ArrayList<Question> questions;
     private String category, name, comment;
     private final ArrayList<Result> results;
 
     public Test(String name, String Category, ArrayList<Question> questions, ArrayList<Result> results) {
         this.questions = questions;
         this.results = results;
+        this.name = name;
+        this.category = Category;
     }
 
     public void setQuestions(ArrayList<Question> questions) {
-        this.questions.clear();
-        this.questions.addAll(questions);
+        this.questions = questions;
     }
 
     public void setComment(String comment) {

@@ -1,11 +1,24 @@
 package interface_adapter.takeQuiz;
 
-import entity.Result;
-import entity.Test;
+import interface_adapter.ViewManagerModel;
+import interface_adapter.getResult.GetResultViewModel;
 import use_cases.takeQuiz.takeQuizOutputBoundary;
 import use_cases.takeQuiz.takeQuizOutputData;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class takeQuizPresenter implements takeQuizOutputBoundary {
+    private final takeQuizViewModel viewModel;
+    private final GetResultViewModel resultviewModel;
+    private final ViewManagerModel viewManagerModel;
+
+    public takeQuizPresenter(takeQuizViewModel viewModel, GetResultViewModel resultviewModel, ViewManagerModel viewManagerModel) {
+        this.viewModel = viewModel;
+        this.resultviewModel = resultviewModel;
+        this.viewManagerModel = viewManagerModel;
+    }
+
     @Override
     public void prepareFailed() {
 
@@ -13,11 +26,28 @@ public class takeQuizPresenter implements takeQuizOutputBoundary {
 
     @Override
     public void prepareNextQuestion(takeQuizOutputData data) {
+        takeQuizState state = new takeQuizState();
+        state.setFinished(false);
+        state.setQuestion(data.getQuestion());
+        ArrayList<String> answers = data.getAnswers();
+        Collections.shuffle(answers);
+        state.setAnswers(answers.toArray(new String[0]));
+        String testName = data.getTestName();
+        if (testName != null) state.setTestName(testName);
+        viewModel.setState(state);
+        viewModel.firePropertyChanged();
 
+        this.viewManagerModel.setActiveView(viewModel.getViewName());
+        this.viewManagerModel.firePropertyChanged();
     }
 
     @Override
     public void prepareResultView(String name) {
+        viewModel.getState().setFinished(true);
+        viewModel.getState().setTestName(name);
+        viewModel.firePropertyChanged();
 
+        this.viewManagerModel.setActiveView(resultviewModel.getViewName());
+        this.viewManagerModel.firePropertyChanged();
     }
 }

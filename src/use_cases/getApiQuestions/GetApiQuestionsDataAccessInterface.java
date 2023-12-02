@@ -6,4 +6,6 @@ public interface GetApiQuestionsDataAccessInterface {
     //api access is static
     void save(Test test);
 
+    boolean existsByName(String name);
+    int getTestCount();
 }

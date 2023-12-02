@@ -1,5 +1,7 @@
 package view;
 
+import entity.Question;
+import interface_adapter.ViewManagerModel;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsController;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsViewModel;
 
@@ -8,6 +10,7 @@ import interface_adapter.ViewModel;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsState;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsViewModel;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsController;
+import interface_adapter.manageQuiz.manageQuizViewModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,16 +23,19 @@ import java.beans.PropertyChangeListener;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class CreateOwnQuestionsView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewname = "Create Questions";
     private final CreateOwnQuestionsViewModel createOwnQuestionsViewModel;
-    private final JTextField questionField = new JTextField();
-    private final JTextField answerField = new JTextField();
-    private final JTextField incorrect1Field = new JTextField();
-    private final JTextField incorrect2Field = new JTextField();
-    private final JTextField incorrect3Field = new JTextField();
+    private final ViewManagerModel viewManagerModel;
+    private final manageQuizViewModel manageQuizViewModel;
+    private final JTextField questionField = new JTextField(15);
+    private final JTextField answerField = new JTextField(15);
+    private final JTextField incorrect1Field = new JTextField(15);
+    private final JTextField incorrect2Field = new JTextField(15);
+    private final JTextField incorrect3Field = new JTextField(15);
     private final CreateOwnQuestionsController createOwnQuestionsController;
     private final JButton next;
     private final JButton finished;
@@ -39,9 +45,13 @@ public class CreateOwnQuestionsView extends JPanel implements ActionListener, Pr
     private List<ArrayList<String>> incorrectAnswers = new ArrayList<ArrayList<String>>();
 
     public CreateOwnQuestionsView(CreateOwnQuestionsController controller,
-                                  CreateOwnQuestionsViewModel viewModel) {
+                                  CreateOwnQuestionsViewModel viewModel,
+                                  ViewManagerModel viewManagerModel,
+                                  manageQuizViewModel manageQuizViewModel) {
         this.createOwnQuestionsController = controller;
         this.createOwnQuestionsViewModel = viewModel;
+        this.viewManagerModel = viewManagerModel;
+        this.manageQuizViewModel = manageQuizViewModel;
         createOwnQuestionsViewModel.addPropertyChangeListener(this);
         JLabel title = new JLabel(CreateOwnQuestionsViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -88,18 +98,41 @@ public class CreateOwnQuestionsView extends JPanel implements ActionListener, Pr
                     }
                 }
         );
-        cancel.addActionListener(this);
+        cancel.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        viewManagerModel.setActiveView(manageQuizViewModel.getViewName());
+                        viewManagerModel.firePropertyChanged();
+                    }
+                }
+        );
         finished.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        next.doClick();
                         for (int i = 0; i < textFields.size(); i++) {
                             textFields.get(i).setText(null);
                         }
+                        String name = JOptionPane.showInputDialog("Enter the name for your test: ");
+                        String comment = JOptionPane.showInputDialog("Enter a comment for your test: ");
+                        String category = JOptionPane.showInputDialog("Enter a category for your test: ");
                         CreateOwnQuestionsState currState = createOwnQuestionsViewModel.getState();
                         createOwnQuestionsController.execute(
-                                currState.getQuestions(), currState.getAnswers(), currState.getIncorrectAnswers());
-                        JOptionPane.showMessageDialog(null, "Successfully created a test!");
+                                currState.getQuestions(), currState.getAnswers(), currState.getIncorrectAnswers(),
+                                name, comment, category);
+                        CreateOwnQuestionsState newState = createOwnQuestionsViewModel.getState();
+                        if (Objects.equals(newState.getError(), "")) {
+                            JOptionPane.showMessageDialog(
+                                    null, "Successfully created a test.");
+                        }
+                        else {
+                            JOptionPane.showMessageDialog(null, newState.getError());
+                        }
+                        newState.clearAll();
+                        createOwnQuestionsViewModel.setState(newState);
+
                     }
                 }
         );

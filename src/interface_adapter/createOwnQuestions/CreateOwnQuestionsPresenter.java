@@ -12,7 +12,17 @@ public class CreateOwnQuestionsPresenter implements CreateOwnQuestionsOutputBoun
 
     @Override
     public void prepareSuccessView(CreateOwnQuestionsOutputData output) {
-        CreateOwnQuestionsState currState = new CreateOwnQuestionsState();
-        questionsViewModel.setState(currState);
+        CreateOwnQuestionsState curr = questionsViewModel.getState();
+        if (output.getQuestionList().contains(null)) {
+            curr.setError("Failed to create a test.");
+        }
+        questionsViewModel.setState(curr);
+    }
+    @Override
+    public void prepareFailView() {
+        CreateOwnQuestionsState curr = questionsViewModel.getState();
+        curr.setError("Failed to create a test.");
+        questionsViewModel.setState(curr);
+        questionsViewModel.firePropertyChanged();
     }
 }

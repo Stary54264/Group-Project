@@ -1,6 +1,5 @@
 package interface_adapter.createOwnQuestions;
 
-import entity.Question;
 import use_cases.createOwnQuestions.CreateOwnQuestionsInputBoundary;
 import use_cases.createOwnQuestions.CreateOwnQuestionsInputData;
 
@@ -13,8 +12,17 @@ public class CreateOwnQuestionsController {
     public CreateOwnQuestionsController(CreateOwnQuestionsInputBoundary createOwnQuestionsInteractor) {
         this.createOwnQuestionsInteractor = createOwnQuestionsInteractor;
     }
-    public void execute(List<String> questions, List<String> answers, List<ArrayList<String>> incorrectAnswers) {
-        CreateOwnQuestionsInputData createInput = new CreateOwnQuestionsInputData(questions, answers, incorrectAnswers);
+    public void execute(List<String> questions, List<String> answers, List<ArrayList<String>> incorrectAnswers,
+                        String name, String comment, String category) {
+        CreateOwnQuestionsInputData createInput = new CreateOwnQuestionsInputData(questions, answers, incorrectAnswers,
+                name, comment, category);
         createOwnQuestionsInteractor.execute(createInput);
+    }
+    public void editExecute(String testName, int questionNum, String question,
+                        String answer, ArrayList<String> incorrectAnswers) {
+        CreateOwnQuestionsInputData editQuestionsInputData = new CreateOwnQuestionsInputData(
+                testName, questionNum, question, answer, incorrectAnswers);
+        createOwnQuestionsInteractor.editExecute(editQuestionsInputData);
+
     }
 }
