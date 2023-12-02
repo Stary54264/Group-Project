@@ -34,6 +34,9 @@ public class takeQuizPresenter implements takeQuizOutputBoundary {
         state.setAnswers(answers.toArray(new String[0]));
         String testName = data.getTestName();
         if (testName != null) state.setTestName(testName);
+        state.setLastAnswer(data.getLastAnswer());
+        state.setLastCorrect(data.isLastCorrect());
+
         viewModel.setState(state);
         viewModel.firePropertyChanged();
 

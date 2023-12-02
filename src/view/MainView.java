@@ -18,6 +18,7 @@ import interface_adapter.getDailyQuiz.GetDailyQuizController;
 import interface_adapter.getDailyQuiz.GetDailyQuizState;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -72,15 +73,20 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
         this.getDailyQuizViewModel = getDailyQuizViewModel;
 
         JPanel buttons = new JPanel();
-        createQuestions = new JButton("Create Own Questions");
-        buttons.add(createQuestions);
+        createQuestions = new JButton(CreateOwnQuestionsViewModel.TITLE_LABEL);
         apiQuestions = new JButton("API Questions");
-        buttons.add(apiQuestions);
         uploadQuestions = new JButton(UploadQuestionsViewModel.UPLOAD_BUTTON_LABEL);
-        buttons.add(uploadQuestions);
         getDailyQuiz = new JButton("DAILY QUIZ");
-        buttons.add(getDailyQuiz);
         refreshTests = new JButton("REFRESH");
+
+        buttons.add(new JPanel());
+        buttons.add(createQuestions);
+        buttons.add(apiQuestions);
+        buttons.add(new JPanel());
+        buttons.add(new JPanel());
+        buttons.add(uploadQuestions);
+        buttons.add(getDailyQuiz);
+        buttons.add(new JPanel());
 
         createQuestions.addActionListener(
                 new ActionListener() {
@@ -145,12 +151,16 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
                 });
         tests = new ArrayList<>();
 
-        JPanel leftSide = new JPanel();
+        JLabel titleName = new JLabel("Program");
+        JPanel title = new JPanel();
+        title.add(titleName);
+        titleName.setFont(new Font("SansSerif", Font.BOLD, 32));
         JPanel rightSide = new JPanel();
 
-        leftSide.setLayout(new BoxLayout(leftSide, BoxLayout.Y_AXIS));
-        buttons.setLayout(new GridLayout(0,1));
-        leftSide.add(buttons);
+        GridLayout buttonLayout = new GridLayout(2,4);
+        buttonLayout.setHgap(7);
+        buttonLayout.setVgap(7);
+        buttons.setLayout(buttonLayout);
 
         testContainer = new JPanel();
         JScrollPane scrollPane = new JScrollPane();
@@ -163,36 +173,61 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
         rightSide.add(refreshTests);
         rightSide.add(scrollPane, BorderLayout.CENTER);
 
-        this.setLayout(new GridLayout(0,2));
+        setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
 
-        this.add(leftSide);
-        this.add(rightSide);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = 0;
+        c.gridheight = 1;
+        c.gridwidth = 1;
+        add(title, c);
+
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 1;
+        c.weightx = 0;
+        c.weighty = 1;
+        c.gridheight = 1;
+        c.gridwidth = 1;
+        add(buttons, c);
+
+        c.fill = GridBagConstraints.BOTH;
+        c.gridx = 1;
+        c.gridy = 0;
+        c.weightx = 1;
+        c.weighty = 1;
+        c.gridheight = 2;
+        c.gridwidth = 1;
+        add(rightSide, c);
 
         manageQuizController.refreshTest();
         manageQuizState state = manageQuizViewModel.getState();
         System.out.println(state.getTests() + "tests");
         updateTests(state.getTests());
+        this.manageQuizViewModel.addPropertyChangeListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
-        System.out.println("main act");
+
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        System.out.println("main prp");
+        manageQuizController.refreshTest();
+        updateTests(manageQuizViewModel.getState().getTests());
     }
 
     private void updateTests(Map<String, String[]> newTests) {
-        for (TestPanel t: tests) {
-            testContainer.remove(t);
-        }
+        testContainer.removeAll();
         tests.clear();
         System.out.println(newTests.keySet());
         for (String s: newTests.keySet()) {
             TestPanel t = new TestPanel(s, newTests.get(s)[0], newTests.get(s)[1]);
             tests.add(t);
             testContainer.add(t);
+            testContainer.add(Box.createVerticalStrut(5));
         }
         testContainer.revalidate();
     }
@@ -204,44 +239,72 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
             JButton play = new JButton("play");
             JButton delete = new JButton("delete");
 
-            this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+            //this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+
+            JPanel titlePanel = new JPanel();
+            BorderLayout blayout = new BorderLayout();
+            blayout.setHgap(10);
+            titlePanel.setLayout(blayout);
+            titlePanel.setBackground(Color.lightGray);
+
+            JLabel nameLabel = new JLabel(name);
+            nameLabel.setFont(new Font("SansSerif", Font.BOLD, 16));
+
+            titlePanel.add(nameLabel, BorderLayout.LINE_START);
+
+            titlePanel.setBorder(new EmptyBorder(7, 7, 7, 7));
+            if (stats != null && !stats.isEmpty()) titlePanel.add(new JLabel("Best: " + stats + "%"), BorderLayout.CENTER);
+            else titlePanel.add(new JLabel("Best: not taken yet!"), BorderLayout.CENTER);
+
 
             JPanel buttons = new JPanel();
-
-            this.add(new JLabel(name));
-            this.add(new JLabel(comment));
-            if (stats != null) this.add(new JLabel("Best: " + stats + "%"));
-            else this.add(new JLabel("Best: not taken yet!"));
+            buttons.setBackground(Color.lightGray);
+            buttons.setLayout(new GridLayout(0,1));
             buttons.add(edit);
             buttons.add(play);
             buttons.add(delete);
-            this.add(buttons);
+            //this.add(buttons, BorderLayout.NORTH);
+            this.setBackground(Color.lightGray);
+            this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+
+            JPanel centralPanel = new JPanel();
+            JLabel comme = new JLabel(comment);
+            comme.setHorizontalAlignment(JLabel.CENTER);
+            comme.setVerticalAlignment(JLabel.CENTER);
+
+            centralPanel.add(comme, BorderLayout.CENTER);
+            //add(centralPanel, BorderLayout.CENTER);
+
+            setLayout(new GridBagLayout());
+            GridBagConstraints c = new GridBagConstraints();
+
+            c.fill = GridBagConstraints.HORIZONTAL;
+            c.gridx = 0;
+            c.gridy = 0;
+            c.weightx = 1;
+            add(titlePanel, c);
+
+            c.fill = GridBagConstraints.BOTH;
+            c.gridx = 0;
+            c.gridy = 1;
+            c.weightx = 0;
+            c.weighty = 1;
+            add(centralPanel, c);
+
+            c.fill = GridBagConstraints.HORIZONTAL;
+            c.gridx = 1;
+            c.gridy = 0;
+            c.gridheight = 2;
+            add(buttons, c);
 
             edit.addActionListener(
                     // This creates an anonymous subclass of ActionListener and instantiates it.
                     new ActionListener() {
                         public void actionPerformed(ActionEvent evt) {
                             if (evt.getSource().equals(edit)) {
-                                String testName = JOptionPane.showInputDialog(
-                                        "Enter the test you want to edit: ");
-                                int questionNum = Integer.parseInt(JOptionPane.showInputDialog(
-                                        "Enter the question number you want to edit: "));
-                                String question = JOptionPane.showInputDialog(
-                                        "Enter the new question: ");
-                                String answer = JOptionPane.showInputDialog(
-                                        "Enter the new answer: ");
-                                ArrayList<String> incorrect = new ArrayList<String>();
-                                String incorrect1 = JOptionPane.showInputDialog(
-                                        "Enter the first incorrect answer: ");
-                                String incorrect2 = JOptionPane.showInputDialog(
-                                        "Enter the second incorrect answer: ");
-                                String incorrect3 = JOptionPane.showInputDialog(
-                                        "Enter the third incorrect answer: ");
-                                incorrect.add(incorrect1);
-                                incorrect.add(incorrect2);
-                                incorrect.add(incorrect3);
-                                createOwnQuestionsController.editExecute(testName, questionNum,
-                                        question, answer, incorrect);
+                                createOwnQuestionsController.editExecute(name);
                             }
                         }
                     }
@@ -262,9 +325,10 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
                     new ActionListener() {
                         public void actionPerformed(ActionEvent evt) {
                             if (evt.getSource().equals(delete)) {
-                                manageQuizController.deleteTest(name);
-
-                                updateTests(manageQuizViewModel.getState().getTests());
+                                if (JOptionPane.showConfirmDialog(delete, "Are you sure?") == 0) {
+                                    manageQuizController.deleteTest(name);
+                                    updateTests(manageQuizViewModel.getState().getTests());
+                                }
                             }
                         }
                     }

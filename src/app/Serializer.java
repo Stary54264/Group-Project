@@ -2,7 +2,6 @@ package app;
 
 import entity.Question;
 import entity.Test;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -20,13 +19,17 @@ public class Serializer {
         while (matcher.find()) {
             QuestionBuilder qb = new QuestionBuilder();
 
-            qb.setCorrectAnswer(matcher.group(3));
-            qb.setQuestionText(matcher.group(2));
+            qb.setCorrectAnswer(StringUtils.unescapeHtml3(matcher.group(3)));
+            qb.setQuestionText(StringUtils.unescapeHtml3(matcher.group(2)));
             String type = matcher.group(1);
             if (type.equals("multiple")) {
-                qb.setIncorrectAnswers(new ArrayList<>(Arrays.asList(matcher.group(4), matcher.group(5), matcher.group(6))));
+                qb.setIncorrectAnswers(new ArrayList<>(Arrays.asList(
+                        StringUtils.unescapeHtml3(matcher.group(4)),
+                        StringUtils.unescapeHtml3(matcher.group(5)),
+                        StringUtils.unescapeHtml3(matcher.group(6))
+                )));
             } else {
-                qb.setIncorrectAnswers(new ArrayList<>(Collections.singletonList(matcher.group(4))));
+                qb.setIncorrectAnswers(new ArrayList<>(Collections.singletonList(StringUtils.unescapeHtml3(matcher.group(4)))));
             }
             out.add(qb.build());
         }
@@ -42,9 +45,13 @@ public class Serializer {
 
         while (matcher.find()) {
             QuestionBuilder qb = new QuestionBuilder();
-            qb.setCorrectAnswer(matcher.group(1));
-            qb.setIncorrectAnswers(new ArrayList<>(Arrays.asList(matcher.group(2), matcher.group(3), matcher.group(4))));
-            qb.setQuestionText(matcher.group(5));
+            qb.setCorrectAnswer(StringUtils.unescapeHtml3(matcher.group(1)));
+            qb.setIncorrectAnswers(new ArrayList<>(Arrays.asList(
+                    StringUtils.unescapeHtml3(matcher.group(2)),
+                    StringUtils.unescapeHtml3(matcher.group(3)),
+                    StringUtils.unescapeHtml3(matcher.group(4))
+            )));
+            qb.setQuestionText(StringUtils.unescapeHtml3(matcher.group(5)));
             out.add(qb.build());
         }
 
@@ -71,30 +78,29 @@ public class Serializer {
         } else stats = "";
         TestBuilder tb = new TestBuilder().setQuestions(questions).setName(name).setCategory("Any").setComment(comment);
 
-        if (!stats.isEmpty()) tb.setStats(stats);
-        System.out.println(stats.isEmpty());
-        System.out.println(stats);
+        if (!stats.isEmpty() && !stats.equals("null")) tb.setStats(stats);
 
         return tb.build();
     }
 
     public static String EncodeTest(Test inp) {
-        System.out.println(inp.getQuestions());
         StringBuilder out = new StringBuilder();
         for (Question q: inp.getQuestions()) {
             String s = "{";
-            if (q.getIncorrectAnswers().size() == 1) s += "\"type\":\"boolean\"";
+            if (q.getIncorrectAnswers().size() == 1) s += "\"type\":\"boolean\",";
             else s += "\"type\":\"multiple\",";
             s += "\"question\":\""+q.getQuestion()+"\",";
             s += "\"correct_answer\":\""+q.getCorrectAnswer()+"\",";
             s += "\"incorrect_answers\":[\""+String.join("\", \"", q.getIncorrectAnswers())+"\"]";
             s += "}";
-            System.out.println(String.join("\", \"", q.getIncorrectAnswers()));
             out.append(s);
         }
         out.append("\"comment\":\"").append(inp.getComment()).append("\"");
         out.append("\"stats\":\"").append(inp.getStats()).append("\"");
-        System.out.println(inp.getStats());
         return out.toString();
+    }
+
+    private static String fixString(String s) {
+        return StringUtils.unescapeHtml3(s);
     }
 }

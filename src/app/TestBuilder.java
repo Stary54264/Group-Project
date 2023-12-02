@@ -12,6 +12,10 @@ public class TestBuilder {
     private ArrayList<Question> questions;
     private ArrayList<Result> results;
     public TestBuilder () {
+        name = "";
+        category = "";
+        comment = "";
+        stats = "";
         results = new ArrayList<>();
         questions = new ArrayList<>();
     }
@@ -36,6 +40,7 @@ public class TestBuilder {
     public TestBuilder addQuestion(Question q) {this.questions.add(q); return this;}
 
     public Test build() {
+        if (name == "" || category == "" || questions.isEmpty() || questions.contains(null)) return null;
         Test t = new Test(name, category, questions, results);
         t.setStats(stats);
         t.setComment(comment);

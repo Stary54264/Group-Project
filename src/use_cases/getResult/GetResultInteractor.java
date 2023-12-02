@@ -24,7 +24,7 @@ public class GetResultInteractor implements GetResultInputBoundary {
             else wrong++;
         }
         int newScore = right*100/(right+wrong);
-        int pastScore = test.getStats() == null? 0 : Integer.parseInt(test.getStats());
+        int pastScore = (test.getStats() == null) || (test.getStats().isEmpty())? -1 : Integer.parseInt(test.getStats());
 
         if (newScore > pastScore) {
             test.setStats(String.valueOf(newScore));

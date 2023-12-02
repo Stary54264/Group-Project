@@ -63,7 +63,7 @@ public class Main {
 
         CreateOwnQuestionsController createOwnQuestionsController = new CreateOwnQuestionsController(
                 new CreateOwnQuestionsInteractor(
-                        new CreateOwnQuestionsPresenter(createOwnQuestionsViewModel),
+                        new CreateOwnQuestionsPresenter(viewManagerModel, createOwnQuestionsViewModel),
                         fileUserDataAccessObject
                 )
         );
@@ -107,7 +107,8 @@ public class Main {
                 createOwnQuestionsController,
                 createOwnQuestionsViewModel,
                 viewManagerModel,
-                manageQuizViewModel
+                manageQuizViewModel,
+                takeQuizController
         );
         GetAPIQuestionsView getApiQuestionsView = new GetAPIQuestionsView(
                 viewManagerModel,

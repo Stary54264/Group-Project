@@ -32,7 +32,7 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
         System.out.println(testOrder.length +"s" + t.getQuestions().size() + "order");
         Question currentQuestion = t.getQuestions().get(testOrder[currentQuestionIndex]);
         startTime = new Date();
-        takeQuizOutputData out = new takeQuizOutputData(name, currentQuestion.getQuestion(), currentQuestion.getAnswers());
+        takeQuizOutputData out = new takeQuizOutputData(name, currentQuestion.getQuestion(), currentQuestion.getAnswers(), true, "");
         outputBoundary.prepareNextQuestion(out);
     }
 
@@ -42,7 +42,8 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
         int currentIndex = testOrder[currentQuestionIndex];
         Question currentQuestion = questions.get(currentIndex);
 
-        if (Objects.equals(currentQuestion.getCorrectAnswer(), inputData.getUserAnswer())) {
+        boolean lastCorrect = Objects.equals(currentQuestion.getCorrectAnswer(), inputData.getUserAnswer());
+        if (lastCorrect) {
             wrongAnswers.add(null);
             System.out.println("YEP!");
         } else {
@@ -60,8 +61,9 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
             clearState();
         } else {
             currentIndex = testOrder[currentQuestionIndex];
+            String lastAnswer = currentQuestion.getCorrectAnswer();
             currentQuestion = questions.get(currentIndex);
-            takeQuizOutputData out = new takeQuizOutputData(null, currentQuestion.getQuestion(), currentQuestion.getAnswers());
+            takeQuizOutputData out = new takeQuizOutputData(null, currentQuestion.getQuestion(), currentQuestion.getAnswers(), lastCorrect, lastAnswer);
             outputBoundary.prepareNextQuestion(out);
         }
     }

@@ -61,7 +61,6 @@ public class FileTestDataAccessObject implements
         try {
             String path = "Quizzes/"+test.getName()+".txt";
             File file = new File(path);
-            System.out.println(path);
             file.createNewFile();
             FileWriter myWriter = new FileWriter(file);
 
@@ -106,6 +105,7 @@ public class FileTestDataAccessObject implements
                 reader.close();
             } catch (Exception e) {
                 System.out.println("failed to read file: " + test.getName());
+                e.printStackTrace();
             }
 
         }
