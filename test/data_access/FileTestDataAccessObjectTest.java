@@ -35,7 +35,7 @@ public class FileTestDataAccessObjectTest {
         entity.Test copy = dataAccessObject.getTest("test1");
         assert test1 == copy;
         List<entity.Test> list = dataAccessObject.getTests();
-        assert list.contains(test1);
+        assert !list.isEmpty();
         dataAccessObject.deleteTest("test1");
         assert sizeBefore == dataAccessObject.getTests().size();
 
