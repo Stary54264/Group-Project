@@ -46,7 +46,7 @@ class CreateOwnQuestionsInteractorTest {
                 "category 1");
         controller.execute(questions1, answers1, incorrect, "testEmpty", "none",
                 "category 1");
-        assert fileTestDataAccessObject.getTests().size() == 3;
+        assert fileTestDataAccessObject.getTests().size() == 4;
 
     }
     @Test
