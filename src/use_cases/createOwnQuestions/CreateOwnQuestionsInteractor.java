@@ -1,11 +1,10 @@
 package use_cases.createOwnQuestions;
 
-import app.TestBuilder;
+import app.QuestionBuilder;
 import entity.Question;
 import entity.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CreateOwnQuestionsInteractor implements CreateOwnQuestionsInputBoundary {
     final CreateOwnQuestionsOutputBoundary questionsPresenter;
@@ -19,30 +18,30 @@ public class CreateOwnQuestionsInteractor implements CreateOwnQuestionsInputBoun
 
     @Override
     public void execute(CreateOwnQuestionsInputData createOwnQuestionsInputData) {
-        if (!createOwnQuestionsInputData.getCreateTest().getQuestions().contains(null)) {
+        if (createOwnQuestionsInputData.getCreateTest() != null) {
             questionsDataAccessInterface.save(createOwnQuestionsInputData.getCreateTest());
-        }
-        CreateOwnQuestionsOutputData outputData = new CreateOwnQuestionsOutputData(createOwnQuestionsInputData.getCreateTest());
-        if (outputData.getQuestionList().contains(null)) {
+            if (questionsDataAccessInterface.getTest(createOwnQuestionsInputData.getCreateTest().getName()) != null) {
+                CreateOwnQuestionsOutputData outputData = new CreateOwnQuestionsOutputData(createOwnQuestionsInputData.getCreateTest());
+                questionsPresenter.prepareSuccessView(outputData);
+            } else {
+                questionsPresenter.prepareFailView();
+            }
+        } else {
             questionsPresenter.prepareFailView();
         }
-        else {
-            questionsPresenter.prepareSuccessView(outputData);
-        }
     }
-    public void editExecute(CreateOwnQuestionsInputData createOwnQuestionsInputData) {
-        Test test = questionsDataAccessInterface.getTest(createOwnQuestionsInputData.getTestName());
-        questionsDataAccessInterface.deleteTest(test.getName());
-        Question newQuestion = createOwnQuestionsInputData.getQuestion();
-        int num = createOwnQuestionsInputData.getQuestionNum();
-        ArrayList<Question> currQuestions = test.getQuestions();
-        for (int i = 0; i < currQuestions.size(); i++) {
-            if (i + 1 == num) {
-                currQuestions.set(i, newQuestion);
-            }
+    public void editExecute(String testName) {
+        Test test = questionsDataAccessInterface.getTest(testName);
+        ArrayList<QuestionBuilder> out = new ArrayList<>();
+        for (Question q: test.getQuestions()) {
+            out.add(new QuestionBuilder()
+                    .setQuestionText(q.getQuestion())
+                    .setIncorrectAnswers(q.getIncorrectAnswers())
+                    .setCorrectAnswer(q.getCorrectAnswer()));
         }
-        test.setQuestions(currQuestions);
-        questionsDataAccessInterface.save(test);
+
+        CreateOwnQuestionsOutputData outputData = new CreateOwnQuestionsOutputData(test.getName(), test.getComment(), out);
+        questionsPresenter.prepareEditState(outputData);
     }
 
 }

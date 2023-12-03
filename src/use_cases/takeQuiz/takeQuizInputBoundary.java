@@ -1,6 +1,6 @@
 package use_cases.takeQuiz;
 
 public interface takeQuizInputBoundary {
-    void startTest(String name);
+    void startTest(takeQuizInputData inputData);
     void nextQuestion(takeQuizInputData inputData);
 }

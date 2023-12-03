@@ -35,6 +35,14 @@ public enum Category {
         this.name = name;
     }
 
-    public int getValue() { return this.value; }
     public String getName() { return this.name; }
+
+    public static Category getByName(String name) {
+        for(Category v : values()){
+            if( v.name.equals(name)){
+                return v;
+            }
+        }
+        return null;
+    }
 }

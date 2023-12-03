@@ -20,20 +20,18 @@ public class takeQuizPresenter implements takeQuizOutputBoundary {
     }
 
     @Override
-    public void prepareFailed() {
-
-    }
-
-    @Override
     public void prepareNextQuestion(takeQuizOutputData data) {
         takeQuizState state = new takeQuizState();
         state.setFinished(false);
-        state.setQuestion(data.getQuestion());
-        ArrayList<String> answers = data.getAnswers();
+        state.setQuestion(data.question());
+        ArrayList<String> answers = data.answers();
         Collections.shuffle(answers);
         state.setAnswers(answers.toArray(new String[0]));
-        String testName = data.getTestName();
+        String testName = data.testName();
         if (testName != null) state.setTestName(testName);
+        state.setLastAnswer(data.lastAnswer());
+        state.setLastCorrect(data.lastCorrect());
+
         viewModel.setState(state);
         viewModel.firePropertyChanged();
 

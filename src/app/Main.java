@@ -37,7 +37,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main() {
         JFrame application = new JFrame("Group Project");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,13 +63,13 @@ public class Main {
 
         CreateOwnQuestionsController createOwnQuestionsController = new CreateOwnQuestionsController(
                 new CreateOwnQuestionsInteractor(
-                        new CreateOwnQuestionsPresenter(createOwnQuestionsViewModel),
+                        new CreateOwnQuestionsPresenter(viewManagerModel, createOwnQuestionsViewModel),
                         fileUserDataAccessObject
                 )
         );
         GetApiQuestionsController getApiQuestionsController = new GetApiQuestionsController(
                 new GetApiQuestionsInteractor(fileUserDataAccessObject,
-                        new GetApiQuestionsPresenter(getApiQuestionsViewModel, takeQuizViewModel, viewManagerModel)
+                        new GetApiQuestionsPresenter(getApiQuestionsViewModel, takeQuizViewModel)
                 )
         );
         UploadQuestionsController uploadQuestionsController = new UploadQuestionsController(
@@ -107,7 +107,8 @@ public class Main {
                 createOwnQuestionsController,
                 createOwnQuestionsViewModel,
                 viewManagerModel,
-                manageQuizViewModel
+                manageQuizViewModel,
+                takeQuizController
         );
         GetAPIQuestionsView getApiQuestionsView = new GetAPIQuestionsView(
                 viewManagerModel,
@@ -132,7 +133,6 @@ public class Main {
                 manageQuizController,
                 manageQuizViewModel,
                 takeQuizController,
-                takeQuizViewModel,
                 getDailyQuizController,
                 getDailyQuizViewModel
         );
