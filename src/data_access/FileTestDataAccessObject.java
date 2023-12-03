@@ -85,7 +85,9 @@ public class FileTestDataAccessObject implements
         refresh();
     }
 
-    private void refresh() {
+    //re-reads all the files and stores them in memory
+    @Override
+    public void refresh() {
         List<File> files = Stream.of(Objects.requireNonNull(new File("Quizzes/").listFiles()))
                 .filter(file -> !file.isDirectory())
                 .toList();
@@ -100,8 +102,6 @@ public class FileTestDataAccessObject implements
             } catch (Exception e) {
                 System.out.println("failed to read file: " + test.getName());
             }
-
         }
-
     }
 }
