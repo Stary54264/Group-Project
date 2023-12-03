@@ -25,7 +25,7 @@ public class GetAPIQuestionsView extends JPanel implements ActionListener, Prope
     public final String viewName = "get api questions";
     private final GetApiQuestionsViewModel getApiQuestionsViewModel;
     private final JTextField nameInputField = new JTextField(15);
-    private final JSpinner numberInputField = new JSpinner();
+    private final JSpinner numberInputField = new JSpinner(new SpinnerNumberModel(10, 1, 100, 1));
     private final JComboBox<String> categoryBox = new JComboBox<>();
     private final JComboBox<String> typeBox = new JComboBox<>();
     private final JComboBox<String> diffBox = new JComboBox<>();
@@ -98,7 +98,7 @@ public class GetAPIQuestionsView extends JPanel implements ActionListener, Prope
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(takequiz)) {
                             GetApiQuestionsState state = getApiQuestionsViewModel.getState();
-                            getApiQuestionsController.execute(state.getNumber(), state.getCategory(), state.getType(),
+                            getApiQuestionsController.execute((int)numberInputField.getValue(), state.getCategory(), state.getType(),
                                     state.getDiff(), state.getTestName());
                             System.out.println(state.getTestName());
                             System.out.println(state.getDiff());
@@ -140,7 +140,9 @@ public class GetAPIQuestionsView extends JPanel implements ActionListener, Prope
                 new KeyListener() {
                     @Override
                     public void keyTyped(KeyEvent e) {
+
                         char typedChar = e.getKeyChar();
+                        System.out.println(typedChar);
                         if (Character.isDigit(typedChar)) {
                             GetApiQuestionsState currentState = getApiQuestionsViewModel.getState();
                             int currentNumber = Integer.parseInt(String.valueOf(numberInputField.getValue()));
