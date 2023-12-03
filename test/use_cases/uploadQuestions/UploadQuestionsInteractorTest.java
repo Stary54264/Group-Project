@@ -18,8 +18,8 @@ class UploadQuestionsInteractorTest {
         UploadQuestionsState uploadQuestionsState = new UploadQuestionsState();
         uploadQuestionsViewModel.setState(uploadQuestionsState);
         UploadQuestionsOutputBoundary uploadQuestionsPresenter = new UploadQuestionsPresenter(uploadQuestionsViewModel);
-        UploadQuestionsInputBoundary uploadQuestionsInteractor = new UploadQuestionsInteractor(
-                dataAccessInterface, uploadQuestionsPresenter);
+        UploadQuestionsInputBoundary uploadQuestionsInteractor = new UploadQuestionsInteractor(dataAccessInterface,
+                uploadQuestionsPresenter);
         UploadQuestionsController uploadQuestionsController = new UploadQuestionsController(uploadQuestionsInteractor);
         uploadQuestionsController.execute("AnotherTestingTest", "Quizzes/TestingTest.txt");
         String message = uploadQuestionsState.getMessage();
