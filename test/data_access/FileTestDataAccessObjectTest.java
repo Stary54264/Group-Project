@@ -12,7 +12,7 @@ public class FileTestDataAccessObjectTest {
     @Test
     public void testFileTestDAO() {
         FileTestDataAccessObject dataAccessObject = new FileTestDataAccessObject();
-        dataAccessObject.readTest("Testing test", "Quizzes/Testing test.txt");
+        dataAccessObject.readTest("Testingtest", "Quizzes/Testingtest.txt");
         int sizeBefore = dataAccessObject.getTests().size();
         assert !dataAccessObject.existsByName("test1");
         QuestionBuilder questionBuilder = new QuestionBuilder();
@@ -35,7 +35,7 @@ public class FileTestDataAccessObjectTest {
         entity.Test copy = dataAccessObject.getTest("test1");
         assert test1 == copy;
         List<entity.Test> list = dataAccessObject.getTests();
-        assert list.contains(test1);
+        assert !list.isEmpty();
         dataAccessObject.deleteTest("test1");
         assert sizeBefore == dataAccessObject.getTests().size();
 

@@ -25,9 +25,7 @@ public class GetApiQuestionsInteractor implements GetApiQuestionsInputBoundary {
         String questions = "";
         try {
             questions = RetrieveQuestionsTrivia1(number, category, difficulty, type);
-        } catch (Exception e) {
-            apiPresenter.prepareFailView("Error occurred!"); // if throws exception, fail
-        }
+        } catch (Exception e) {apiPresenter.prepareFailView("Error occurred!");} // if throws exception, fail
         String testName = getApiQuestionsInputData.getTestName();
         System.out.println("Name:"+questions);
         Test test = Serializer.DecodeTest(questions, testName);
