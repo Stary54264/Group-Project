@@ -21,13 +21,13 @@ class UploadQuestionsInteractorTest {
         UploadQuestionsInputBoundary uploadQuestionsInteractor = new UploadQuestionsInteractor(
                 dataAccessInterface, uploadQuestionsPresenter);
         UploadQuestionsController uploadQuestionsController = new UploadQuestionsController(uploadQuestionsInteractor);
-        uploadQuestionsController.execute("AnotherEmptyTest", "Quizzes/EmptyTest.txt");
+        uploadQuestionsController.execute("AnotherTestingTest", "Quizzes/TestingTest.txt");
         String message = uploadQuestionsState.getMessage();
         UploadQuestionsState anotherUploadQuestionsState = new UploadQuestionsState(uploadQuestionsState);
         anotherUploadQuestionsState.getTestName();
         anotherUploadQuestionsState.getTxtPath();
-        anotherUploadQuestionsState.setTestName("AnotherEmptyTest");
-        anotherUploadQuestionsState.setTxtPath("Quizzes/EmptyTest.txt");
+        anotherUploadQuestionsState.setTestName("AnotherTestingTest");
+        anotherUploadQuestionsState.setTxtPath("Quizzes/TestingTest.txt");
         assertEquals("Uploaded successfully!", message);
     }
 
@@ -41,7 +41,7 @@ class UploadQuestionsInteractorTest {
         UploadQuestionsInputBoundary uploadQuestionsInteractor = new UploadQuestionsInteractor(
                 dataAccessInterface, uploadQuestionsPresenter);
         UploadQuestionsController uploadQuestionsController = new UploadQuestionsController(uploadQuestionsInteractor);
-        uploadQuestionsController.execute("AnotherEmptyTest", "Quizzes/NonEmptyTest.txt");
+        uploadQuestionsController.execute("AnotherTestingTest", "Quizzes/InvalidPath.txt");
         String message = uploadQuestionsState.getMessage();
         assertEquals("Failed to upload. File does not exist!", message);
     }
@@ -56,7 +56,7 @@ class UploadQuestionsInteractorTest {
         UploadQuestionsInputBoundary uploadQuestionsInteractor = new UploadQuestionsInteractor(
                 dataAccessInterface, uploadQuestionsPresenter);
         UploadQuestionsController uploadQuestionsController = new UploadQuestionsController(uploadQuestionsInteractor);
-        uploadQuestionsController.execute("EmptyTest", "Quizzes/EmptyTest.txt");
+        uploadQuestionsController.execute("TestingTest", "Quizzes/TestingTest.txt");
         String message = uploadQuestionsState.getMessage();
         assertEquals("Failed to upload. Test name exists!", message);
     }
