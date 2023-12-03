@@ -102,8 +102,6 @@ public class FileTestDataAccessObject implements
             } catch (Exception e) {
                 System.out.println("failed to read file: " + test.getName());
             }
-
         }
-
     }
 }
