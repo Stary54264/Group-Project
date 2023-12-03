@@ -58,20 +58,11 @@ class CreateOwnQuestionsInteractorTest {
     @Test
     public void testEditExecute() {
         int sizeBefore = fileTestDataAccessObject.getTests().size();
-        String question = "z";
-        String answer = "4";
-        ArrayList<String> incorrect = new ArrayList<String>();
-        incorrect.add("3");
-        incorrect.add("2");
-        incorrect.add("1");
         controller.editExecute("test1");
         interactor.editExecute("test1");
         int sizeAfter = fileTestDataAccessObject.getTests().size();
         assert sizeBefore == sizeAfter;
         fileTestDataAccessObject.deleteTest("test1");
-
-
-
 
     }
 
