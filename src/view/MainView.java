@@ -1,6 +1,7 @@
 package view;
 
 import interface_adapter.ViewManagerModel;
+import interface_adapter.createOwnQuestions.CreateOwnQuestionsState;
 import interface_adapter.getApiQuestions.GetApiQuestionsViewModel;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsController;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsViewModel;
@@ -70,6 +71,10 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(createQuestions)) {
+                            CreateOwnQuestionsState state = createOwnQuestionsViewModel.getState();
+                            state.clearAll();
+                            createOwnQuestionsViewModel.setState(state);
+                            createOwnQuestionsViewModel.firePropertyChanged();
                             viewManagerModel.setActiveView(createOwnQuestionsViewModel.getViewName());
                             viewManagerModel.firePropertyChanged();
                         }
@@ -100,6 +105,8 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
                                     currentState.getTxtPath());
                             JOptionPane.showMessageDialog(
                                     MainView.this, currentState.getMessage());
+                            manageQuizController.refreshTest();
+                            updateTests(manageQuizViewModel.getState().getTests());
                         }
                     }
                 });

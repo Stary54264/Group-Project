@@ -23,16 +23,16 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
     }
 
     @Override
-    public void startTest(String name) {
-        Test t =  dataAccessInterface.getTest(name);
+    public void startTest(takeQuizInputData inputData) {
+        Test t =  dataAccessInterface.getTest(inputData.testName());
         activeTest = t;
         currentQuestionIndex = 0;
         testOrder = IntStream.range(0, t.getQuestions().size()).boxed().toArray(Integer[]::new);
         Collections.shuffle(Arrays.asList(testOrder));
-        System.out.println(testOrder.length +"s" + t.getQuestions().size() + "order");
+
         Question currentQuestion = t.getQuestions().get(testOrder[currentQuestionIndex]);
         startTime = new Date();
-        takeQuizOutputData out = new takeQuizOutputData(name, currentQuestion.getQuestion(), currentQuestion.getAnswers(), true, "");
+        takeQuizOutputData out = new takeQuizOutputData(inputData.testName(), currentQuestion.getQuestion(), currentQuestion.getAnswers(), true, "");
         outputBoundary.prepareNextQuestion(out);
     }
 
@@ -50,12 +50,10 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
             wrongAnswers.add(currentQuestion);
             System.out.println("WRONG!");
         }
-        currentQuestionIndex ++;
+        currentQuestionIndex++;
 
         if (currentQuestionIndex >= testOrder.length) {
-
             Result newResult = prepareResult();
-
             activeTest.addResult(newResult);
             outputBoundary.prepareResultView(activeTest.getName());
             clearState();
@@ -73,12 +71,12 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
         for (int i = 0; i < testOrder.length; i++) {
             qs[i] = wrongAnswers.get(testOrder[i]) == null;
         }
-
         return new Result(new Date((new Date().getTime() - startTime.getTime())), qs);
     }
 
     private void clearState() {
         wrongAnswers.clear();
+        startTime = null;
         activeTest = null;
     }
 }
