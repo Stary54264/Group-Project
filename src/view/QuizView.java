@@ -108,12 +108,12 @@ public class QuizView extends JPanel implements ActionListener, PropertyChangeLi
                                 takeQuizState currentState = takeQuizViewModel.getState();
                                 takeQuizController.answerQuestion(currentState.getAnswer(i));
                                 currentState = takeQuizViewModel.getState();
-                                if (currentState.isFinished()) {
-                                    getResultController.execute(currentState.getTestName());
-                                }
                                 if (!currentState.isLastCorrect()) {
                                     JOptionPane.showMessageDialog(
                                             null, "Wrong! Correct answer: "+currentState.getLastAnswer());
+                                }
+                                if (currentState.isFinished()) {
+                                    getResultController.execute(currentState.getTestName());
                                 }
                             }
                         }

@@ -38,7 +38,7 @@ public enum Category {
     public String getName() { return this.name; }
 
     public static Category getByName(String name) {
-        for(Category v : values()){
+        for (Category v : values()){
             if( v.name.equals(name)){
                 return v;
             }
