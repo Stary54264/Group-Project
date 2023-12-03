@@ -7,4 +7,5 @@ public interface GetApiQuestionsDataAccessInterface {
     void save(Test test);
 
     boolean existsByName(String name);
+    int getTestCount();
 }

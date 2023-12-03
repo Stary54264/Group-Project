@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 public class takeQuizInteractor implements takeQuizInputBoundary {
     private Test activeTest;
     private Date startTime;
-    private Integer[] testOrder;
+    private int[] testOrder;
     private int currentQuestionIndex;
     private final ArrayList<Question> wrongAnswers;
     private final takeQuizOutputBoundary outputBoundary;
@@ -23,16 +23,16 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
     }
 
     @Override
-    public void startTest(takeQuizInputData inputData) {
-        Test t =  dataAccessInterface.getTest(inputData.testName());
+    public void startTest(String name) {
+        Test t =  dataAccessInterface.getTest(name);
         activeTest = t;
         currentQuestionIndex = 0;
-        testOrder = IntStream.range(0, t.getQuestions().size()).boxed().toArray(Integer[]::new);
+        testOrder = IntStream.range(0, t.getQuestions().size()).toArray();
         Collections.shuffle(Arrays.asList(testOrder));
-
+        System.out.println(testOrder.length +"s" + t.getQuestions().size() + "order");
         Question currentQuestion = t.getQuestions().get(testOrder[currentQuestionIndex]);
         startTime = new Date();
-        takeQuizOutputData out = new takeQuizOutputData(inputData.testName(), currentQuestion.getQuestion(), currentQuestion.getAnswers(), true, "");
+        takeQuizOutputData out = new takeQuizOutputData(name, currentQuestion.getQuestion(), currentQuestion.getAnswers());
         outputBoundary.prepareNextQuestion(out);
     }
 
@@ -42,26 +42,26 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
         int currentIndex = testOrder[currentQuestionIndex];
         Question currentQuestion = questions.get(currentIndex);
 
-        boolean lastCorrect = Objects.equals(currentQuestion.getCorrectAnswer(), inputData.userAnswer());
-        if (lastCorrect) {
+        if (Objects.equals(currentQuestion.getCorrectAnswer(), inputData.getUserAnswer())) {
             wrongAnswers.add(null);
             System.out.println("YEP!");
         } else {
             wrongAnswers.add(currentQuestion);
             System.out.println("WRONG!");
         }
-        currentQuestionIndex++;
+        currentQuestionIndex ++;
 
         if (currentQuestionIndex >= testOrder.length) {
+
             Result newResult = prepareResult();
+
             activeTest.addResult(newResult);
             outputBoundary.prepareResultView(activeTest.getName());
             clearState();
         } else {
             currentIndex = testOrder[currentQuestionIndex];
-            String lastAnswer = currentQuestion.getCorrectAnswer();
             currentQuestion = questions.get(currentIndex);
-            takeQuizOutputData out = new takeQuizOutputData(null, currentQuestion.getQuestion(), currentQuestion.getAnswers(), lastCorrect, lastAnswer);
+            takeQuizOutputData out = new takeQuizOutputData(null, currentQuestion.getQuestion(), currentQuestion.getAnswers());
             outputBoundary.prepareNextQuestion(out);
         }
     }
@@ -71,12 +71,15 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
         for (int i = 0; i < testOrder.length; i++) {
             qs[i] = wrongAnswers.get(testOrder[i]) == null;
         }
+        System.out.println(new Date().getTime());
+        System.out.println(startTime.getTime());
+        Date a = new Date((new Date().getTime() - startTime.getTime())/1000);
+        System.out.println(a.getSeconds());
         return new Result(new Date((new Date().getTime() - startTime.getTime())), qs);
     }
 
     private void clearState() {
         wrongAnswers.clear();
-        startTime = null;
         activeTest = null;
     }
 }

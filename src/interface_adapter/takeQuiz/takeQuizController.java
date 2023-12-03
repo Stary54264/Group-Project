@@ -11,12 +11,11 @@ public class takeQuizController {
     }
 
     public void start(String name) {
-        takeQuizInputData data = new takeQuizInputData("", name);
-        interactor.startTest(data);
+        interactor.startTest(name);
     }
 
     public void answerQuestion(String answer) {
-        takeQuizInputData data = new takeQuizInputData(answer, "");
+        takeQuizInputData data = new takeQuizInputData(answer);
         interactor.nextQuestion(data);
     }
 }

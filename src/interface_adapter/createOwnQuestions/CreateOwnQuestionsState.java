@@ -1,65 +1,69 @@
 package interface_adapter.createOwnQuestions;
 
-import app.QuestionBuilder;
+import use_cases.createOwnQuestions.CreateOwnQuestionsOutputData;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CreateOwnQuestionsState {
-    private final List<QuestionBuilder> builders;
-    private String name, comment;
-    private int page;
+    private List<String> questions = new ArrayList<String>();
+    private String question = "";
+    private String answer = "";
+    private ArrayList<String> incorrect = new ArrayList<String>();
+    private List<String> answers = new ArrayList<String>();
+    private List<ArrayList<String>> incorrectAnswers = new ArrayList<ArrayList<String>>();
+
     private String error = "";
 
+    public CreateOwnQuestionsState(CreateOwnQuestionsState copy) {
+        this.questions = copy.questions;
+        this.answers = copy.answers;
+        this.incorrectAnswers = copy.incorrectAnswers;
+        incorrect.add("");
+        incorrect.add("");
+        incorrect.add("");
+    }
     public CreateOwnQuestionsState() {
-        builders = new ArrayList<>();
-        builders.add(new QuestionBuilder());
+        incorrect.add("");
+        incorrect.add("");
+        incorrect.add("");
+    }
+    public String getQuestion() {
+        return question;
+    }
+    public List<String> getQuestions() {
+        return questions;
+    }
+    public String getAnswer() {
+        return answer;
+    }
+    public List<String> getAnswers() {
+        return answers;
+    }
+    public ArrayList<String> getIncorrect() {
+        return incorrect;
+    }
+    public List<ArrayList<String>> getIncorrectAnswers() {
+        return incorrectAnswers;
+    }
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+    public void setIncorrect(ArrayList<String> incorrect) {
+        this.incorrect = incorrect;
     }
 
-    public CreateOwnQuestionsState(String name, String comment, List<QuestionBuilder> builders) {
-        this.builders = builders;
-        this.name = name;
-        this.comment = comment;
-        if (!builders.isEmpty()) page = builders.size()-1;
+    public void addQuestions(String question) {
+        questions.add(question);
     }
-
-    public List<QuestionBuilder> getBuilders() {
-        return builders;
+    public void addAnswers(String answer) {
+        answers.add(answer);
     }
-
-    public QuestionBuilder getBuilderOnPage() {
-        return builders.get(page);
-    }
-
-    public void forward() {
-        page++;
-        if (page == builders.size()) {
-            builders.add(new QuestionBuilder());
-        }
-    }
-
-    public void back() {
-        if (page!=0) page--;
-    }
-
-    public int getPage() {
-        return page;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void addIncorrectAnswers(ArrayList<String> incorrect) {
+        incorrectAnswers.add(incorrect);
     }
 
     public String getError() {
@@ -69,11 +73,12 @@ public class CreateOwnQuestionsState {
         this.error = error;
     }
     public void clearAll() {
-        builders.clear();
-        builders.add(new QuestionBuilder());
-        page = 0;
-        name = "";
-        comment = "";
+        this.question = "";
+        this.answer = "";
+        this.incorrect.clear();
+        this.questions.clear();
+        this.answers.clear();
+        this.incorrectAnswers.clear();
         this.error = "";
     }
 }

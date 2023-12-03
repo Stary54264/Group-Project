@@ -1,12 +1,19 @@
 package use_cases.getDailyQuiz;
 
+import app.QuestionDifficulty;
+import app.QuestionType;
 import app.Serializer;
 import app.TestBuilder;
 import data_access.APIDataAccessObject;
+import entity.Question;
 import entity.Test;
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import static data_access.APIDataAccessObject.RetrieveQuestionsTrivia1;
 
 public class GetDailyQuizInteractor implements GetDailyQuizInputBoundary {
     final GetDailyQuizDataAccessInterface DataAccessObject;

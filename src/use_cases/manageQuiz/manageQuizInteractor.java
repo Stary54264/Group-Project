@@ -17,20 +17,21 @@ public class manageQuizInteractor implements manageQuizInputBoundary {
 
     @Override
     public void deleteTest(manageQuizInputdata data) {
-        dataAccessInterface.deleteTest(data.test());
+        dataAccessInterface.deleteTest(data.getTest());
         outputBoundary.refreshTests(new manageQuizOutputData(getNames()));
     }
 
     @Override
     public void refreshTests() {
+        List<Test> tests = dataAccessInterface.getTests();
         outputBoundary.refreshTests(new manageQuizOutputData(getNames()));
     }
 
     private Map<String, String[]> getNames() {
         List<Test> tests = dataAccessInterface.getTests();
-        Map<String, String[]> out = new HashMap<>();
+        Map<String, String[]> out = new HashMap<String, String[]>();
         for (Test test : tests) {
-            if (test != null) out.put(test.getName(), new String[] {test.getComment(), test.getStats()});
+            out.put(test.getName(), new String[] {test.getComment(), test.getStats()});
         }
         return out;
     }

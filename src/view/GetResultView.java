@@ -37,7 +37,6 @@ public class GetResultView extends JPanel implements ActionListener, PropertyCha
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == backButton) {
             viewManagerModel.setActiveView(manageQuizViewModel.getViewName());
-            manageQuizViewModel.firePropertyChanged();
             viewManagerModel.firePropertyChanged();
         }
     }

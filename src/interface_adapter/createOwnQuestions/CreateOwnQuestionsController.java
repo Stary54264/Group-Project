@@ -1,9 +1,9 @@
 package interface_adapter.createOwnQuestions;
 
-import app.QuestionBuilder;
 import use_cases.createOwnQuestions.CreateOwnQuestionsInputBoundary;
 import use_cases.createOwnQuestions.CreateOwnQuestionsInputData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CreateOwnQuestionsController {
@@ -12,12 +12,17 @@ public class CreateOwnQuestionsController {
     public CreateOwnQuestionsController(CreateOwnQuestionsInputBoundary createOwnQuestionsInteractor) {
         this.createOwnQuestionsInteractor = createOwnQuestionsInteractor;
     }
-    public void execute(String name, String comment, List<QuestionBuilder> questions) {
-        CreateOwnQuestionsInputData createInput = new CreateOwnQuestionsInputData(name, comment, questions);
+    public void execute(List<String> questions, List<String> answers, List<ArrayList<String>> incorrectAnswers,
+                        String name, String comment, String category) {
+        CreateOwnQuestionsInputData createInput = new CreateOwnQuestionsInputData(questions, answers, incorrectAnswers,
+                name, comment, category);
         createOwnQuestionsInteractor.execute(createInput);
     }
-    public void editExecute(String testName) {
-        createOwnQuestionsInteractor.editExecute(testName);
+    public void editExecute(String testName, int questionNum, String question,
+                        String answer, ArrayList<String> incorrectAnswers) {
+        CreateOwnQuestionsInputData editQuestionsInputData = new CreateOwnQuestionsInputData(
+                testName, questionNum, question, answer, incorrectAnswers);
+        createOwnQuestionsInteractor.editExecute(editQuestionsInputData);
 
     }
 }

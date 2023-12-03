@@ -4,12 +4,20 @@ import java.util.ArrayList;
 
 public class Question {
     private String question;
-    private final String correctAnswer;
-    private final ArrayList<String> incorrectAnswers;
+    private String correctAnswer;
+    private ArrayList<String> incorrectAnswers;
 
     public Question(String question, String correctAnswer, ArrayList<String> incorrectAnswers) {
         this.question = question;
         this.correctAnswer = correctAnswer;
+        this.incorrectAnswers = incorrectAnswers;
+    }
+
+    public void setCorrectAnswer(String correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
+
+    public void setIncorrectAnswers(ArrayList<String> incorrectAnswers) {
         this.incorrectAnswers = incorrectAnswers;
     }
 

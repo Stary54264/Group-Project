@@ -12,7 +12,10 @@ import use_cases.takeQuiz.takeQuizDataAccessInterface;
 import use_cases.uploadQuestions.UploadQuestionsDataAccessInterface;
 
 import java.io.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 import java.util.stream.Stream;
 
 public class FileTestDataAccessObject implements
@@ -24,10 +27,13 @@ public class FileTestDataAccessObject implements
         UploadQuestionsDataAccessInterface,
         GetResultDataAccessInterface {
 
-    private final Map<String, Test> tests = new HashMap<>();
+    private Map<String, Test> tests = new HashMap<>();
 
     public FileTestDataAccessObject() {
         refresh();
+    }
+    public int getTestCount() {
+        return tests.size();
     }
 
     @Override
@@ -40,12 +46,12 @@ public class FileTestDataAccessObject implements
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(txtPath));
             String line;
-            StringBuilder content = new StringBuilder();
+            String content = "";
             while ((line = bufferedReader.readLine()) != null) {
-                content.append(line).append(' ');
+                content += line + ' ';
             }
-            return Serializer.DecodeTest(content.toString(), testName);
-        } catch (Exception ignored) {
+            return Serializer.DecodeTest(content, testName);
+        } catch (Exception e) {
         }
         return null;
     }
@@ -55,7 +61,8 @@ public class FileTestDataAccessObject implements
         try {
             String path = "Quizzes/"+test.getName()+".txt";
             File file = new File(path);
-            if (file.createNewFile()) System.out.println("new file made!");
+            System.out.println(path);
+            file.createNewFile();
             FileWriter myWriter = new FileWriter(file);
 
             myWriter.write(Serializer.EncodeTest(test));
@@ -81,12 +88,12 @@ public class FileTestDataAccessObject implements
     public void deleteTest(String name) {
         String path = "Quizzes/"+name+".txt";
         File file = new File(path);
-        if (!file.delete()) System.out.println("bruh no file to delete");
+        file.delete();
         refresh();
     }
 
     private void refresh() {
-        List<File> files = Stream.of(Objects.requireNonNull(new File("Quizzes/").listFiles()))
+        List<File> files = Stream.of(new File("Quizzes/").listFiles())
                 .filter(file -> !file.isDirectory())
                 .toList();
         tests.clear();

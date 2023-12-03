@@ -1,5 +1,7 @@
 package interface_adapter.getApiQuestions;
 
+import app.QuestionDifficulty;
+import app.QuestionType;
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
