@@ -12,15 +12,6 @@ public class GetApiQuestionsState {
     private QuestionType type = QuestionType.ALL;
     private QuestionDifficulty diff = QuestionDifficulty.ALL;
 
-    public GetApiQuestionsState(GetApiQuestionsState copy) {
-        testName = copy.testName;
-        testNameError = copy.testNameError;
-        number = copy.number;
-        category = copy.category;
-        type = copy.type;
-        diff = copy.diff;
-    }
-
     public GetApiQuestionsState() {
     }
     public String getTestName() {return testName;}
@@ -47,5 +38,4 @@ public class GetApiQuestionsState {
 
     public void setDiff(QuestionDifficulty diff) {this.diff = diff;}
 
-    public String categoryString() {return category.getName();}
 }

@@ -1,7 +1,5 @@
 package interface_adapter.getDailyQuiz;
 
-import use_cases.getApiQuestions.GetApiQuestionsOutputBoundary;
-import use_cases.getApiQuestions.GetApiQuestionsOutputData;
 import use_cases.getDailyQuiz.GetDailyQuizOutputBoundary;
 import use_cases.getDailyQuiz.GetDailyQuizOutputData;
 
@@ -14,7 +12,7 @@ public class GetDailyQuizPresenter implements GetDailyQuizOutputBoundary {
     @Override
     public void prepareSuccessView(GetDailyQuizOutputData response) {
         GetDailyQuizState state = new GetDailyQuizState();
-        state.setDailyTest(response.getTestName());
+        state.setDailyTest(response.testName(), response.success());
         viewModel.setState(state);
     }
 }

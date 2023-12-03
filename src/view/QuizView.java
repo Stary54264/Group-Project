@@ -5,9 +5,9 @@ import interface_adapter.takeQuiz.takeQuizState;
 import interface_adapter.takeQuiz.takeQuizViewModel;
 import interface_adapter.takeQuiz.takeQuizController;
 import interface_adapter.getResult.GetResultController;
-import interface_adapter.manageQuiz.manageQuizViewModel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -15,45 +15,60 @@ import java.beans.PropertyChangeListener;
 
 public class QuizView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewname = "Take Quiz";
-    private final ViewManagerModel viewManagerModel;
     private final takeQuizViewModel takeQuizViewModel;
     private final takeQuizController takeQuizController;
     private final GetResultController getResultController;
-    private final manageQuizViewModel manageQuizViewModel;
     private final JLabel questionField = new JLabel();
     private final JButton cancel;
     private final AnswerButton A1, A2, A3, A4;
 
     public QuizView(ViewManagerModel viewManagerModel, takeQuizViewModel takeQuizViewModel, takeQuizController takeQuizController, GetResultController getResultController, interface_adapter.manageQuiz.manageQuizViewModel manageQuizViewModel) {
-        this.viewManagerModel = viewManagerModel;
         this.takeQuizViewModel = takeQuizViewModel;
         this.takeQuizController = takeQuizController;
         this.getResultController = getResultController;
-        this.manageQuizViewModel = manageQuizViewModel;
 
-        cancel = new JButton("Menu");
+        cancel = new JButton("Exit");
         cancel.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(cancel)) {
                             viewManagerModel.setActiveView(manageQuizViewModel.getViewName());
+                            manageQuizViewModel.firePropertyChanged();
                             viewManagerModel.firePropertyChanged();
                         }
                     }
                 }
         );
-        this.add(cancel);
         this.takeQuizViewModel.addPropertyChangeListener(this);
-        this.add(questionField);
-        this.A1 = new AnswerButton(new JButton("answer 1"), 0);
-        this.add(A1);
-        this.A2 = new AnswerButton(new JButton("answer 2"), 1);
-        this.add(A2);
-        this.A3 = new AnswerButton(new JButton("answer 3"), 2);
-        this.add(A3);
-        this.A4 = new AnswerButton(new JButton("answer 4"), 3);
-        this.add(A4);
+        JPanel question = new JPanel();
+        question.add(questionField);
+        Font answerFont = new Font("SansSerif", Font.BOLD, 24);
+        Font questionFont = new Font("SansSerif", Font.BOLD, 32);
+        questionField.setFont(questionFont);
+
+        A1 = new AnswerButton(new JButton("answer 1"), 0);
+        A2 = new AnswerButton(new JButton("answer 2"), 1);
+        A3 = new AnswerButton(new JButton("answer 3"), 2);
+        A4 = new AnswerButton(new JButton("answer 4"), 3);
+
+        A1.getButton().setFont(answerFont);
+        A2.getButton().setFont(answerFont);
+        A3.getButton().setFont(answerFont);
+        A4.getButton().setFont(answerFont);
+
+        JPanel buttons = new JPanel();
+        buttons.add(A1);
+        buttons.add(A2);
+        buttons.add(A3);
+        buttons.add(A4);
+
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        add(cancel);
+        add(question);
+        add(buttons);
+        JLabel lastAnswer = new JLabel();
+        add(lastAnswer);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -64,7 +79,7 @@ public class QuizView extends JPanel implements ActionListener, PropertyChangeLi
     public void propertyChange(PropertyChangeEvent evt) {
         takeQuizState state = (takeQuizState) evt.getNewValue();
 
-        questionField.setText(state.getQuestion());
+        questionField.setText("<html><div style='width: 700px;text-align: center;'>"+state.getQuestion()+"</div></html>");
         A1.setText(state.getAnswer(0));
         A2.setText(state.getAnswer(1));
 
@@ -95,6 +110,10 @@ public class QuizView extends JPanel implements ActionListener, PropertyChangeLi
                                 currentState = takeQuizViewModel.getState();
                                 if (currentState.isFinished()) {
                                     getResultController.execute(currentState.getTestName());
+                                }
+                                if (!currentState.isLastCorrect()) {
+                                    JOptionPane.showMessageDialog(
+                                            null, "Wrong! Correct answer: "+currentState.getLastAnswer());
                                 }
                             }
                         }

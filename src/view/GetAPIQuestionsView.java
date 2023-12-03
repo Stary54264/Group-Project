@@ -2,8 +2,8 @@ package view;
 
 import app.Category;
 import app.QuestionDifficulty;
+import app.QuestionType;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.createOwnQuestions.CreateOwnQuestionsViewModel;
 import interface_adapter.getApiQuestions.GetApiQuestionsController;
 import interface_adapter.getApiQuestions.GetApiQuestionsState;
 import interface_adapter.getApiQuestions.GetApiQuestionsViewModel;
@@ -18,13 +18,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class GetAPIQuestionsView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "get api questions";
     private final GetApiQuestionsViewModel getApiQuestionsViewModel;
     private final JTextField nameInputField = new JTextField(15);
-    private final JSpinner numberInputField = new JSpinner();
+    private final JSpinner numberInputField = new JSpinner(new SpinnerNumberModel(10, 1, 100, 1));
     private final JComboBox<String> categoryBox = new JComboBox<>();
     private final JComboBox<String> typeBox = new JComboBox<>();
     private final JComboBox<String> diffBox = new JComboBox<>();
@@ -50,32 +51,29 @@ public class GetAPIQuestionsView extends JPanel implements ActionListener, Prope
                 new JLabel(GetApiQuestionsViewModel.NUMBER_LABEL), numberInputField);
 
         JPanel categoryPanel = new JPanel();
-        String[] categoryOptions = {Category.AnyCategory.getName(), Category.General.getName(), Category.Books.getName(),
-                Category.Film.getName(), Category.Music.getName(), Category.Musicals.getName(),
-                Category.Television.getName(), Category.Video.getName(), Category.Board.getName(),
-                Category.Nature.getName(), Category.Computers.getName(), Category.Mathematics.getName(),
-                Category.Mythology.getName(), Category.Sports.getName(), Category.Sports.getName(),
-                Category.Geography.getName(), Category.History.getName(), Category.Politics.getName(),
-                Category.Art.getName(), Category.Celebrities.getName(), Category.Animals.getName(),
-                Category.Vehicles.getName(), Category.Comics.getName(), Category.Gadgets.getName(),
-                Category.Japanese.getName(), Category.Cartoon.getName()};
+        String[] categoryOptions = Arrays.stream(Category.values()).map(v -> v.name).toArray(String[]::new);
+
         for (String e: categoryOptions) {
             categoryBox.addItem(e);
         }
+        categoryPanel.add(new JLabel(GetApiQuestionsViewModel.CATEGORY_LABEL));
         categoryPanel.add(categoryBox);
 
         JPanel typePanel = new JPanel();
-        String[] typeOptions = {"Any Type", "Multiple Choice", "True / False"};
+
+        String[] typeOptions = Arrays.stream(QuestionType.values()).map(v -> v.name).toArray(String[]::new);
         for (String e: typeOptions) {
             typeBox.addItem(e);
         }
+        typePanel.add(new JLabel(GetApiQuestionsViewModel.TYPE_LABEL));
         typePanel.add(typeBox);
 
         JPanel diffPanel = new JPanel();
-        String[] diffOptions = {"Any Difficulty", "Easy", "Medium", "Hard"};
+        String[] diffOptions = Arrays.stream(QuestionDifficulty.values()).map(v -> v.name).toArray(String[]::new);
         for (String e: diffOptions) {
             diffBox.addItem(e);
         }
+        diffPanel.add(new JLabel(GetApiQuestionsViewModel.DIFF_LABEL));
         diffPanel.add(diffBox);
 
         JPanel buttons = new JPanel();
@@ -84,10 +82,12 @@ public class GetAPIQuestionsView extends JPanel implements ActionListener, Prope
         takequiz = new JButton(GetApiQuestionsViewModel.QUIZ_LABEL);
         buttons.add(takequiz);
 
-        cancel.addActionListener(new ActionListener() {
+        cancel.addActionListener(
+                new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource().equals(cancel)) {
                     viewManagerModel.setActiveView(manageQuizViewModel.getViewName());
+                    manageQuizViewModel.firePropertyChanged();
                     viewManagerModel.firePropertyChanged();
                 }
             }
@@ -100,6 +100,9 @@ public class GetAPIQuestionsView extends JPanel implements ActionListener, Prope
                             GetApiQuestionsState state = getApiQuestionsViewModel.getState();
                             getApiQuestionsController.execute((int)numberInputField.getValue(), state.getCategory(), state.getType(),
                                     state.getDiff(), state.getTestName());
+                            System.out.println(state.getTestName());
+                            System.out.println(state.getDiff());
+                            System.out.println(state.getCategory());
                             GetApiQuestionsState newState = getApiQuestionsViewModel.getState();
                             if (Objects.equals(newState.getTestNameError(), null)) {
                                 JOptionPane.showMessageDialog(
@@ -137,7 +140,9 @@ public class GetAPIQuestionsView extends JPanel implements ActionListener, Prope
                 new KeyListener() {
                     @Override
                     public void keyTyped(KeyEvent e) {
+
                         char typedChar = e.getKeyChar();
+                        System.out.println(typedChar);
                         if (Character.isDigit(typedChar)) {
                             GetApiQuestionsState currentState = getApiQuestionsViewModel.getState();
                             int currentNumber = Integer.parseInt(String.valueOf(numberInputField.getValue()));
@@ -163,7 +168,9 @@ public class GetAPIQuestionsView extends JPanel implements ActionListener, Prope
             public void actionPerformed(ActionEvent e) {
                 // Handle the selection change
                 String selectedOption = (String) categoryBox.getSelectedItem();
-                System.out.println(GetApiQuestionsViewModel.CATEGORY_LABEL + selectedOption);
+
+                GetApiQuestionsState currentState = getApiQuestionsViewModel.getState();
+                currentState.setCategory(Category.getByName(selectedOption));
             }
         });
 
@@ -172,7 +179,9 @@ public class GetAPIQuestionsView extends JPanel implements ActionListener, Prope
             public void actionPerformed(ActionEvent e) {
                 // Handle the selection change
                 String selectedOption = (String) typeBox.getSelectedItem();
-                System.out.println(GetApiQuestionsViewModel.TYPE_LABEL + selectedOption);
+
+                GetApiQuestionsState currentState = getApiQuestionsViewModel.getState();
+                currentState.setType(QuestionType.getByName(selectedOption));
             }
         });
 
@@ -181,7 +190,9 @@ public class GetAPIQuestionsView extends JPanel implements ActionListener, Prope
             public void actionPerformed(ActionEvent e) {
                 // Handle the selection change
                 String selectedOption = (String) diffBox.getSelectedItem();
-                System.out.println(GetApiQuestionsViewModel.DIFF_LABEL + selectedOption);
+                //System.out.println(GetApiQuestionsViewModel.DIFF_LABEL + selectedOption);
+                GetApiQuestionsState currentState = getApiQuestionsViewModel.getState();
+                currentState.setDiff(QuestionDifficulty.getByName(selectedOption));
             }
         });
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

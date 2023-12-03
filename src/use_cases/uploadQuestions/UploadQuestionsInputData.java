@@ -2,18 +2,18 @@ package use_cases.uploadQuestions;
 
 public class UploadQuestionsInputData {
     final private String testName;
-    final private String jsonPath;
+    final private String txtPath;
 
-    public UploadQuestionsInputData(String testName, String jsonPath) {
+    public UploadQuestionsInputData(String testName, String txtPath) {
         this.testName = testName;
-        this.jsonPath = jsonPath;
+        this.txtPath = txtPath;
     }
 
     String getTestName() {
         return testName;
     }
 
-    String getJsonPath() {
-        return jsonPath;
+    String getTxtPath() {
+        return txtPath;
     }
 }

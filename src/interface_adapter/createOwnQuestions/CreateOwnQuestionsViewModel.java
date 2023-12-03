@@ -1,13 +1,9 @@
 package interface_adapter.createOwnQuestions;
 
-import entity.Question;
 import interface_adapter.ViewModel;
-import use_cases.createOwnQuestions.CreateOwnQuestionsOutputData;
-import interface_adapter.createOwnQuestions.CreateOwnQuestionsState;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.List;
 
 public class CreateOwnQuestionsViewModel extends ViewModel {
     public static final String CANCEL_BUTTON_LABEL = "Cancel";
@@ -17,7 +13,6 @@ public class CreateOwnQuestionsViewModel extends ViewModel {
     public static final String QUESTION_LABEL = "Question: ";
     public static final String ANSWER_LABEL = "Answer: ";
     public static final String INCORRECT_LABEL = "Incorrect answer: ";
-    private CreateOwnQuestionsOutputData output;
     private CreateOwnQuestionsState questionsState = new CreateOwnQuestionsState();
 
     public CreateOwnQuestionsViewModel() {

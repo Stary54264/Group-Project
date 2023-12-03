@@ -1,6 +1,7 @@
 package use_cases.getResult;
 import entity.*;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class GetResultInteractor implements GetResultInputBoundary {
@@ -13,15 +14,30 @@ public class GetResultInteractor implements GetResultInputBoundary {
     @Override
     public void execute(GetResultInputData getResultInputData) {
         String name = getResultInputData.getName();
-        Test result = getResultDataAccessObject.getTest(name);
-        ArrayList<Result> results = result.getResults();
-        double sum = 0;
-        for (Result r : results) {
-            sum += r.getAverage();
+        Test test = getResultDataAccessObject.getTest(name);
+        ArrayList<Result> results = test.getResults();
+        Result lastResult = results.get(results.size()-1);
+        boolean[] answers = lastResult.results();
+        int right = 0, wrong = 0;
+        for (boolean b: answers) {
+            if (b) right++;
+            else wrong++;
         }
-        double resultAverage = sum / results.size();
-        String finalResult = Double.toString(resultAverage);
-        GetResultOutputData getResultOutputData = new GetResultOutputData(finalResult);
+        int newScore = right*100/(right+wrong);
+        int pastScore = (test.getStats() == null) || (test.getStats().isEmpty())? -1 : Integer.parseInt(test.getStats());
+
+        if (newScore > pastScore) {
+            test.setStats(String.valueOf(newScore));
+        }
+
+        String score = String.format("Average: %d%% (Correct: %d, Wrong: %d) ", newScore, right, wrong);
+        SimpleDateFormat dt1 = new SimpleDateFormat("mm:ss");
+        String time = "Time taken: " + dt1.format(lastResult.timeTaken());
+
+        GetResultOutputData getResultOutputData = new GetResultOutputData(score, time);
+
+        getResultDataAccessObject.save(test);
+
         getResultPresenter.prepareSuccessView(getResultOutputData);
     }
 }

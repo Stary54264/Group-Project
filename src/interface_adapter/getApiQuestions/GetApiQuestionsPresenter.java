@@ -1,6 +1,5 @@
 package interface_adapter.getApiQuestions;
 
-import interface_adapter.ViewManagerModel;
 import interface_adapter.takeQuiz.takeQuizState;
 import interface_adapter.takeQuiz.takeQuizViewModel;
 import use_cases.getApiQuestions.GetApiQuestionsOutputBoundary;
@@ -9,14 +8,11 @@ import use_cases.getApiQuestions.GetApiQuestionsOutputData;
 public class GetApiQuestionsPresenter implements GetApiQuestionsOutputBoundary {
     private final GetApiQuestionsViewModel getApiQuestionsViewModel;
     private final takeQuizViewModel quizViewModel;
-    private final ViewManagerModel viewManagerModel;
 
     public GetApiQuestionsPresenter(GetApiQuestionsViewModel getApiQuestionsViewModel,
-                                    takeQuizViewModel quizViewModel,
-                                    ViewManagerModel viewManagerModel) {
+                                    takeQuizViewModel quizViewModel) {
         this.getApiQuestionsViewModel = getApiQuestionsViewModel;
         this.quizViewModel = quizViewModel;
-        this.viewManagerModel = viewManagerModel;
     }
 
     @Override

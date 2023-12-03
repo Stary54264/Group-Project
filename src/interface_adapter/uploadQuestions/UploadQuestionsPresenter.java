@@ -9,9 +9,15 @@ public class UploadQuestionsPresenter implements UploadQuestionsOutputBoundary {
         this.uploadQuestionsViewModel = uploadQuestionsViewModel;
     }
     @Override
-    public void prepareView(String message) {
+    public void prepareView(boolean nameError, boolean fileError) {
         UploadQuestionsState uploadQuestionsState = uploadQuestionsViewModel.getState();
-        uploadQuestionsState.setMessage(message);
+        if (nameError && fileError) {
+            uploadQuestionsState.setMessage("Uploaded successfully!");
+        } else if (!fileError) {
+            uploadQuestionsState.setMessage("Failed to upload. File does not exist!");
+        } else {
+            uploadQuestionsState.setMessage("Failed to upload. Test name exists!");
+        }
         uploadQuestionsViewModel.firePropertyChanged();
     }
 }

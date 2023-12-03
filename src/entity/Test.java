@@ -1,13 +1,13 @@
 package entity;
 
 import java.util.ArrayList;
-import java.util.List;
-import entity.Question;
-import entity.Result;
 
 public class Test {
     private ArrayList<Question> questions;
-    private String category, name, comment;
+    private final String category;
+    private String name;
+    private String comment;
+    private String stats;
     private final ArrayList<Result> results;
 
     public Test(String name, String Category, ArrayList<Question> questions, ArrayList<Result> results) {
@@ -27,6 +27,14 @@ public class Test {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setStats(String stats) {
+        this.stats = stats;
+    }
+
+    public String getStats() {
+        return stats;
     }
 
     public ArrayList<Question> getQuestions() {

@@ -17,7 +17,7 @@ public class GetResultPresenter implements GetResultOutputBoundary {
     @Override
     public void prepareSuccessView(GetResultOutputData response) {
         GetResultState getResultState = getResultViewModel.getState();
-        getResultState.setResult(response.getResult());
+        getResultState.setResult(response.getScore()+response.getTime());
         this.getResultViewModel.setGetResultState(getResultState);
         getResultViewModel.firePropertyChanged();
         viewManagerModel.setActiveView(getResultViewModel.getViewName());
