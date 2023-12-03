@@ -21,13 +21,13 @@ class UploadQuestionsInteractorTest {
         UploadQuestionsInputBoundary uploadQuestionsInteractor = new UploadQuestionsInteractor(dataAccessInterface,
                 uploadQuestionsPresenter);
         UploadQuestionsController uploadQuestionsController = new UploadQuestionsController(uploadQuestionsInteractor);
-        uploadQuestionsController.execute("AnotherTestingTest", "Quizzes/TestingTest.txt");
+        uploadQuestionsController.execute("AnotherTestingTest", "Quizzes/Testing test.txt");
         String message = uploadQuestionsState.getMessage();
         UploadQuestionsState anotherUploadQuestionsState = new UploadQuestionsState(uploadQuestionsState);
         anotherUploadQuestionsState.getTestName();
         anotherUploadQuestionsState.getTxtPath();
         anotherUploadQuestionsState.setTestName("AnotherTestingTest");
-        anotherUploadQuestionsState.setTxtPath("Quizzes/TestingTest.txt");
+        anotherUploadQuestionsState.setTxtPath("Quizzes/Testing test.txt");
         assertEquals("Uploaded successfully!", message);
     }
 
@@ -56,7 +56,7 @@ class UploadQuestionsInteractorTest {
         UploadQuestionsInputBoundary uploadQuestionsInteractor = new UploadQuestionsInteractor(
                 dataAccessInterface, uploadQuestionsPresenter);
         UploadQuestionsController uploadQuestionsController = new UploadQuestionsController(uploadQuestionsInteractor);
-        uploadQuestionsController.execute("TestingTest", "Quizzes/TestingTest.txt");
+        uploadQuestionsController.execute("TestingTest", "Quizzes/Testing test.txt");
         String message = uploadQuestionsState.getMessage();
         assertEquals("Failed to upload. Test name exists!", message);
     }
