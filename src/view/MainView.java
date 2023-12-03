@@ -105,7 +105,7 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
                                     currentState.getTxtPath());
                             JOptionPane.showMessageDialog(
                                     MainView.this, currentState.getMessage());
-                            manageQuizController.refreshTest();
+                            manageQuizController.refreshTests();
                             updateTests(manageQuizViewModel.getState().getTests());
                         }
                     }
@@ -131,7 +131,7 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(refreshTests)) {
-                            manageQuizController.refreshTest();
+                            manageQuizController.refreshTests();
                             manageQuizState state = manageQuizViewModel.getState();
                             System.out.println(state.getTests());
                             updateTests(state.getTests());
@@ -190,7 +190,7 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
         c.gridwidth = 1;
         add(rightSide, c);
 
-        manageQuizController.refreshTest();
+        manageQuizController.refreshTests();
         manageQuizState state = manageQuizViewModel.getState();
         System.out.println(state.getTests() + "tests");
         updateTests(state.getTests());
@@ -203,7 +203,7 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        manageQuizController.refreshTest();
+        manageQuizController.refreshTests();
         updateTests(manageQuizViewModel.getState().getTests());
     }
 

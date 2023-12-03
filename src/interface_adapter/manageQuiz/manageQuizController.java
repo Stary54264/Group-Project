@@ -10,7 +10,7 @@ public class manageQuizController {
         this.interactor = interactor;
     }
 
-    public void refreshTest() {
+    public void refreshTests() {
         interactor.refreshTests();
     }
 
