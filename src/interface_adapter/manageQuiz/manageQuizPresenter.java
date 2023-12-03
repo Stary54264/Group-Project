@@ -13,5 +13,6 @@ public class manageQuizPresenter implements manageQuizOutputBoundary {
     @Override
     public void refreshTests(manageQuizOutputData data) {
         viewModel.getState().setTests(data.newTests());
+        viewModel.firePropertyChanged();
     }
 }
