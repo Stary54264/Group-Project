@@ -2,9 +2,9 @@
 We are making a trivia application with support for speech input/output, with support for self-designed questions and randomly generated questions.
 The application will be on mobile/web.
 
-Speech Recognition API: https://docs.speechace.com/
+Trivia API: https://the-trivia-api.com/
 
-Trivia API: https://opentdb.com/api_config.php (Results below)
+The Trivia Database: https://opentdb.com/api_config.php (Results below)
 
 Java API call
 ```java
