@@ -18,15 +18,16 @@ public class manageQuizInteractor implements manageQuizInputBoundary {
     @Override
     public void deleteTest(manageQuizInputdata data) {
         dataAccessInterface.deleteTest(data.test());
-        outputBoundary.refreshTests(new manageQuizOutputData(getNames()));
+        outputBoundary.refreshTests(new manageQuizOutputData(getData()));
     }
 
     @Override
     public void refreshTests() {
-        outputBoundary.refreshTests(new manageQuizOutputData(getNames()));
+        outputBoundary.refreshTests(new manageQuizOutputData(getData()));
     }
 
-    private Map<String, String[]> getNames() {
+    private Map<String, String[]> getData() {
+
         List<Test> tests = dataAccessInterface.getTests();
         Map<String, String[]> out = new HashMap<>();
         for (Test test : tests) {

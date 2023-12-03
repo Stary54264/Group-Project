@@ -38,6 +38,9 @@ import java.awt.*;
 
 public class Main {
     public static void main(String[] args) {
+        main();
+    }
+    public static void main() {
         JFrame application = new JFrame("Group Project");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 

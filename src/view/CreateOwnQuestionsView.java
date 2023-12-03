@@ -306,8 +306,14 @@ public class CreateOwnQuestionsView extends JPanel implements ActionListener, Pr
         questionField.setText(builder.getQuestionText());
         answerField.setText(builder.getCorrectAnswer());
         incorrect1Field.setText(builder.getIncorrectAnswers().get(0));
-        incorrect2Field.setText(builder.getIncorrectAnswers().get(1));
-        incorrect3Field.setText(builder.getIncorrectAnswers().get(2));
+        try {
+            incorrect2Field.setText(builder.getIncorrectAnswers().get(1));
+            incorrect3Field.setText(builder.getIncorrectAnswers().get(2));
+        } catch (Exception ignored) {
+            incorrect2Field.setText("");
+            incorrect3Field.setText("");
+        }
+
         pageNumber.setText("Page "+(state.getPage()+1));
     }
 }

@@ -69,6 +69,11 @@ public class CreateOwnQuestionsState {
         this.error = error;
     }
     public void clearAll() {
+        builders.clear();
+        builders.add(new QuestionBuilder());
+        page = 0;
+        name = "";
+        comment = "";
         this.error = "";
     }
 }

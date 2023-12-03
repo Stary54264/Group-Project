@@ -10,11 +10,9 @@ public class manageQuizViewModel extends ViewModel {
     public manageQuizViewModel() {
         super("Main Menu");
     }
-
     public void setState(manageQuizState state) {
         this.state = state;
     }
-
     public manageQuizState getState() {
         return state;
     }
