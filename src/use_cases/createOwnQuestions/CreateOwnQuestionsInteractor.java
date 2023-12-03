@@ -6,6 +6,7 @@ import entity.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CreateOwnQuestionsInteractor implements CreateOwnQuestionsInputBoundary {
     final CreateOwnQuestionsOutputBoundary questionsPresenter;
@@ -31,18 +32,20 @@ public class CreateOwnQuestionsInteractor implements CreateOwnQuestionsInputBoun
         }
     }
     public void editExecute(CreateOwnQuestionsInputData createOwnQuestionsInputData) {
-        Test test = questionsDataAccessInterface.getTest(createOwnQuestionsInputData.getTestName());
-        questionsDataAccessInterface.deleteTest(test.getName());
-        Question newQuestion = createOwnQuestionsInputData.getQuestion();
-        int num = createOwnQuestionsInputData.getQuestionNum();
-        ArrayList<Question> currQuestions = test.getQuestions();
-        for (int i = 0; i < currQuestions.size(); i++) {
-            if (i + 1 == num) {
-                currQuestions.set(i, newQuestion);
+        if (!(createOwnQuestionsInputData.getQuestion() == null)) {
+            Test test = questionsDataAccessInterface.getTest(createOwnQuestionsInputData.getTestName());
+            questionsDataAccessInterface.deleteTest(test.getName());
+            Question newQuestion = createOwnQuestionsInputData.getQuestion();
+            int num = createOwnQuestionsInputData.getQuestionNum();
+            ArrayList<Question> currQuestions = test.getQuestions();
+            for (int i = 0; i < currQuestions.size(); i++) {
+                if (i + 1 == num) {
+                    currQuestions.set(i, newQuestion);
+                }
             }
+            test.setQuestions(currQuestions);
+            questionsDataAccessInterface.save(test);
         }
-        test.setQuestions(currQuestions);
-        questionsDataAccessInterface.save(test);
     }
 
 }

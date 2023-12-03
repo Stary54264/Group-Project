@@ -6,6 +6,7 @@ import entity.Question;
 import entity.Test;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CreateOwnQuestionsInputData {
     private String testName = null;
@@ -31,6 +32,12 @@ public class CreateOwnQuestionsInputData {
         this.answers = answers;
         this.incorrectAnswers = incorrectAnswers;
         ArrayList<Question> output = new ArrayList<>();
+        boolean incorrectEmpty = false;
+        for (int i = 0; i < incorrectAnswers.size(); i++) {
+            if (incorrectAnswers.get(i).contains("")) {
+                incorrectEmpty = true;
+            }
+        }
         for (int i = 0; i < questions.size(); i++) {
             QuestionBuilder builder = new QuestionBuilder();
             builder.setQuestionText(questions.get(i));
@@ -45,19 +52,24 @@ public class CreateOwnQuestionsInputData {
         tBuilder.setComment(comment);
         tBuilder.setCategory(category);
         this.test = tBuilder.build();
+
     }
     public CreateOwnQuestionsInputData(String testName, int questionNum,
                                        String questionText, String answer,
                                        ArrayList<String> incorrectAnswers) {
-        this.testName = testName;
-        this.questionNum = questionNum;
-        this.questionText = questionText;
-        this.answer = answer;
-        this.incorrect = incorrectAnswers;
-        questionBuilder.setQuestionText(questionText);
-        questionBuilder.setCorrectAnswer(answer);
-        questionBuilder.setIncorrectAnswers(incorrectAnswers);
-        this.question = questionBuilder.build();
+        if (!(Objects.equals(questionText, "")) || !(Objects.equals(answer, ""))
+        || !(incorrectAnswers.contains(""))) {
+            this.testName = testName;
+            this.questionNum = questionNum;
+            this.questionText = questionText;
+            this.answer = answer;
+            this.incorrect = incorrectAnswers;
+            questionBuilder.setQuestionText(questionText);
+            questionBuilder.setCorrectAnswer(answer);
+            questionBuilder.setIncorrectAnswers(incorrectAnswers);
+            this.question = questionBuilder.build();
+        }
+
     }
     public String getTestName() { return testName; }
     public int getQuestionNum() { return questionNum; }

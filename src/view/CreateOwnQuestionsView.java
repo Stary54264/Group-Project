@@ -86,14 +86,20 @@ public class CreateOwnQuestionsView extends JPanel implements ActionListener, Pr
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(next)) {
-                            CreateOwnQuestionsState curr = createOwnQuestionsViewModel.getState();
-                            curr.addQuestions(curr.getQuestion());
-                            curr.addAnswers(curr.getAnswer());
-                            curr.addIncorrectAnswers(curr.getIncorrect());
-                            for (int i = 0; i < textFields.size(); i++) {
-                                textFields.get(i).setText(null);
+                            if (questionField.getText().equals("") || answerField.getText().equals("")
+                            || incorrect1Field.getText().equals("") || incorrect2Field.getText().equals("") ||
+                            incorrect3Field.getText().equals("")) {
+                                JOptionPane.showMessageDialog(null, "Input cannot be empty");
                             }
-
+                            else {
+                                CreateOwnQuestionsState curr = createOwnQuestionsViewModel.getState();
+                                curr.addQuestions(curr.getQuestion());
+                                curr.addAnswers(curr.getAnswer());
+                                curr.addIncorrectAnswers(curr.getIncorrect());
+                                for (int i = 0; i < textFields.size(); i++) {
+                                    textFields.get(i).setText(null);
+                                }
+                            }
                         }
                     }
                 }

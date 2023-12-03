@@ -281,11 +281,13 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
                                     JOptionPane.showMessageDialog(null,
                                             "Failed to edit test, question content not valid");
                                 }
+
                                 else {
                                     try {
+                                        int num = Integer.parseInt(questionNum);
                                         createOwnQuestionsController.editExecute(name, Integer.parseInt(questionNum),
                                                 question, answer, incorrect);
-                                    } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                                    } catch (NumberFormatException e) {
                                         JOptionPane.showMessageDialog(null,
                                                 "Failed to edit test, question number not valid");
                                     }
