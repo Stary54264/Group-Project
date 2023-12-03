@@ -121,69 +121,35 @@ public class Serializer {
 
                 // Found '&', look for ';'
                 int j = i;
-                while (j < len && j < i + MAX_ESCAPE + 1 && input.charAt(j) != ';')
-                    j++;
-                if (j == len || j < i + MIN_ESCAPE || j == i + MAX_ESCAPE + 1) {
-                    i++;
-                    continue;
-                }
+                while (j < len && j < i + MAX_ESCAPE + 1 && input.charAt(j) != ';') j++;
+                if (j == len || j < i + MIN_ESCAPE || j == i + MAX_ESCAPE + 1) {i++;continue;}
 
                 // Found escape
                 if (input.charAt(i) == '#') {
                     // Numeric escape
-                    int k = i + 1;
-                    int radix = 10;
-
+                    int k = i + 1, radix = 10;
                     final char firstChar = input.charAt(k);
-                    if (firstChar == 'x' || firstChar == 'X') {
-                        k++;
-                        radix = 16;
-                    }
+                    if (firstChar == 'x' || firstChar == 'X') {k++; radix = 16;}
 
                     try {
                         int entityValue = Integer.parseInt(input.substring(k, j), radix);
+                        if (writer == null) writer = new StringWriter(input.length());writer.append(input.substring(st, i - 1));
 
-                        if (writer == null)
-                            writer = new StringWriter(input.length());
-                        writer.append(input.substring(st, i - 1));
-
-                        if (entityValue > 0xFFFF) {
-                            final char[] chrs = Character.toChars(entityValue);
-                            writer.write(chrs[0]);
-                            writer.write(chrs[1]);
-                        } else {
-                            writer.write(entityValue);
-                        }
-
-                    } catch (NumberFormatException ex) {
-                        i++;
-                        continue;
-                    }
+                        if (entityValue > 0xFFFF) {final char[] chrs = Character.toChars(entityValue);writer.write(chrs[0]);writer.write(chrs[1]);
+                        } else {writer.write(entityValue);}
+                    } catch (NumberFormatException ex) {i++;continue;}
                 }
                 else {
                     // Named escape
                     CharSequence value = lookupMap.get(input.substring(i, j));
-                    if (value == null) {
-                        i++;
-                        continue;
-                    }
-
-                    if (writer == null)
-                        writer = new StringWriter(input.length());
-                    writer.append(input.substring(st, i - 1));
-
+                    if (value == null) {i++;continue;}
+                    if (writer == null) writer = new StringWriter(input.length());writer.append(input.substring(st, i - 1));
                     writer.append(value);
                 }
-
                 // Skip escape
-                st = j + 1;
-                i = st;
+                st = j + 1;i = st;
             }
-
-            if (writer != null) {
-                writer.append(input.substring(st, len));
-                return writer.toString();
-            }
+            if (writer != null) {writer.append(input.substring(st, len)); return writer.toString();}
             return input;
         }
 

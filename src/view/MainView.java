@@ -139,7 +139,7 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
                     }
                 });
 
-        JLabel titleName = new JLabel("Program");
+        JLabel titleName = new JLabel("TriviaTest");
         JPanel title = new JPanel();
         title.add(titleName);
         titleName.setFont(new Font("SansSerif", Font.BOLD, 32));

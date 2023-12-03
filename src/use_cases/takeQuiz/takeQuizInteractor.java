@@ -10,8 +10,7 @@ import java.util.stream.IntStream;
 public class takeQuizInteractor implements takeQuizInputBoundary {
     private Test activeTest;
     private Date startTime;
-    private Integer[] testOrder;
-    private int currentQuestionIndex;
+    private TestOrder testOrder;
     private final ArrayList<Question> wrongAnswers;
     private final takeQuizOutputBoundary outputBoundary;
     private final takeQuizDataAccessInterface dataAccessInterface;
@@ -26,11 +25,9 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
     public void startTest(takeQuizInputData inputData) {
         Test t =  dataAccessInterface.getTest(inputData.testName());
         activeTest = t;
-        currentQuestionIndex = 0;
-        testOrder = IntStream.range(0, t.getQuestions().size()).boxed().toArray(Integer[]::new);
-        Collections.shuffle(Arrays.asList(testOrder));
+        testOrder = new TestOrder(t.getQuestions());
 
-        Question currentQuestion = t.getQuestions().get(testOrder[currentQuestionIndex]);
+        Question currentQuestion = testOrder.next();
         startTime = new Date();
         takeQuizOutputData out = new takeQuizOutputData(inputData.testName(), currentQuestion.getQuestion(), currentQuestion.getAnswers(), true, "");
         outputBoundary.prepareNextQuestion(out);
@@ -38,9 +35,7 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
 
     @Override
     public void nextQuestion(takeQuizInputData inputData) {
-        ArrayList<Question> questions = activeTest.getQuestions();
-        int currentIndex = testOrder[currentQuestionIndex];
-        Question currentQuestion = questions.get(currentIndex);
+        Question currentQuestion = testOrder.now();
 
         boolean lastCorrect = Objects.equals(currentQuestion.getCorrectAnswer(), inputData.userAnswer());
         if (lastCorrect) {
@@ -50,26 +45,29 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
             wrongAnswers.add(currentQuestion);
             System.out.println("WRONG!");
         }
-        currentQuestionIndex++;
 
-        if (currentQuestionIndex >= testOrder.length) {
+
+        if (!testOrder.hasNext()) {
             Result newResult = prepareResult();
             activeTest.addResult(newResult);
-            outputBoundary.prepareResultView(activeTest.getName());
+            String lastAnswer = currentQuestion.getCorrectAnswer();
+            takeQuizOutputData out = new takeQuizOutputData(activeTest.getName(), currentQuestion.getQuestion(), currentQuestion.getAnswers(), lastCorrect, lastAnswer);
+
+            outputBoundary.prepareResultView(out);
             clearState();
         } else {
-            currentIndex = testOrder[currentQuestionIndex];
             String lastAnswer = currentQuestion.getCorrectAnswer();
-            currentQuestion = questions.get(currentIndex);
+            currentQuestion = testOrder.next();
             takeQuizOutputData out = new takeQuizOutputData(null, currentQuestion.getQuestion(), currentQuestion.getAnswers(), lastCorrect, lastAnswer);
             outputBoundary.prepareNextQuestion(out);
         }
     }
 
     private Result prepareResult() {
-        boolean[] qs = new boolean[testOrder.length];
-        for (int i = 0; i < testOrder.length; i++) {
-            qs[i] = wrongAnswers.get(testOrder[i]) == null;
+        int count = activeTest.getQuestions().size();
+        boolean[] qs = new boolean[count];
+        for (int i = 0; i < count; i++) {
+            qs[i] = wrongAnswers.get(i) == null;
         }
         return new Result(new Date((new Date().getTime() - startTime.getTime())), qs);
     }
@@ -78,5 +76,32 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
         wrongAnswers.clear();
         startTime = null;
         activeTest = null;
+    }
+
+    private class TestOrder implements Iterator<Question> {
+
+        private final ArrayList<Question> questions;
+        private final Integer[] order;
+        private int index;
+        TestOrder(ArrayList<Question> questions) {
+            this.questions = questions;
+            this.order = IntStream.range(0, questions.size()).boxed().toArray(Integer[]::new);
+            Collections.shuffle(Arrays.asList(testOrder));
+            index = -1;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return index < order.length-1;
+        }
+
+        @Override
+        public Question next() {
+            index++;
+            return questions.get(index);
+        }
+        public Question now() {
+            return questions.get(index);
+        }
     }
 }

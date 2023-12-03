@@ -25,7 +25,7 @@ class manageQuizInteractorTest {
         fileUserDataAccessObject.save(new entity.Test("test", "None", new ArrayList<>(), new ArrayList<>()));
         manageQuizController.deleteTest("test");
         manageQuizController.refreshTests();
-        assertEquals(fileUserDataAccessObject.getTest("test"), null);
+        assertNull(fileUserDataAccessObject.getTest("test"));
     }
 
     @Test
