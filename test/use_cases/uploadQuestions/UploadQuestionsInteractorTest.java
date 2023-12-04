@@ -28,7 +28,7 @@ class UploadQuestionsInteractorTest {
         anotherUploadQuestionsState.getTxtPath();
         anotherUploadQuestionsState.setTestName("Another testing test");
         anotherUploadQuestionsState.setTxtPath("Quizzes/Testing test.txt");
-        assertEquals("Uploaded successfully!", message);
+        assertEquals("Failed to upload. Test name exists!", message);
         dataAccessInterface.deleteTest("Another testing test");
     }
 
