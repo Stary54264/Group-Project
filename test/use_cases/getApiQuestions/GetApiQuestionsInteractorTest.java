@@ -1,5 +1,6 @@
 package use_cases.getApiQuestions;
 
+
 import app.Category;
 import app.QuestionDifficulty;
 import app.QuestionType;
@@ -9,16 +10,7 @@ import interface_adapter.getApiQuestions.GetApiQuestionsPresenter;
 import interface_adapter.getApiQuestions.GetApiQuestionsState;
 import interface_adapter.getApiQuestions.GetApiQuestionsViewModel;
 import interface_adapter.takeQuiz.takeQuizViewModel;
-import interface_adapter.uploadQuestions.UploadQuestionsController;
-import interface_adapter.uploadQuestions.UploadQuestionsPresenter;
-import interface_adapter.uploadQuestions.UploadQuestionsState;
-import interface_adapter.uploadQuestions.UploadQuestionsViewModel;
 import org.junit.jupiter.api.Test;
-import use_cases.uploadQuestions.UploadQuestionsDataAccessInterface;
-import use_cases.uploadQuestions.UploadQuestionsInputBoundary;
-import use_cases.uploadQuestions.UploadQuestionsInteractor;
-import use_cases.uploadQuestions.UploadQuestionsOutputBoundary;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class GetApiQuestionsInteractorTest {
