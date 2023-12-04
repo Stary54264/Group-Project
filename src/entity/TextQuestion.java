@@ -2,7 +2,7 @@ package entity;
 
 import java.util.ArrayList;
 
-public class TextQuestion implements Question<String> {
+public class TextQuestion implements Question<String, String> {
     private String question;
     private final String correctAnswer;
     private final ArrayList<String> incorrectAnswers;

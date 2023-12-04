@@ -2,13 +2,13 @@ package entity;
 
 import java.util.ArrayList;
 
-public interface Question<T> {
-    T getQuestion();
-    void setQuestion(T s);
+public interface Question<Q, A> {
+    Q getQuestion();
+    void setQuestion(Q s);
 
-    T getCorrectAnswer();
+    A getCorrectAnswer();
 
-    ArrayList<T> getIncorrectAnswers();
+    ArrayList<A> getIncorrectAnswers();
 
-    ArrayList<T> getAnswers();
+    ArrayList<A> getAnswers();
 }
