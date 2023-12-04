@@ -1,6 +1,7 @@
 package use_cases.getResult;
 import static org.junit.jupiter.api.Assertions.*;
 
+import interface_adapter.getResult.GetResultController;
 import interface_adapter.getResult.GetResultPresenter;
 import interface_adapter.getResult.GetResultViewModel;
 import interface_adapter.takeQuiz.takeQuizController;
@@ -30,8 +31,10 @@ class GetResultInteractorTest {
         takeQuizController.answerQuestion("3");
         takeQuizController.answerQuestion("3");
 
-        GetResultInputData getResultInputData1 = new GetResultInputData("Testing test");
-        getResultInteractor.execute(getResultInputData1);
+        GetResultController getResultController = new GetResultController(getResultInteractor);
+        getResultController.execute("Testing test");
         assertEquals(getResultViewModel.result(),"Average: 33% (Correct: 1, Wrong: 2) Time taken: 00:00");
+
+
     }
 }

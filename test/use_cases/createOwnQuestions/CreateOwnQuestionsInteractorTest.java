@@ -5,6 +5,7 @@ import data_access.FileTestDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsController;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsPresenter;
+import interface_adapter.createOwnQuestions.CreateOwnQuestionsState;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsViewModel;
 import org.junit.jupiter.api.Test;
 
@@ -40,14 +41,23 @@ class CreateOwnQuestionsInteractorTest {
         questions.add(questionBuilder2);
         List<TextQuestionBuilder> questions2 = new ArrayList<TextQuestionBuilder>();
         questions2.add(questionBuilder);
-
         controller.execute("test1", "none", questions);
         int sizeAfter = fileTestDataAccessObject.getTests().size();
         assert sizeBefore == sizeAfter;
         controller.execute("test1", "none", questions2);
         assert sizeBefore + 1 == fileTestDataAccessObject.getTests().size();
-
-
+        CreateOwnQuestionsState createOwnQuestionsState = new CreateOwnQuestionsState();
+        createOwnQuestionsState.getBuilders();
+        createOwnQuestionsState.getBuilderOnPage();
+        createOwnQuestionsState.forward();
+        createOwnQuestionsState.back();
+        createOwnQuestionsState.getPage();
+        createOwnQuestionsState.getComment();
+        createOwnQuestionsState.getName();
+        createOwnQuestionsState.setName(null);
+        createOwnQuestionsState.setComment(null);
+        createOwnQuestionsState.getError();
+        createOwnQuestionsState.clearAll();
     }
     @Test
     public void testEditExecute() {

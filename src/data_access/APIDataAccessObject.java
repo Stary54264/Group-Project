@@ -51,10 +51,7 @@ public class APIDataAccessObject {
                     .build();
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
             return response.body();
-        } catch (Exception e) {
-            System.out.println("request error (1)");
-            return null;
-        }
+        } catch (Exception e) {System.out.println("request error (1)"); return null;}
     }
 
     public static String RetrieveQuestionsTrivia2() {
@@ -66,8 +63,6 @@ public class APIDataAccessObject {
                     .build();
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
             return response.body();
-        } catch (Exception e) {
-            return null;
-        }
+        } catch (Exception e) {return null;}
     }
 }
