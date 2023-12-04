@@ -70,12 +70,4 @@ public class APIDataAccessObject {
             return null;
         }
     }
-
-    public static void main(String[] args) {
-        //ArrayList<Question> s = RetrieveQuestionsTrivia2();
-        String s = RetrieveQuestionsTrivia1(15, Category.Politics, ALL, BOOL);
-        Test t = Serializer.DecodeTest(s, "pog");
-        System.out.println(t.getName());
-        System.out.println(t.getQuestions().size());
-    }
 }

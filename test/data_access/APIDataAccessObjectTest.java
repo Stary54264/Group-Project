@@ -11,9 +11,7 @@ import java.util.Objects;
 public class APIDataAccessObjectTest {
     @Test
     public void testAPiDAO() {
-        String[] args = new String[1];
 
-        APIDataAccessObject.main(args);
         Category category = Category.Art;
         QuestionDifficulty difficulty = QuestionDifficulty.EASY;
         QuestionType type = QuestionType.MULTI;

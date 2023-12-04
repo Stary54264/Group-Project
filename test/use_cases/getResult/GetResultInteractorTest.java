@@ -25,12 +25,12 @@ class GetResultInteractorTest {
                         getResultInputData
                 )
         );
-        takeQuizController.start("TestingTest");
+        takeQuizController.start("Testing test");
         takeQuizController.answerQuestion("3");
         takeQuizController.answerQuestion("3");
         takeQuizController.answerQuestion("3");
 
-        GetResultInputData getResultInputData1 = new GetResultInputData("TestingTest");
+        GetResultInputData getResultInputData1 = new GetResultInputData("Testing test");
         getResultInteractor.execute(getResultInputData1);
         assertEquals(getResultViewModel.result(),"Average: 33% (Correct: 1, Wrong: 2) Time taken: 00:00");
     }

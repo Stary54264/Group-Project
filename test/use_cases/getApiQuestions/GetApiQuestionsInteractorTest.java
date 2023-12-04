@@ -8,6 +8,7 @@ import interface_adapter.getApiQuestions.GetApiQuestionsController;
 import interface_adapter.getApiQuestions.GetApiQuestionsPresenter;
 import interface_adapter.getApiQuestions.GetApiQuestionsState;
 import interface_adapter.getApiQuestions.GetApiQuestionsViewModel;
+import interface_adapter.takeQuiz.takeQuizViewModel;
 import interface_adapter.uploadQuestions.UploadQuestionsController;
 import interface_adapter.uploadQuestions.UploadQuestionsPresenter;
 import interface_adapter.uploadQuestions.UploadQuestionsState;
@@ -25,17 +26,9 @@ class GetApiQuestionsInteractorTest {
     @Test
     void executeSuccessTest() {
         FileTestDataAccessObject dataAccessInterface = new FileTestDataAccessObject();
-        GetApiQuestionsOutputBoundary getApiQuestionsPresenter =new GetApiQuestionsOutputBoundary() {
-            @Override
-            public void prepareSuccessView(GetApiQuestionsOutputData getApiQuestionsOutputData) {
-                assertEquals("Api testing test", getApiQuestionsOutputData.getTestName());
-            }
-
-            @Override
-            public void prepareFailView(String error) {
-                fail("Use case failure is unexpected.");
-            }
-        };
+        GetApiQuestionsPresenter getApiQuestionsPresenter = new GetApiQuestionsPresenter(
+                new GetApiQuestionsViewModel(), new takeQuizViewModel()
+        );
         GetApiQuestionsInputData getApiQuestionsInputData = new GetApiQuestionsInputData(
                 10,
                 Category.AnyCategory,
