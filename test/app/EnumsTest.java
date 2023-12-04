@@ -1,8 +1,5 @@
-package App;
+package app;
 
-import app.Category;
-import app.QuestionDifficulty;
-import app.QuestionType;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
