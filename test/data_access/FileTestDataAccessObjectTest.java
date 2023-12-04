@@ -1,6 +1,6 @@
 package data_access;
 
-import app.QuestionBuilder;
+import app.TextQuestionBuilder;
 import app.TestBuilder;
 import entity.TextQuestion;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ public class FileTestDataAccessObjectTest {
         dataAccessObject.readTest("Testingtest", "Quizzes/Testingtest.txt");
         int sizeBefore = dataAccessObject.getTests().size();
         assert !dataAccessObject.existsByName("test1");
-        QuestionBuilder questionBuilder = new QuestionBuilder();
+        TextQuestionBuilder questionBuilder = new TextQuestionBuilder();
         questionBuilder.setQuestionText("a");
         questionBuilder.setCorrectAnswer("1");
         ArrayList<String> curr = new ArrayList<String>();

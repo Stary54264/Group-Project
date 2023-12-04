@@ -22,7 +22,7 @@ public class Serializer {
         ArrayList<TextQuestion> out = new ArrayList<>();
 
         while (matcher.find()) {
-            QuestionBuilder qb = new QuestionBuilder();
+            TextQuestionBuilder qb = new TextQuestionBuilder();
 
             qb.setCorrectAnswer(StringUtils.unescapeHtml3(matcher.group(3)));
             qb.setQuestionText(StringUtils.unescapeHtml3(matcher.group(2)));
@@ -49,7 +49,7 @@ public class Serializer {
         ArrayList<TextQuestion> out = new ArrayList<>();
 
         while (matcher.find()) {
-            QuestionBuilder qb = new QuestionBuilder();
+            TextQuestionBuilder qb = new TextQuestionBuilder();
             qb.setCorrectAnswer(StringUtils.unescapeHtml3(matcher.group(1)));
             qb.setIncorrectAnswers(new ArrayList<>(Arrays.asList(
                     StringUtils.unescapeHtml3(matcher.group(2)),

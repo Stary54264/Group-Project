@@ -3,18 +3,18 @@ import entity.TextQuestion;
 
 import java.util.ArrayList;
 
-public class QuestionBuilder {
+public class TextQuestionBuilder {
     private String questionText, correctAnswer;
     private ArrayList<String> incorrectAnswers;
-    public QuestionBuilder setQuestionText(String questionText) {
+    public TextQuestionBuilder setQuestionText(String questionText) {
         this.questionText = questionText;
         return this;
     }
-    public QuestionBuilder setCorrectAnswer(String correctAnswer) {
+    public TextQuestionBuilder setCorrectAnswer(String correctAnswer) {
         this.correctAnswer = correctAnswer;
         return this;
     }
-    public QuestionBuilder setIncorrectAnswers(ArrayList<String> incorrectAnswers) {
+    public TextQuestionBuilder setIncorrectAnswers(ArrayList<String> incorrectAnswers) {
         this.incorrectAnswers = incorrectAnswers;
         return this;
     }
@@ -31,7 +31,7 @@ public class QuestionBuilder {
         return incorrectAnswers;
     }
 
-    public QuestionBuilder() {
+    public TextQuestionBuilder() {
         incorrectAnswers = new ArrayList<>();
         incorrectAnswers.add(""); incorrectAnswers.add(""); incorrectAnswers.add("");
     }

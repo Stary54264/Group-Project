@@ -1,6 +1,6 @@
 package use_cases.createOwnQuestions;
 
-import app.QuestionBuilder;
+import app.TextQuestionBuilder;
 import app.TestBuilder;
 import entity.TextQuestion;
 import entity.Test;
@@ -9,10 +9,10 @@ import java.util.List;
 
 public class CreateOwnQuestionsInputData {
     private final Test test;
-    public CreateOwnQuestionsInputData(String name, String comment, List<QuestionBuilder> questions) {
+    public CreateOwnQuestionsInputData(String name, String comment, List<TextQuestionBuilder> questions) {
         TestBuilder tBuilder = new TestBuilder();
         ArrayList<TextQuestion> output = new ArrayList<>();
-        for (QuestionBuilder questionBuilder : questions) {
+        for (TextQuestionBuilder questionBuilder : questions) {
             output.add(questionBuilder.build());
         }
         tBuilder.setName(name);

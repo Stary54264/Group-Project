@@ -1,6 +1,6 @@
 package view;
 
-import app.QuestionBuilder;
+import app.TextQuestionBuilder;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsController;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsViewModel;
@@ -300,7 +300,7 @@ public class CreateOwnQuestionsView extends JPanel implements ActionListener, Pr
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         CreateOwnQuestionsState state = (CreateOwnQuestionsState) evt.getNewValue();
-        QuestionBuilder builder = state.getBuilderOnPage();
+        TextQuestionBuilder builder = state.getBuilderOnPage();
         nameField.setText(state.getName());
         commentField.setText(state.getComment());
         questionField.setText(builder.getQuestionText());

@@ -1,6 +1,6 @@
 package interface_adapter.createOwnQuestions;
 
-import app.QuestionBuilder;
+import app.TextQuestionBuilder;
 import use_cases.createOwnQuestions.CreateOwnQuestionsInputBoundary;
 import use_cases.createOwnQuestions.CreateOwnQuestionsInputData;
 
@@ -12,7 +12,7 @@ public class CreateOwnQuestionsController {
     public CreateOwnQuestionsController(CreateOwnQuestionsInputBoundary createOwnQuestionsInteractor) {
         this.createOwnQuestionsInteractor = createOwnQuestionsInteractor;
     }
-    public void execute(String name, String comment, List<QuestionBuilder> questions) {
+    public void execute(String name, String comment, List<TextQuestionBuilder> questions) {
         CreateOwnQuestionsInputData createInput = new CreateOwnQuestionsInputData(name, comment, questions);
         createOwnQuestionsInteractor.execute(createInput);
     }

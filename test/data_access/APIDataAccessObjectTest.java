@@ -1,7 +1,6 @@
 package data_access;
 
 import app.Category;
-import app.QuestionBuilder;
 import app.QuestionDifficulty;
 import app.QuestionType;
 import org.junit.jupiter.api.Test;

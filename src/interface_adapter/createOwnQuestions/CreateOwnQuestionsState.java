@@ -1,40 +1,40 @@
 package interface_adapter.createOwnQuestions;
 
-import app.QuestionBuilder;
+import app.TextQuestionBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CreateOwnQuestionsState {
-    private final List<QuestionBuilder> builders;
+    private final List<TextQuestionBuilder> builders;
     private String name, comment;
     private int page;
     private String error = "";
 
     public CreateOwnQuestionsState() {
         builders = new ArrayList<>();
-        builders.add(new QuestionBuilder());
+        builders.add(new TextQuestionBuilder());
     }
 
-    public CreateOwnQuestionsState(String name, String comment, List<QuestionBuilder> builders) {
+    public CreateOwnQuestionsState(String name, String comment, List<TextQuestionBuilder> builders) {
         this.builders = builders;
         this.name = name;
         this.comment = comment;
         if (!builders.isEmpty()) page = builders.size()-1;
     }
 
-    public List<QuestionBuilder> getBuilders() {
+    public List<TextQuestionBuilder> getBuilders() {
         return builders;
     }
 
-    public QuestionBuilder getBuilderOnPage() {
+    public TextQuestionBuilder getBuilderOnPage() {
         return builders.get(page);
     }
 
     public void forward() {
         page++;
         if (page == builders.size()) {
-            builders.add(new QuestionBuilder());
+            builders.add(new TextQuestionBuilder());
         }
     }
 
@@ -70,7 +70,7 @@ public class CreateOwnQuestionsState {
     }
     public void clearAll() {
         builders.clear();
-        builders.add(new QuestionBuilder());
+        builders.add(new TextQuestionBuilder());
         page = 0;
         name = "";
         comment = "";

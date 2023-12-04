@@ -1,6 +1,6 @@
 package use_cases.createOwnQuestions;
 
-import app.QuestionBuilder;
+import app.TextQuestionBuilder;
 import data_access.FileTestDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsController;
@@ -23,8 +23,8 @@ class CreateOwnQuestionsInteractorTest {
     @Test
     public void testExecute() {
         int sizeBefore = fileTestDataAccessObject.getTests().size();
-        QuestionBuilder questionBuilder = new QuestionBuilder();
-        QuestionBuilder questionBuilder2 = new QuestionBuilder();
+        TextQuestionBuilder questionBuilder = new TextQuestionBuilder();
+        TextQuestionBuilder questionBuilder2 = new TextQuestionBuilder();
         questionBuilder.setQuestionText("a");
         questionBuilder.setCorrectAnswer("1");
         questionBuilder2.setQuestionText("");
@@ -35,10 +35,10 @@ class CreateOwnQuestionsInteractorTest {
         curr.add(String.valueOf(4));
         questionBuilder.setIncorrectAnswers(curr);
         questionBuilder2.setIncorrectAnswers(curr);
-        List<QuestionBuilder> questions = new ArrayList<QuestionBuilder>();
+        List<TextQuestionBuilder> questions = new ArrayList<TextQuestionBuilder>();
         questions.add(questionBuilder);
         questions.add(questionBuilder2);
-        List<QuestionBuilder> questions2 = new ArrayList<QuestionBuilder>();
+        List<TextQuestionBuilder> questions2 = new ArrayList<TextQuestionBuilder>();
         questions2.add(questionBuilder);
 
         controller.execute("test1", "none", questions);
