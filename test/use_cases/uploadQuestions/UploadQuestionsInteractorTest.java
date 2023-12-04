@@ -15,7 +15,7 @@ class UploadQuestionsInteractorTest {
     void executeSuccessTest() {
 
         FileTestDataAccessObject dataAccessInterface = new FileTestDataAccessObject();
-        dataAccessInterface.deleteTest("AnotherTestingTest");
+        dataAccessInterface.deleteTest("Another testing test");
 
         UploadQuestionsViewModel uploadQuestionsViewModel = new UploadQuestionsViewModel();
         UploadQuestionsState uploadQuestionsState = new UploadQuestionsState();
@@ -65,7 +65,7 @@ class UploadQuestionsInteractorTest {
         UploadQuestionsInputBoundary uploadQuestionsInteractor = new UploadQuestionsInteractor(
                 dataAccessInterface, uploadQuestionsPresenter);
         UploadQuestionsController uploadQuestionsController = new UploadQuestionsController(uploadQuestionsInteractor);
-        uploadQuestionsController.execute("TestingTest", "Quizzes/Testing test.txt");
+        uploadQuestionsController.execute("Testing test", "Quizzes/Testing test.txt");
         String message = uploadQuestionsState.getMessage();
         assertEquals("Failed to upload. Test name exists!", message);
     }
