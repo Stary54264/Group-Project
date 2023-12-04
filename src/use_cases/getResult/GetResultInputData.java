@@ -1,7 +1,5 @@
 package use_cases.getResult;
 
-import entity.Test;
-
 public class GetResultInputData {
     final private String name;
 
