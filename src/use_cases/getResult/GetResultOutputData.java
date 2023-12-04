@@ -1,8 +1,8 @@
 package use_cases.getResult;
 
 public class GetResultOutputData {
-    private String score;
-    private String time;
+    private final String score;
+    private final String time;
 
     public GetResultOutputData(String score, String time) {
 

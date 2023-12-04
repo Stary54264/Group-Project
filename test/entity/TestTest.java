@@ -3,21 +3,8 @@ package entity;
 import app.Main;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 class TestTest {
-
-    @Test
-    void setQuestions() {
-    }
-
-    @Test
-    void setComment() {
-    }
-
-    @Test
-    void setName() {
-    }
 
     @Test
     void getQuestions() {
@@ -25,22 +12,13 @@ class TestTest {
     }
 
     @Test
-    void getName() {
+    void otherTest() {
+        entity.Test test = new entity.Test(null, null, null, null);
+        test.setQuestions(null);
+        test.setName(null);
+        test.getCategory();
+        TextQuestion textQuestion = new TextQuestion(null, null, null);
+        textQuestion.setQuestion(null);
     }
 
-    @Test
-    void getResults() {
-    }
-
-    @Test
-    void addResult() {
-    }
-
-    @Test
-    void getCategory() {
-    }
-
-    @Test
-    void getComment() {
-    }
 }
