@@ -86,7 +86,7 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
         TestOrder(ArrayList<TextQuestion> questions) {
             this.questions = questions;
             this.order = IntStream.range(0, questions.size()).boxed().toArray(Integer[]::new);
-            Collections.shuffle(Arrays.asList(testOrder));
+            Collections.shuffle(Arrays.asList(order));
             index = -1;
         }
 
