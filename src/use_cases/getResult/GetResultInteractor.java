@@ -7,7 +7,8 @@ import java.util.ArrayList;
 public class GetResultInteractor implements GetResultInputBoundary {
     final GetResultDataAccessInterface getResultDataAccessObject;
     final GetResultOutputBoundary getResultPresenter;
-    public GetResultInteractor(GetResultDataAccessInterface getResultDataAccessInterface, GetResultOutputBoundary getResultOutputBoundary){
+    public GetResultInteractor(GetResultDataAccessInterface getResultDataAccessInterface,
+                               GetResultOutputBoundary getResultOutputBoundary){
         this.getResultDataAccessObject = getResultDataAccessInterface;
         this.getResultPresenter = getResultOutputBoundary;
     }
