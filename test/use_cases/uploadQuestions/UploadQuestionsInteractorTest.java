@@ -13,10 +13,7 @@ class UploadQuestionsInteractorTest {
 
     @Test
     void executeSuccessTest() {
-
         FileTestDataAccessObject dataAccessInterface = new FileTestDataAccessObject();
-        dataAccessInterface.deleteTest("Another testing test");
-
         UploadQuestionsViewModel uploadQuestionsViewModel = new UploadQuestionsViewModel();
         UploadQuestionsState uploadQuestionsState = new UploadQuestionsState();
         uploadQuestionsViewModel.setState(uploadQuestionsState);
@@ -24,18 +21,15 @@ class UploadQuestionsInteractorTest {
         UploadQuestionsInputBoundary uploadQuestionsInteractor = new UploadQuestionsInteractor(dataAccessInterface,
                 uploadQuestionsPresenter);
         UploadQuestionsController uploadQuestionsController = new UploadQuestionsController(uploadQuestionsInteractor);
-
         uploadQuestionsController.execute("Another testing test", "Quizzes/Testing test.txt");
-
         String message = uploadQuestionsState.getMessage();
         UploadQuestionsState anotherUploadQuestionsState = new UploadQuestionsState(uploadQuestionsState);
         anotherUploadQuestionsState.getTestName();
         anotherUploadQuestionsState.getTxtPath();
-
         anotherUploadQuestionsState.setTestName("Another testing test");
-
         anotherUploadQuestionsState.setTxtPath("Quizzes/Testing test.txt");
         assertEquals("Uploaded successfully!", message);
+        dataAccessInterface.deleteTest("Another testing test");
     }
 
     @Test
