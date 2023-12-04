@@ -17,6 +17,8 @@ class TestTest {
         test.setQuestions(null);
         test.setName(null);
         test.getCategory();
+        TextQuestion textQuestion = new TextQuestion(null, null, null);
+        textQuestion.setQuestion(null);
     }
 
 }
