@@ -1,13 +1,13 @@
 package use_cases.createOwnQuestions;
 
 import app.QuestionBuilder;
-import entity.Question;
+import entity.TextQuestion;
 import entity.Test;
 
 import java.util.List;
 
 public class CreateOwnQuestionsOutputData{
-    private List<Question> questionList;
+    private List<TextQuestion> questionList;
     private List<QuestionBuilder> questionBuilders;
     private String name, comment;
     public CreateOwnQuestionsOutputData(Test test) {
@@ -18,7 +18,7 @@ public class CreateOwnQuestionsOutputData{
         this.comment = comment;
         this.questionBuilders = questions;
     }
-    public List<Question> getQuestionList() {
+    public List<TextQuestion> getQuestionList() {
         return questionList;
     }
 

@@ -1,6 +1,6 @@
 package use_cases.takeQuiz;
 
-import entity.Question;
+import entity.TextQuestion;
 import entity.Result;
 import entity.Test;
 
@@ -11,7 +11,7 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
     private Test activeTest;
     private Date startTime;
     private TestOrder testOrder;
-    private final ArrayList<Question> wrongAnswers;
+    private final ArrayList<TextQuestion> wrongAnswers;
     private final takeQuizOutputBoundary outputBoundary;
     private final takeQuizDataAccessInterface dataAccessInterface;
 
@@ -27,7 +27,7 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
         activeTest = t;
         testOrder = new TestOrder(t.getQuestions());
 
-        Question currentQuestion = testOrder.next();
+        TextQuestion currentQuestion = testOrder.next();
         startTime = new Date();
         takeQuizOutputData out = new takeQuizOutputData(inputData.testName(), currentQuestion.getQuestion(), currentQuestion.getAnswers(), true, "");
         outputBoundary.prepareNextQuestion(out);
@@ -35,7 +35,7 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
 
     @Override
     public void nextQuestion(takeQuizInputData inputData) {
-        Question currentQuestion = testOrder.now();
+        TextQuestion currentQuestion = testOrder.now();
 
         boolean lastCorrect = Objects.equals(currentQuestion.getCorrectAnswer(), inputData.userAnswer());
         if (lastCorrect) {
@@ -78,12 +78,12 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
         activeTest = null;
     }
 
-    private class TestOrder implements Iterator<Question> {
+    private class TestOrder implements Iterator<TextQuestion> {
 
-        private final ArrayList<Question> questions;
+        private final ArrayList<TextQuestion> questions;
         private final Integer[] order;
         private int index;
-        TestOrder(ArrayList<Question> questions) {
+        TestOrder(ArrayList<TextQuestion> questions) {
             this.questions = questions;
             this.order = IntStream.range(0, questions.size()).boxed().toArray(Integer[]::new);
             Collections.shuffle(Arrays.asList(testOrder));
@@ -96,11 +96,11 @@ public class takeQuizInteractor implements takeQuizInputBoundary {
         }
 
         @Override
-        public Question next() {
+        public TextQuestion next() {
             index++;
             return questions.get(index);
         }
-        public Question now() {
+        public TextQuestion now() {
             return questions.get(index);
         }
     }

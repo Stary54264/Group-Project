@@ -1,7 +1,7 @@
 package use_cases.createOwnQuestions;
 
 import app.QuestionBuilder;
-import entity.Question;
+import entity.TextQuestion;
 import entity.Test;
 
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ public class CreateOwnQuestionsInteractor implements CreateOwnQuestionsInputBoun
     public void editExecute(String testName) {
         Test test = questionsDataAccessInterface.getTest(testName);
         ArrayList<QuestionBuilder> out = new ArrayList<>();
-        for (Question q: test.getQuestions()) {
+        for (TextQuestion q: test.getQuestions()) {
             out.add(new QuestionBuilder()
                     .setQuestionText(q.getQuestion())
                     .setIncorrectAnswers(q.getIncorrectAnswers())

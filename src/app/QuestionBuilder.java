@@ -1,5 +1,5 @@
 package app;
-import entity.Question;
+import entity.TextQuestion;
 
 import java.util.ArrayList;
 
@@ -36,13 +36,13 @@ public class QuestionBuilder {
         incorrectAnswers.add(""); incorrectAnswers.add(""); incorrectAnswers.add("");
     }
 
-    public Question build() {
+    public TextQuestion build() {
         if (questionText.isBlank() || correctAnswer.isBlank() || incorrectAnswers.get(0).isBlank()) return null;
 
         if (incorrectAnswers.size() != 1 && incorrectAnswers.get(2).isBlank() && incorrectAnswers.get(3).isBlank()) {
             incorrectAnswers.remove(3);
             incorrectAnswers.remove(2);
         }
-        return new Question(questionText, correctAnswer, incorrectAnswers);
+        return new TextQuestion(questionText, correctAnswer, incorrectAnswers);
     }
 }

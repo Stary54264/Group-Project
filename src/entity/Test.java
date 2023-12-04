@@ -3,21 +3,21 @@ package entity;
 import java.util.ArrayList;
 
 public class Test {
-    private ArrayList<Question> questions;
+    private ArrayList<TextQuestion> questions;
     private final String category;
     private String name;
     private String comment;
     private String stats;
     private final ArrayList<Result> results;
 
-    public Test(String name, String Category, ArrayList<Question> questions, ArrayList<Result> results) {
+    public Test(String name, String Category, ArrayList<TextQuestion> questions, ArrayList<Result> results) {
         this.questions = questions;
         this.results = results;
         this.name = name;
         this.category = Category;
     }
 
-    public void setQuestions(ArrayList<Question> questions) {
+    public void setQuestions(ArrayList<TextQuestion> questions) {
         this.questions = questions;
     }
 
@@ -37,7 +37,7 @@ public class Test {
         return stats;
     }
 
-    public ArrayList<Question> getQuestions() {
+    public ArrayList<TextQuestion> getQuestions() {
         return questions;
     }
 

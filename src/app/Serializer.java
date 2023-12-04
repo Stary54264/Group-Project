@@ -1,6 +1,6 @@
 package app;
 
-import entity.Question;
+import entity.TextQuestion;
 import entity.Test;
 
 import java.io.StringWriter;
@@ -15,11 +15,11 @@ public class Serializer {
     /** Prevent instantiation. */
     private Serializer() {}
 
-    public static ArrayList<Question> ParseTrivia(String inp) {
+    public static ArrayList<TextQuestion> ParseTrivia(String inp) {
         final String regex = "\\{\"type\":\"(multiple|boolean)\",.*?\"question\":\"(.*?)\",\"correct_answer\":\"(.*?)\",\"incorrect_answers\":\\[\"(.*?)\"(?:, ?\"(.*?)\", ?\"(.*?)\")?]\\}";
         final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         final Matcher matcher = pattern.matcher(inp);
-        ArrayList<Question> out = new ArrayList<>();
+        ArrayList<TextQuestion> out = new ArrayList<>();
 
         while (matcher.find()) {
             QuestionBuilder qb = new QuestionBuilder();
@@ -42,11 +42,11 @@ public class Serializer {
         return out;
     }
 
-    public static ArrayList<Question> ParseTrivia2(String inp) {
+    public static ArrayList<TextQuestion> ParseTrivia2(String inp) {
         final String regex = "\"correctAnswer\":\"(.*?)\",\"incorrectAnswers\":\\[\"(.*?)\",\"(.*?)\",\"(.*?)\"],\"question\":\\{\"text\":\"(.*?)\"";
         final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         final Matcher matcher = pattern.matcher(inp);
-        ArrayList<Question> out = new ArrayList<>();
+        ArrayList<TextQuestion> out = new ArrayList<>();
 
         while (matcher.find()) {
             QuestionBuilder qb = new QuestionBuilder();
@@ -64,7 +64,7 @@ public class Serializer {
     }
 
     public static Test DecodeTest(String input, String name) {
-        ArrayList<Question> questions = ParseTrivia(input);
+        ArrayList<TextQuestion> questions = ParseTrivia(input);
         final String comReg = "\"comment\":\"(.*?)\"";
         final Pattern pattern = Pattern.compile(comReg, Pattern.MULTILINE);
         final Matcher matcher = pattern.matcher(input);
@@ -90,7 +90,7 @@ public class Serializer {
 
     public static String EncodeTest(Test inp) {
         StringBuilder out = new StringBuilder();
-        for (Question q: inp.getQuestions()) {
+        for (TextQuestion q: inp.getQuestions()) {
             String s = "{";
             if (q.getIncorrectAnswers().size() == 1) s += "\"type\":\"boolean\",";
             else s += "\"type\":\"multiple\",";

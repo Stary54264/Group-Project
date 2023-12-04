@@ -1,6 +1,6 @@
 package app;
 
-import entity.Question;
+import entity.TextQuestion;
 import entity.Result;
 import entity.Test;
 
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class TestBuilder {
 
     private String name, category, comment, stats;
-    private ArrayList<Question> questions;
+    private ArrayList<TextQuestion> questions;
     private final ArrayList<Result> results;
     public TestBuilder () {
         name = "";
@@ -28,7 +28,7 @@ public class TestBuilder {
 
     public TestBuilder setStats(String stats) {this.stats = stats; return this;}
 
-    public TestBuilder setQuestions(ArrayList<Question> questions) {this.questions = questions; return this;}
+    public TestBuilder setQuestions(ArrayList<TextQuestion> questions) {this.questions = questions; return this;}
 
     public Test build() {
         if (name.isBlank() || category.isBlank() || questions.isEmpty() || questions.contains(null)) return null;

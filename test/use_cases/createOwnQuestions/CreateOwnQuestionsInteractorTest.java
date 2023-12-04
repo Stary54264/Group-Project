@@ -1,21 +1,15 @@
 package use_cases.createOwnQuestions;
 
 import app.QuestionBuilder;
-import app.TestBuilder;
 import data_access.FileTestDataAccessObject;
-import entity.Question;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsController;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsPresenter;
 import interface_adapter.createOwnQuestions.CreateOwnQuestionsViewModel;
 import org.junit.jupiter.api.Test;
-import view.MainView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CreateOwnQuestionsInteractorTest {
 

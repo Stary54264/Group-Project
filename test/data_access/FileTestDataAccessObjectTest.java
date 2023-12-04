@@ -2,7 +2,7 @@ package data_access;
 
 import app.QuestionBuilder;
 import app.TestBuilder;
-import entity.Question;
+import entity.TextQuestion;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -23,10 +23,10 @@ public class FileTestDataAccessObjectTest {
         curr.add(String.valueOf(3));
         curr.add(String.valueOf(4));
         questionBuilder.setIncorrectAnswers(curr);
-        Question question = questionBuilder.build();
+        TextQuestion question = questionBuilder.build();
         TestBuilder testBuilder = new TestBuilder();
         testBuilder.setName("test1");
-        ArrayList<Question> questionArrayList = new ArrayList<Question>();
+        ArrayList<TextQuestion> questionArrayList = new ArrayList<TextQuestion>();
         questionArrayList.add(question);
         testBuilder.setQuestions(questionArrayList);
         entity.Test test1 = testBuilder.build();
